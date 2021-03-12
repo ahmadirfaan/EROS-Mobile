@@ -54,18 +54,18 @@ class LoginFragment : Fragment() {
             btnSignUp.setOnClickListener {
                 findNavController().navigate(R.id.action_loginFragment_to_signUpFragment)
             }
-            btnForgotPassword.setOnClickListener {
-                clearSharedPreferencesFinishBoarding()
-            }
+//            btnForgotPassword.setOnClickListener {
+//                clearSharedPreferencesFinishBoarding()
+//            }
         }
         validateEmailOnRuntime()
     }
 
-    //Untuk mengetes onBoarding Finished
-    private fun clearSharedPreferencesFinishBoarding() {
-        val sharedPreference = requireActivity().getSharedPreferences("OnBoardingFinished", Context.MODE_PRIVATE)
-        sharedPreference.edit().clear().commit()
-    }
+//    //Untuk mengetes onBoarding Finished
+//    private fun clearSharedPreferencesFinishBoarding() {
+//        val sharedPreference = requireActivity().getSharedPreferences("OnBoardingFinished", Context.MODE_PRIVATE)
+//        sharedPreference.edit().clear().commit()
+//    }
 
     //Untuk mengecek apakah input email yang dijalankan sudah memenuhi kriteria inputan sebuah email
     private fun validateEmailOnRuntime() {

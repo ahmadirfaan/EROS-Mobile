@@ -37,11 +37,11 @@
     </fragment>
     <fragment
         android:id="@+id/homeAdminHCFragment"
-        android:name="com.finalproject.presentations.home.HomeAdminHCFragment"
+        android:name="com.finalproject.presentations.adminhc.home.HomeAdminHCFragment"
         android:label="HomeAdminHCFragment" />
     <fragment
         android:id="@+id/homeEmployeeFragment"
-        android:name="com.finalproject.presentations.home.HomeEmployeeFragment"
+        android:name="com.finalproject.presentations.employee.home.HomeEmployeeFragment"
         android:label="fragment_home_admin_hc"
         tools:layout="@layout/fragment_home_admin_hc" />
     <fragment
