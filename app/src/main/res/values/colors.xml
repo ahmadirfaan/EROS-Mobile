@@ -9,4 +9,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="blue_enigma">#292961</color>
     <color name="red_danger">#FF0000</color>
+    <color name="gray">#EBEBEB</color>
 </resources>

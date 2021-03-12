@@ -22,8 +22,7 @@ class MainActivity : AppCompatActivity() {
         supportActionBar?.hide()
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        navHostFragment =
-            supportFragmentManager.findFragmentById(R.id.nav_host_fragment_container) as NavHostFragment
+        navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment_container) as NavHostFragment
         navController = navHostFragment.findNavController()
         setupNav()
 
@@ -44,8 +43,8 @@ class MainActivity : AppCompatActivity() {
     //Function untuk memunculkan bottom Navigation View
     private fun showBottomNavEmployee() {
         binding.bottomNavigationView.apply {
-            menu.clear()
             inflateMenu(R.menu.bottom_navigation_menu_user)
+            setupWithNavController(navController)
             visibility = View.VISIBLE
         }
     }
@@ -54,6 +53,7 @@ class MainActivity : AppCompatActivity() {
         binding.bottomNavigationView.apply {
             menu.clear()
             inflateMenu(R.menu.bottom_navigation_menu_admin_hc)
+            setupWithNavController(navController)
             visibility = View.VISIBLE
         }
     }

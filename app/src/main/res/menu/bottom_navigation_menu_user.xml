@@ -2,9 +2,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/homeEmployeeFragment"
         android:icon="@drawable/home_24"
         android:title="Home" />
     <item
+        android:id="@+id/historyFragment"
         android:icon="@drawable/history_24"
         android:title="History" />
     <item
