@@ -1,22 +1,27 @@
 package com.finalproject.presentations.login
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import com.finalproject.R
 import com.finalproject.databinding.FragmentLoginBinding
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import com.finalproject.utils.ResourceStatus
 
 
 class LoginFragment : Fragment() {
 
-    private lateinit var binding : FragmentLoginBinding
+    private lateinit var viewModel: LoginViewModel
+    private lateinit var binding: FragmentLoginBinding
+    private val emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+"
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -26,28 +31,68 @@ class LoginFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentLoginBinding.inflate(layoutInflater)
+        initViewModel()
+        subscribe()
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        CoroutineScope(Dispatchers.Main).launch {
-//            delay(1000)
-//            Navigation.findNavController(requireView()).navigate(R.id.action_loginFragment_to_homeAdminHCFragment)
-//        }
         binding.apply {
             btnLogin.setOnClickListener {
-                val usernameString = inputUsername.editText?.text.toString()
-                val passswordString = inputUsername.editText?.text.toString()
-                if(usernameString.equals("admin" )&& passswordString.equals("admin")) {
+                val usernameString = inputEmailLogin.editText?.text.toString()
+                val passswordString = inputPasswordLogin.editText?.text.toString()
+                viewModel.checkEmailPasswordLogin(email = usernameString, password = passswordString)
+                if (usernameString.equals("admin@admin.com") && passswordString.equals("admin")) {
                     Navigation.findNavController(requireView()).navigate(R.id.action_loginFragment_to_homeAdminHCFragment)
                 } else {
                     Navigation.findNavController(requireView()).navigate(R.id.action_loginFragment_to_homeEmployeeFragment)
                 }
             }
+            btnSignUp.setOnClickListener {
+                Navigation.findNavController(requireView()).navigate(R.id.action_loginFragment_to_signUpFragment)
+            }
         }
-
+        validateEmailOnRuntime()
     }
+
+    //Untuk mengecek apakah input email yang dijalankan sudah memenuhi kriteria inputan sebuah email
+    private fun validateEmailOnRuntime() {
+        binding.inputEmailLogin.editText?.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                if (!s.toString().matches(emailPattern.toRegex())) {
+                    binding.inputEmailLogin.editText?.error = "Please enter a valid email address"
+                }
+            }
+        })
+    }
+
+    private fun initViewModel() {
+        viewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
+    }
+
+    private fun subscribe() {
+        viewModel.inputValidation.observe(this, {
+            when (it.status) {
+                ResourceStatus.LOADING -> {
+                    Toast.makeText(requireContext(), "Loading", Toast.LENGTH_SHORT).show()
+                }
+                ResourceStatus.SUCCESS -> {
+                    Toast.makeText(requireContext(), "Success Create Account", Toast.LENGTH_SHORT).show()
+                }
+                ResourceStatus.FAILURE -> {
+                    Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
+                }
+            }
+        })
+    }
+
 
     companion object {
         @JvmStatic
