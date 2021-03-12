@@ -1,5 +1,6 @@
 package com.finalproject.presentations.login
 
+import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -10,6 +11,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import com.finalproject.R
 import com.finalproject.databinding.FragmentLoginBinding
 import com.finalproject.utils.ResourceStatus
@@ -44,16 +46,25 @@ class LoginFragment : Fragment() {
                 val passswordString = inputPasswordLogin.editText?.text.toString()
                 viewModel.checkEmailPasswordLogin(email = usernameString, password = passswordString)
                 if (usernameString.equals("admin@admin.com") && passswordString.equals("admin")) {
-                    Navigation.findNavController(requireView()).navigate(R.id.action_loginFragment_to_homeAdminHCFragment)
+                    findNavController().navigate(R.id.action_loginFragment_to_homeAdminHCFragment)
                 } else {
-                    Navigation.findNavController(requireView()).navigate(R.id.action_loginFragment_to_homeEmployeeFragment)
+                    findNavController().navigate(R.id.action_loginFragment_to_homeEmployeeFragment)
                 }
             }
             btnSignUp.setOnClickListener {
-                Navigation.findNavController(requireView()).navigate(R.id.action_loginFragment_to_signUpFragment)
+                findNavController().navigate(R.id.action_loginFragment_to_signUpFragment)
+            }
+            btnForgotPassword.setOnClickListener {
+                clearSharedPreferencesFinishBoarding()
             }
         }
         validateEmailOnRuntime()
+    }
+
+    //Untuk mengetes onBoarding Finished
+    private fun clearSharedPreferencesFinishBoarding() {
+        val sharedPreference = requireActivity().getSharedPreferences("OnBoardingFinished", Context.MODE_PRIVATE)
+        sharedPreference.edit().clear().commit()
     }
 
     //Untuk mengecek apakah input email yang dijalankan sudah memenuhi kriteria inputan sebuah email

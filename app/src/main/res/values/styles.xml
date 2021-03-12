@@ -1,0 +1,12 @@
+<resources>
+    <style name="TextView"></style>
+    <style name="TextView.latoblack">
+        <item name="android:fontFamily">@font/lato_black</item>
+    </style>
+    <style name="TextView.latoblack.regular">
+        <item name="android:fontFamily">@font/lato_regular</item>
+    </style>
+
+
+
+</resources>
