@@ -17,5 +17,21 @@
         android:id="@+id/loginFragment"
         android:name="com.finalproject.presentations.login.LoginFragment"
         android:label="fragment_login"
-        tools:layout="@layout/fragment_login" />
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_homeAdminHCFragment"
+            app:destination="@id/homeAdminHCFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_homeEmployeeFragment"
+            app:destination="@id/homeEmployeeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/homeAdminHCFragment"
+        android:name="com.finalproject.presentations.home.HomeAdminHCFragment"
+        android:label="HomeAdminHCFragment" />
+    <fragment
+        android:id="@+id/homeEmployeeFragment"
+        android:name="com.finalproject.presentations.home.HomeEmployeeFragment"
+        android:label="fragment_home_admin_hc"
+        tools:layout="@layout/fragment_home_admin_hc" />
 </navigation>

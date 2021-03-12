@@ -34,15 +34,28 @@ class MainActivity : AppCompatActivity() {
             when (destination.id) {
                 R.id.splashFragment -> hideBottomNav()
                 R.id.loginFragment -> hideBottomNav()
+                R.id.homeAdminHCFragment -> showBottomNavAdminHC()
+                R.id.homeEmployeeFragment -> showBottomNavEmployee()
             }
         }
 
     }
 
     //Function untuk memunculkan bottom Navigation View
-    private fun showBottomNav() {
-        binding.bottomNavigationView.visibility = View.VISIBLE
+    private fun showBottomNavEmployee() {
+        binding.bottomNavigationView.apply {
+            menu.clear()
+            inflateMenu(R.menu.bottom_navigation_menu_user)
+            visibility = View.VISIBLE
+        }
+    }
 
+    private fun showBottomNavAdminHC() {
+        binding.bottomNavigationView.apply {
+            menu.clear()
+            inflateMenu(R.menu.bottom_navigation_menu_admin_hc)
+            visibility = View.VISIBLE
+        }
     }
 
     //Function untuk menyembunyikan bottom Navigation View

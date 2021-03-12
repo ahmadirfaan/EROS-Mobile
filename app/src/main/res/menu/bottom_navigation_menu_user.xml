@@ -6,10 +6,10 @@
         android:title="Home" />
     <item
         android:icon="@drawable/ic_baseline_format_list_bulleted_24"
-        android:title="List Reimbursement" />
+        android:title="History" />
     <item
         android:icon="@drawable/ic_refund_menu_icon"
-        android:title="Add Reimbursement"/>
+        android:title="Request"/>
     <item
         android:icon="@drawable/ic_baseline_account_circle_24"
         android:title="Account" />
