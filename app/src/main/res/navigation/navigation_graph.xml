@@ -12,6 +12,7 @@
         <action
             android:id="@+id/action_splashFragment_to_loginFragment"
             app:destination="@id/loginFragment"
+            app:launchSingleTop="true"
             app:popUpTo="@id/splashFragment"
             app:popUpToInclusive="true" />
         <action
@@ -30,7 +31,10 @@
             app:destination="@id/homeAdminHCFragment" />
         <action
             android:id="@+id/action_loginFragment_to_homeEmployeeFragment"
-            app:destination="@id/homeEmployeeFragment" />
+            app:destination="@id/homeEmployeeFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_loginFragment_to_signUpFragment"
             app:destination="@id/signUpFragment" />
@@ -43,7 +47,11 @@
         android:id="@+id/homeEmployeeFragment"
         android:name="com.finalproject.presentations.employee.home.HomeEmployeeFragment"
         android:label="fragment_home_admin_hc"
-        tools:layout="@layout/fragment_home_admin_hc" />
+        tools:layout="@layout/fragment_home_admin_hc" >
+        <action
+            android:id="@+id/action_homeEmployeeFragment_to_claimGlassesFragment"
+            app:destination="@id/claimGlassesFragment" />
+    </fragment>
     <fragment
         android:id="@+id/signUpFragment"
         android:name="com.finalproject.presentations.signup.SignUpFragment"
@@ -68,10 +76,29 @@
         android:id="@+id/historyFragment"
         android:name="com.finalproject.presentations.employee.history.HistoryFragment"
         android:label="fragment_history"
-        tools:layout="@layout/fragment_history" />
+        tools:layout="@layout/fragment_history" >
+        <action
+            android:id="@+id/action_historyFragment_to_homeEmployeeFragment2"
+            app:destination="@id/homeEmployeeFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/historyFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
     <fragment
         android:id="@+id/accountFragment"
         android:name="com.finalproject.presentations.employee.account.AccountFragment"
         android:label="fragment_account"
-        tools:layout="@layout/fragment_account" />
+        tools:layout="@layout/fragment_account" >
+        <action
+            android:id="@+id/action_accountFragment_to_homeEmployeeFragment2"
+            app:destination="@id/homeEmployeeFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/accountFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/claimGlassesFragment"
+        android:name="com.finalproject.presentations.employee.claim.glasses.ClaimGlassesFragment"
+        android:label="fragment_claim_glasses"
+        tools:layout="@layout/fragment_claim_glasses" />
 </navigation>

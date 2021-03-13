@@ -1,10 +1,11 @@
 package com.finalproject.presentations.main
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isEmpty
+import androidx.core.view.isNotEmpty
 import androidx.navigation.NavController
-import androidx.navigation.Navigation
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
@@ -36,7 +37,10 @@ class MainActivity : AppCompatActivity() {
                 R.id.splashFragment -> hideBottomNav()
                 R.id.loginFragment -> hideBottomNav()
                 R.id.homeAdminHCFragment -> showBottomNavAdminHC()
-                R.id.homeEmployeeFragment -> showBottomNavEmployee()
+                R.id.homeEmployeeFragment -> {
+                    showBottomNavEmployee()
+                }
+                R.id.claimGlassesFragment -> hideBottomNav()
             }
         }
 
@@ -45,24 +49,28 @@ class MainActivity : AppCompatActivity() {
     //Function untuk memunculkan bottom Navigation View
     private fun showBottomNavEmployee() {
         binding.bottomNavigationView.apply {
-            inflateMenu(R.menu.bottom_navigation_menu_user)
-            setupWithNavController(navController)
+            if (menu.isEmpty()) {
+                inflateMenu(R.menu.bottom_navigation_menu_user)
+                setupWithNavController(navController)
+            }
             visibility = View.VISIBLE
         }
     }
 
     private fun showBottomNavAdminHC() {
         binding.bottomNavigationView.apply {
-            inflateMenu(R.menu.bottom_navigation_menu_admin_hc)
-            setupWithNavController(navController)
-            visibility = View.VISIBLE
+            if (menu.isEmpty()) {
+                inflateMenu(R.menu.bottom_navigation_menu_admin_hc)
+                setupWithNavController(navController)
+            } else if (menu.isNotEmpty()) {
+                visibility = View.VISIBLE
+            }
         }
     }
 
     //Function untuk menyembunyikan bottom Navigation View
     private fun hideBottomNav() {
         binding.bottomNavigationView.visibility = View.GONE
-
     }
 
 }

@@ -22,6 +22,13 @@ class HistoryFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_history, container, false)
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        requireActivity().onBackPressedDispatcher.addCallback(){
+            findNavController().navigate(R.id.action_historyFragment_to_homeEmployeeFragment2)
+        }
+    }
+
     companion object {
 
         @JvmStatic

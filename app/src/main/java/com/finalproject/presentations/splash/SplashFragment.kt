@@ -33,7 +33,7 @@ class SplashFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         CoroutineScope(Dispatchers.Main).launch {
-            delay(2000)
+            delay(1000)
             if(onBoardingFinished()) {
                 findNavController().navigate(R.id.action_splashFragment_to_loginFragment)
             } else {

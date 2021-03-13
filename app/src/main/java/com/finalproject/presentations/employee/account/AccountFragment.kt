@@ -23,6 +23,13 @@ class AccountFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_account, container, false)
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        requireActivity().onBackPressedDispatcher.addCallback(){
+            findNavController().navigate(R.id.action_accountFragment_to_homeEmployeeFragment2)
+        }
+    }
+
     companion object {
         @JvmStatic
         fun newInstance() = AccountFragment()
