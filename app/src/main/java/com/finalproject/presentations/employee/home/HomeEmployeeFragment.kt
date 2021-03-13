@@ -29,12 +29,7 @@ class HomeEmployeeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentHomeEmployeeBinding.inflate(layoutInflater)
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        requireActivity().onBackPressedDispatcher.addCallback(){
+        requireActivity().onBackPressedDispatcher.addCallback(this){
             if(!isBackPressed) {
                 Toast.makeText(requireContext(), "Tekan Sekali lagi untuk keluar", Toast.LENGTH_SHORT).show()
                 isBackPressed = true
@@ -42,10 +37,21 @@ class HomeEmployeeFragment : Fragment() {
                 requireActivity().finish()
             }
         }
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
         binding.layoutClaimGlasses.setOnClickListener {
             findNavController().navigate(R.id.action_homeEmployeeFragment_to_claimGlassesFragment)
         }
 //        binding.layoutClaimGlasses.setBackgroundColor(Color.parseColor("#FF0000")) untuk menghilangkan tombol click listener dan ganti warna pada karyawan on site
+    }
+
+    override fun onPause() {
+        super.onPause()
+        isBackPressed = false
     }
 
     companion object {

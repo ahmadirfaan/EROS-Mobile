@@ -25,7 +25,7 @@ class AccountFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        requireActivity().onBackPressedDispatcher.addCallback(){
+        requireActivity().onBackPressedDispatcher.addCallback(this){
             findNavController().navigate(R.id.action_accountFragment_to_homeEmployeeFragment2)
         }
     }
