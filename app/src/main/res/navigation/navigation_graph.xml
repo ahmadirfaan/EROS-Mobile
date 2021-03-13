@@ -34,12 +34,6 @@
         <action
             android:id="@+id/action_loginFragment_to_signUpFragment"
             app:destination="@id/signUpFragment" />
-        <action
-            android:id="@+id/action_loginFragment_to_historyFragment"
-            app:destination="@id/historyFragment" />
-        <action
-            android:id="@+id/action_loginFragment_to_accountFragment"
-            app:destination="@id/accountFragment" />
     </fragment>
     <fragment
         android:id="@+id/homeAdminHCFragment"
