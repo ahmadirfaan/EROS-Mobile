@@ -15,8 +15,9 @@ import androidx.navigation.fragment.findNavController
 import com.finalproject.R
 import com.finalproject.databinding.FragmentLoginBinding
 import com.finalproject.utils.ResourceStatus
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class LoginFragment : Fragment() {
 
     private lateinit var viewModel: LoginViewModel
@@ -45,11 +46,6 @@ class LoginFragment : Fragment() {
                 val usernameString = inputEmailLogin.editText?.text.toString()
                 val passswordString = inputPasswordLogin.editText?.text.toString()
                 viewModel.checkEmailPasswordLogin(email = usernameString, password = passswordString)
-                if (usernameString.equals("admin@admin.com") && passswordString.equals("admin")) {
-                    findNavController().navigate(R.id.action_loginFragment_to_homeAdminHCFragment)
-                } else {
-                    findNavController().navigate(R.id.action_loginFragment_to_homeEmployeeFragment)
-                }
             }
             btnSignUp.setOnClickListener {
                 findNavController().navigate(R.id.action_loginFragment_to_signUpFragment)
@@ -61,7 +57,7 @@ class LoginFragment : Fragment() {
         validateEmailOnRuntime()
     }
 
-//    //Untuk mengetes onBoarding Finished
+//    Untuk mengetes onBoarding Finished
 //    private fun clearSharedPreferencesFinishBoarding() {
 //        val sharedPreference = requireActivity().getSharedPreferences("OnBoardingFinished", Context.MODE_PRIVATE)
 //        sharedPreference.edit().clear().commit()
@@ -95,7 +91,17 @@ class LoginFragment : Fragment() {
                     Toast.makeText(requireContext(), "Loading", Toast.LENGTH_SHORT).show()
                 }
                 ResourceStatus.SUCCESS -> {
-                    Toast.makeText(requireContext(), "Success Create Account", Toast.LENGTH_SHORT).show()
+                    binding.apply {
+                        val usernameString = inputEmailLogin.editText?.text.toString()
+                        val passswordString = inputPasswordLogin.editText?.text.toString()
+                        if (usernameString.equals("admin@admin.com") && passswordString.equals("admin")) {
+                            findNavController().navigate(R.id.action_loginFragment_to_homeAdminHCFragment)
+                        } else {
+                            findNavController().navigate(R.id.action_loginFragment_to_homeEmployeeFragment)
+                        }
+                    }
+
+                    Toast.makeText(requireContext(), "Success Login", Toast.LENGTH_SHORT).show()
                 }
                 ResourceStatus.FAILURE -> {
                     Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()

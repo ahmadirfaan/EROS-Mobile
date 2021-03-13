@@ -1,5 +1,8 @@
 package com.finalproject.presentations.employee.home
 
+import android.graphics.Color
+import android.graphics.ColorFilter
+import android.graphics.PorterDuff
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -25,6 +28,7 @@ class HomeEmployeeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+//        binding.layoutClaimGlasses.setBackgroundColor(Color.parseColor("#FF0000"))
     }
 
     companion object {

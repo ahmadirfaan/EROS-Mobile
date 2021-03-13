@@ -10,7 +10,9 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.finalproject.R
 import com.finalproject.databinding.ActivityMainBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
@@ -51,7 +53,6 @@ class MainActivity : AppCompatActivity() {
 
     private fun showBottomNavAdminHC() {
         binding.bottomNavigationView.apply {
-            menu.clear()
             inflateMenu(R.menu.bottom_navigation_menu_admin_hc)
             setupWithNavController(navController)
             visibility = View.VISIBLE

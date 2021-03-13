@@ -9,9 +9,12 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.finalproject.data.models.account.RegisterAccountRequest
 import com.finalproject.databinding.FragmentSignUpBinding
 import com.finalproject.utils.ResourceStatus
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SignUpFragment : Fragment() {
 
     private lateinit var binding: FragmentSignUpBinding
@@ -86,6 +89,10 @@ class SignUpFragment : Fragment() {
                     Toast.makeText(requireContext(), "Loading", Toast.LENGTH_SHORT).show()
                 }
                 ResourceStatus.SUCCESS -> {
+                    val emailString = binding.signUpInputEmail.editText?.text.toString()
+                    val passwordString = binding.signUpInputPassword.editText?.text.toString()
+                    val registerAccount = RegisterAccountRequest(email = emailString, password = passwordString)
+                    viewModel.registerAccount(request = registerAccount)
                     Toast.makeText(requireContext(), "Success Create Account", Toast.LENGTH_SHORT).show()
                 }
                 ResourceStatus.FAILURE -> {
