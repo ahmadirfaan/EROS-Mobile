@@ -1,6 +1,7 @@
 package com.finalproject.presentations.main
 
 import android.os.Bundle
+import android.text.TextUtils.isEmpty
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isEmpty
@@ -36,7 +37,9 @@ class MainActivity : AppCompatActivity() {
             when (destination.id) {
                 R.id.splashFragment -> hideBottomNav()
                 R.id.loginFragment -> hideBottomNav()
-                R.id.homeAdminHCFragment -> showBottomNavAdminHC()
+                R.id.homeAdminHCFragment -> {
+                    showBottomNavAdminHC()
+                }
                 R.id.homeEmployeeFragment -> {
                     showBottomNavEmployee()
                 }
@@ -62,9 +65,8 @@ class MainActivity : AppCompatActivity() {
             if (menu.isEmpty()) {
                 inflateMenu(R.menu.bottom_navigation_menu_admin_hc)
                 setupWithNavController(navController)
-            } else if (menu.isNotEmpty()) {
-                visibility = View.VISIBLE
             }
+            visibility = View.VISIBLE
         }
     }
 

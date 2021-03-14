@@ -35,6 +35,8 @@
         app:layout_constraintVertical_bias="0.214">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:drawableStart="@drawable/account_circle_24"
+            android:drawableTint="@color/black"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="10dp"
@@ -57,8 +59,11 @@
         app:passwordToggleEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:drawableTint="@color/black"
+            android:drawableStart="@drawable/ic_baseline_lock_24"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:inputType="textPassword"
             android:layout_margin="10dp"
             android:backgroundTint="@color/white"
             android:hint="Password" />
@@ -79,9 +84,12 @@
         app:passwordToggleEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:drawableStart="@drawable/ic_baseline_lock_24"
+            android:drawableTint="@color/black"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="10dp"
+            android:inputType="textPassword"
             android:backgroundTint="@color/white"
             android:hint="Confirm Password" />
 

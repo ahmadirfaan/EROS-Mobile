@@ -7,11 +7,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.finalproject.R
 import com.finalproject.databinding.FragmentLoginBinding
+import com.finalproject.utils.LoadingDialog
 import com.finalproject.utils.ResourceStatus
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
@@ -25,6 +27,7 @@ class LoginFragment : Fragment() {
     private lateinit var viewModel: LoginViewModel
     private lateinit var binding: FragmentLoginBinding
     private val emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+"
+    private lateinit var loadingDialog : AlertDialog
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,12 +39,13 @@ class LoginFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentLoginBinding.inflate(layoutInflater)
-        CoroutineScope(Dispatchers.Main).launch {
-            delay(1000)
-            findNavController().navigate(R.id.action_loginFragment_to_homeEmployeeFragment)
-        }
+//        CoroutineScope(Dispatchers.Main).launch {
+//            delay(1000)
+//            findNavController().navigate(R.id.action_loginFragment_to_homeAdminHCFragment)
+//        }
         initViewModel()
         subscribe()
+        loadingDialog = LoadingDialog.build(requireContext())
         return binding.root
     }
 
@@ -55,6 +59,9 @@ class LoginFragment : Fragment() {
             }
             btnSignUp.setOnClickListener {
                 findNavController().navigate(R.id.action_loginFragment_to_signUpFragment)
+            }
+            btnForgotPassword.setOnClickListener {
+                findNavController().navigate(R.id.action_loginFragment_to_forgetPasswordFragment)
             }
 //            btnForgotPassword.setOnClickListener {
 //                clearSharedPreferencesFinishBoarding()
@@ -94,9 +101,10 @@ class LoginFragment : Fragment() {
         viewModel.inputValidation.observe(this, {
             when (it.status) {
                 ResourceStatus.LOADING -> {
-                    Toast.makeText(requireContext(), "Loading", Toast.LENGTH_SHORT).show()
+                    loadingDialog.show()
                 }
                 ResourceStatus.SUCCESS -> {
+                    loadingDialog.hide()
                     binding.apply {
                         val usernameString = inputEmailLogin.editText?.text.toString()
                         val passswordString = inputPasswordLogin.editText?.text.toString()
@@ -110,6 +118,7 @@ class LoginFragment : Fragment() {
                     Toast.makeText(requireContext(), "Success Login", Toast.LENGTH_SHORT).show()
                 }
                 ResourceStatus.FAILURE -> {
+                    loadingDialog.hide()
                     Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
                 }
             }

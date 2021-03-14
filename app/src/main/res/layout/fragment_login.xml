@@ -39,7 +39,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Email"
-        android:textColorHint="@color/white"
+        android:textColorHint="@android:color/darker_gray"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -48,14 +48,15 @@
         app:layout_constraintTop_toBottomOf="@id/title_login"
         app:layout_constraintVertical_bias="0.128">
 
-        <androidx.appcompat.widget.AppCompatEditText
+        <EditText
             android:id="@+id/etUsername"
+            android:drawableStart="@drawable/account_circle_24"
+            android:backgroundTint="@color/white"
+            android:drawableTint="@color/black"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/blue_enigma"
             android:inputType="textEmailAddress"
-            android:maxLines="1"
-            android:textColor="@color/white" />
+            android:textColor="@color/black" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -64,7 +65,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Password"
-        android:textColorHint="@color/white"
+        android:textColorHint="@android:color/darker_gray"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -74,14 +75,16 @@
         app:layout_constraintVertical_bias="0.128"
         app:passwordToggleEnabled="true">
 
-        <androidx.appcompat.widget.AppCompatEditText
+        <EditText
             android:id="@+id/etPassword"
+            android:drawableStart="@drawable/ic_baseline_lock_24"
+            android:drawableTint="@color/black"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/blue_enigma"
-            android:inputType="text"
+            android:backgroundTint="@color/white"
+            android:inputType="textPassword"
             android:maxLines="1"
-            android:textColor="@color/white" />
+            android:textColor="@color/black" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.button.MaterialButton

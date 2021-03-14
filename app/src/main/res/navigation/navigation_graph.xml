@@ -38,6 +38,9 @@
         <action
             android:id="@+id/action_loginFragment_to_signUpFragment"
             app:destination="@id/signUpFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_forgetPasswordFragment"
+            app:destination="@id/forgetPasswordFragment" />
     </fragment>
     <fragment
         android:id="@+id/homeAdminHCFragment"
@@ -130,4 +133,9 @@
         android:name="com.finalproject.presentations.employee.account.FormProfileEmployeeFragment"
         android:label="fragment_form_profile_employee"
         tools:layout="@layout/fragment_form_profile_employee" />
+    <fragment
+        android:id="@+id/forgetPasswordFragment"
+        android:name="com.finalproject.presentations.employee.forgetpassword.ForgetPasswordFragment"
+        android:label="fragment_forget_password"
+        tools:layout="@layout/fragment_forget_password" />
 </navigation>

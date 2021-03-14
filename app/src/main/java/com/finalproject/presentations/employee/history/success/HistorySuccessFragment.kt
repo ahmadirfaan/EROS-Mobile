@@ -32,7 +32,7 @@ class HistorySuccessFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.tvMoveFragmentHistoryOnprogress.setOnClickListener {
+        binding.tvMoveFragmentHistoryOnProgress.setOnClickListener {
             findNavController().navigate(R.id.action_historySuccessFragment2_to_historyOnProgressFragment)
         }
     }
