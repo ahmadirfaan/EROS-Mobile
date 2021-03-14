@@ -73,15 +73,21 @@
             app:popUpToInclusive="true" />
     </fragment>
     <fragment
-        android:id="@+id/historyFragment"
-        android:name="com.finalproject.presentations.employee.history.HistoryFragment"
+        android:id="@+id/historyOnProgressFragment"
+        android:name="com.finalproject.presentations.employee.history.onprogress.HistoryOnProgressFragment"
         android:label="fragment_history"
-        tools:layout="@layout/fragment_history" >
+        tools:layout="@layout/fragment_history_onprogress" >
         <action
-            android:id="@+id/action_historyFragment_to_homeEmployeeFragment2"
+            android:id="@+id/action_historyOnProgressFragment_to_homeEmployeeFragment2"
             app:destination="@id/homeEmployeeFragment"
             app:launchSingleTop="true"
-            app:popUpTo="@id/historyFragment"
+            app:popUpTo="@id/historyOnProgressFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_historyOnProgressFragment_to_historySuccessFragment2"
+            app:destination="@id/historySuccessFragment2"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/historyOnProgressFragment"
             app:popUpToInclusive="true" />
     </fragment>
     <fragment
@@ -101,4 +107,19 @@
         android:name="com.finalproject.presentations.employee.claim.glasses.ClaimGlassesFragment"
         android:label="fragment_claim_glasses"
         tools:layout="@layout/fragment_claim_glasses" />
+    <fragment
+        android:id="@+id/historySuccessFragment2"
+        android:name="com.finalproject.presentations.employee.history.success.HistorySuccessFragment"
+        android:label="fragment_history_success"
+        tools:layout="@layout/fragment_history_success" >
+        <action
+            android:id="@+id/action_historySuccessFragment2_to_historyOnProgressFragment"
+            app:destination="@id/historyOnProgressFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/historySuccessFragment2"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_historySuccessFragment2_to_homeEmployeeFragment"
+            app:destination="@id/homeEmployeeFragment" />
+    </fragment>
 </navigation>
