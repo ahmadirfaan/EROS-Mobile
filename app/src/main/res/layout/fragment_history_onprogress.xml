@@ -50,7 +50,7 @@
                 android:text="On Progress"
                 android:textAlignment="center"
                 android:textColor="@color/black"
-                android:textSize="15sp"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -61,7 +61,7 @@
                 android:text="Success"
                 android:textAlignment="center"
                 android:textColor="@color/gray"
-                android:textSize="15sp"
+                android:textSize="20sp"
                 android:textStyle="bold" />
         </LinearLayout>
 
@@ -70,6 +70,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginTop="20sp"
         app:layout_constraintTop_toBottomOf="@id/linear_layout_status_history"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

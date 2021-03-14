@@ -101,6 +101,9 @@
             app:launchSingleTop="true"
             app:popUpTo="@id/accountFragment"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_accountFragment_to_formProfileEmployeeFragment"
+            app:destination="@id/formProfileEmployeeFragment" />
     </fragment>
     <fragment
         android:id="@+id/claimGlassesFragment"
@@ -122,4 +125,9 @@
             android:id="@+id/action_historySuccessFragment2_to_homeEmployeeFragment"
             app:destination="@id/homeEmployeeFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/formProfileEmployeeFragment"
+        android:name="com.finalproject.presentations.employee.account.FormProfileEmployeeFragment"
+        android:label="fragment_form_profile_employee"
+        tools:layout="@layout/fragment_form_profile_employee" />
 </navigation>
