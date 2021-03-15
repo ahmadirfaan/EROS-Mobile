@@ -133,10 +133,14 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_sorting_kategori" />
 
-            <ImageView
+            <TextView
+                android:id="@+id/tv_not_avalaible"
                 android:layout_width="match_parent"
                 android:layout_height="500dp"
-                android:src="@drawable/not_available_circle"
+                android:text="Data Tidak ada\nSilahkan Lakukan Transaksi Dulu"
+                android:textColor="@color/black"
+                android:textSize="50sp"
+                android:gravity="center_horizontal|center_vertical"
                 android:visibility="gone"
                 app:layout_constraintBottom_toTopOf="@+id/btn_prev_page"
                 app:layout_constraintEnd_toEndOf="parent"

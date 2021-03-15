@@ -35,6 +35,8 @@ class HistorySuccessFragment : Fragment() {
         binding.tvMoveFragmentHistoryOnProgress.setOnClickListener {
             findNavController().navigate(R.id.action_historySuccessFragment2_to_historyOnProgressFragment)
         }
+        binding.tvNotAvalaible.visibility = View.VISIBLE
+
     }
 
 

@@ -194,6 +194,37 @@
             </LinearLayout>
 
             <TextView
+                android:id="@+id/tv_name_couple"
+                android:layout_marginTop="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:text="Name Couple"
+                android:layout_gravity="start"
+                android:textSize="15sp"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_input_name_couple"
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:hintEnabled="false"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_full_name">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_name_couple"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:hint="Insert Name Couple"
+                    android:inputType="textPersonName"
+                    android:singleLine="true"
+                    android:textSize="20sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
                 android:id="@+id/tv_religion"
                 android:layout_marginTop="15dp"
                 android:layout_width="wrap_content"
