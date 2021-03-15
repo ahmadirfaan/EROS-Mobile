@@ -1,5 +1,6 @@
 package com.finalproject.presentations.login
 
+import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -15,6 +16,7 @@ import com.finalproject.R
 import com.finalproject.data.models.account.LoginResponse
 import com.finalproject.data.models.account.RegisterAccountRequest
 import com.finalproject.databinding.FragmentLoginBinding
+import com.finalproject.utils.AppConstant
 import com.finalproject.utils.LoadingDialog
 import com.finalproject.utils.ResourceStatus
 import dagger.hilt.android.AndroidEntryPoint
@@ -74,7 +76,7 @@ class LoginFragment : Fragment() {
 
 //    Untuk mengetes onBoarding Finished
 //    private fun clearSharedPreferencesFinishBoarding() {
-//        val sharedPreference = requireActivity().getSharedPreferences("OnBoardingFinished", Context.MODE_PRIVATE)
+//        val sharedPreference = requireActivity().getSharedPreferences(AppConstant.ON_BOARDING_FINISHED, Context.MODE_PRIVATE)
 //        sharedPreference.edit().clear().commit()
 //    }
 
@@ -129,6 +131,12 @@ class LoginFragment : Fragment() {
             when (it.status) {
                 ResourceStatus.LOADING -> loadingDialog.show()
                 ResourceStatus.SUCCESS -> {
+                    val data = it.data as LoginResponse
+                    val sharedPreferences = requireActivity().getSharedPreferences(AppConstant.ON_LOGIN_FINISHED, Context.MODE_PRIVATE)
+                    val editor = sharedPreferences.edit()
+                    editor.putBoolean("Login", true)
+                    editor.putString("EmailUser", data.data?.email)
+                    editor.apply()
                     loadingDialog.hide()
                     findNavController().navigate(R.id.action_loginFragment_to_homeEmployeeFragment)
                 }
@@ -138,6 +146,12 @@ class LoginFragment : Fragment() {
                 }
             }
         })
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        viewModel.inputValidation.removeObservers(this)
+        viewModel.loginAccount.removeObservers(this)
     }
 
 

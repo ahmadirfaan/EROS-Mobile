@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.finalproject.R
 import com.finalproject.databinding.FragmentThirdScreenBinding
+import com.finalproject.utils.AppConstant
 
 
 class ThirdScreenFragment : Fragment() {
@@ -31,7 +32,7 @@ class ThirdScreenFragment : Fragment() {
     }
 
     private fun onBoardingFinished() {
-        val sharedPreference = requireActivity().getSharedPreferences("OnBoardingFinished", Context.MODE_PRIVATE)
+        val sharedPreference = requireActivity().getSharedPreferences(AppConstant.ON_BOARDING_FINISHED, Context.MODE_PRIVATE)
         val editor = sharedPreference.edit()
         editor.putBoolean("Finished", true)
         editor.apply()

@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import com.finalproject.R
+import com.finalproject.utils.AppConstant
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -34,7 +35,10 @@ class SplashFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         CoroutineScope(Dispatchers.Main).launch {
             delay(1000)
-            if(onBoardingFinished()) {
+            if(onBoardingFinished() && onLoginFinished()) {
+                findNavController().navigate(R.id.action_splashFragment_to_homeEmployeeFragment)
+            }
+            else if(onBoardingFinished()) {
                 findNavController().navigate(R.id.action_splashFragment_to_loginFragment)
             } else {
                 findNavController().navigate(R.id.action_splashFragment_to_viewPagerFragment)
@@ -43,8 +47,13 @@ class SplashFragment : Fragment() {
     }
 
     private fun onBoardingFinished() : Boolean {
-        val sharedPreference = requireActivity().getSharedPreferences("OnBoardingFinished", Context.MODE_PRIVATE)
+        val sharedPreference = requireActivity().getSharedPreferences(AppConstant.ON_BOARDING_FINISHED, Context.MODE_PRIVATE)
         return sharedPreference.getBoolean("Finished", false)
+    }
+
+    private fun onLoginFinished() : Boolean {
+        val sharedPreferences = requireActivity().getSharedPreferences(AppConstant.ON_LOGIN_FINISHED, Context.MODE_PRIVATE)
+        return sharedPreferences.getBoolean("Login", false)
     }
 
     companion object {

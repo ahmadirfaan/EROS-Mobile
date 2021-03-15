@@ -1,5 +1,6 @@
 package com.finalproject.presentations.employee.account
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -10,6 +11,7 @@ import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import com.finalproject.R
 import com.finalproject.databinding.FragmentAccountBinding
+import com.finalproject.utils.AppConstant
 
 class AccountFragment : Fragment() {
 
@@ -33,6 +35,13 @@ class AccountFragment : Fragment() {
         }
         binding.btnEditAccount.setOnClickListener {
             findNavController().navigate(R.id.action_accountFragment_to_formProfileEmployeeFragment)
+        }
+        binding.btnLogOutAccount.setOnClickListener {
+            val sharedPreferences = requireActivity().getSharedPreferences(AppConstant.ON_LOGIN_FINISHED, Context.MODE_PRIVATE)
+            val editor = sharedPreferences.edit()
+            editor.clear()
+            editor.apply()
+            findNavController().navigate(R.id.action_accountFragment_to_loginFragment)
         }
 
     }
