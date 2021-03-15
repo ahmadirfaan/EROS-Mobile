@@ -44,6 +44,10 @@ class MainActivity : AppCompatActivity() {
                     showBottomNavEmployee()
                 }
                 R.id.claimGlassesFragment -> hideBottomNav()
+                R.id.claimInsuranceFragment -> hideBottomNav()
+                R.id.claimPregnantFragment -> hideBottomNav()
+                R.id.claimSPDFragment -> hideBottomNav()
+                R.id.claimTrainingFragment -> hideBottomNav()
             }
         }
 

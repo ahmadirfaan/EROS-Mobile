@@ -54,6 +54,18 @@
         <action
             android:id="@+id/action_homeEmployeeFragment_to_claimGlassesFragment"
             app:destination="@id/claimGlassesFragment" />
+        <action
+            android:id="@+id/action_homeEmployeeFragment_to_claimInsuranceFragment"
+            app:destination="@id/claimInsuranceFragment" />
+        <action
+            android:id="@+id/action_homeEmployeeFragment_to_claimSPDFragment"
+            app:destination="@id/claimSPDFragment" />
+        <action
+            android:id="@+id/action_homeEmployeeFragment_to_claimTrainingFragment"
+            app:destination="@id/claimTrainingFragment" />
+        <action
+            android:id="@+id/action_homeEmployeeFragment_to_claimPregnantFragment"
+            app:destination="@id/claimPregnantFragment" />
     </fragment>
     <fragment
         android:id="@+id/signUpFragment"
@@ -138,4 +150,24 @@
         android:name="com.finalproject.presentations.employee.forgetpassword.ForgetPasswordFragment"
         android:label="fragment_forget_password"
         tools:layout="@layout/fragment_forget_password" />
+    <fragment
+        android:id="@+id/claimInsuranceFragment"
+        android:name="com.finalproject.presentations.employee.claim.insurance.ClaimInsuranceFragment"
+        android:label="fragment_claim_insurance"
+        tools:layout="@layout/fragment_claim_insurance" />
+    <fragment
+        android:id="@+id/claimSPDFragment"
+        android:name="com.finalproject.presentations.employee.claim.spd.ClaimSPDFragment"
+        android:label="fragment_claim_spd"
+        tools:layout="@layout/fragment_claim_spd" />
+    <fragment
+        android:id="@+id/claimTrainingFragment"
+        android:name="com.finalproject.presentations.employee.claim.training.ClaimTrainingFragment"
+        android:label="fragment_claim_training"
+        tools:layout="@layout/fragment_claim_training" />
+    <fragment
+        android:id="@+id/claimPregnantFragment"
+        android:name="com.finalproject.presentations.employee.claim.pregnant.ClaimPregnantFragment"
+        android:label="fragment_claim_pregnant"
+        tools:layout="@layout/fragment_claim_pregnant" />
 </navigation>
