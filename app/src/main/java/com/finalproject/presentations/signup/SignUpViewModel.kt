@@ -5,8 +5,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.finalproject.data.models.account.RegisterAccountRequest
-import com.finalproject.data.repositories.registeraccount.RegisterAccountRepository
-import com.finalproject.di.qualifier.RegisterAccountRepoQualifier
+import com.finalproject.data.repositories.registeraccount.RegisterLoginAccountRepository
+import com.finalproject.di.qualifier.RegisterLoginAccountRepoQualifier
 import com.finalproject.utils.ResourceState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
@@ -16,7 +16,8 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class SignUpViewModel @Inject constructor(@RegisterAccountRepoQualifier private val registerAccountRepo: RegisterAccountRepository) : ViewModel() {
+class SignUpViewModel @Inject constructor(@RegisterLoginAccountRepoQualifier private val registerAccountRepo: RegisterLoginAccountRepository) :
+    ViewModel() {
 
     private val emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+"
     private var _inputValidation = MutableLiveData<ResourceState>()

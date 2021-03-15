@@ -1,6 +1,6 @@
 package com.finalproject.di.module
 
-import com.finalproject.data.api.RegisterApi
+import com.finalproject.data.api.RegisterLoginApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -14,5 +14,5 @@ class ReimburseApiModule {
 
     @Singleton
     @Provides
-    fun provideRegisterAccountApi(retrofit : Retrofit) = retrofit.create(RegisterApi::class.java)
+    fun provideRegisterLoginAccountApi(retrofit : Retrofit) = retrofit.create(RegisterLoginApi::class.java)
 }
