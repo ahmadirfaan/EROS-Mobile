@@ -40,7 +40,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
-                android:text="1. Full Name"
+                android:text="Full Name"
                 android:layout_gravity="start"
                 android:textSize="15sp"/>
 
@@ -66,12 +66,74 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
+                android:id="@+id/tv_place_birth"
+                android:layout_marginTop="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:text="Place Birth"
+                android:layout_gravity="start"
+                android:textSize="15sp"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_input_place_birth"
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:hintEnabled="false"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_full_name">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_place_birth_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:hint="Insert Place Birth"
+                    android:inputType="textPersonName"
+                    android:singleLine="true"
+                    android:textSize="20sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/tv_date_birth"
+                android:layout_marginTop="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:text="Date Birth"
+                android:layout_gravity="start"
+                android:textSize="15sp"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_input_date_birth"
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:hintEnabled="false"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_full_name">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_date_birth_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:hint="Insert Date Birth"
+                    android:inputType="textPersonName"
+                    android:singleLine="true"
+                    android:textSize="20sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
                 android:id="@+id/tv_input_gender"
                 android:layout_marginTop="15dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
-                android:text="2.Gender"
+                android:text="Gender"
                 android:layout_gravity="start"
                 android:textSize="15sp"/>
 
@@ -104,7 +166,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
-                android:text="3.Marital Status"
+                android:text="Marital Status"
                 android:layout_gravity="start"
                 android:textSize="15sp"/>
 
@@ -137,7 +199,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
-                android:text="4.Religion"
+                android:text="Religion"
                 android:layout_gravity="start"
                 android:textSize="15sp"/>
 
@@ -170,7 +232,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
-                android:text="5. Nomer KTP"
+                android:text="Nomer KTP"
                 android:layout_gravity="start"
                 android:textSize="15sp"/>
 
@@ -201,7 +263,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
-                android:text="6.Alamat Lengkap KTP"
+                android:text="Alamat Lengkap KTP"
                 android:layout_gravity="start"
                 android:textSize="15sp"/>
 
@@ -234,7 +296,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
-                android:text="7.Alamat Domisili"
+                android:text="Alamat Domisili"
                 android:layout_gravity="start"
                 android:textSize="15sp"/>
 
@@ -267,7 +329,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
-                android:text="8.Blood Type"
+                android:text="Blood Type"
                 android:layout_gravity="start"
                 android:textSize="15sp"/>
 
@@ -300,7 +362,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
-                android:text="9. Nama Rekening"
+                android:text="Nama Rekening"
                 android:layout_gravity="start"
                 android:textSize="15sp"/>
 
@@ -331,7 +393,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
-                android:text="10. Nomer Rekening"
+                android:text="Nomer Rekening"
                 android:layout_gravity="start"
                 android:textSize="15sp"/>
 
@@ -362,7 +424,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
-                android:text="11. Nomer HP"
+                android:text="Nomer HP"
                 android:layout_gravity="start"
                 android:textSize="15sp"/>
 
@@ -393,7 +455,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
-                android:text="12. Nomer Emergency"
+                android:text="Nomer Emergency"
                 android:layout_gravity="start"
                 android:textSize="15sp"/>
 

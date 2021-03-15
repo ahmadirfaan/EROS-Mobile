@@ -133,6 +133,16 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_sorting_kategori" />
 
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="500dp"
+                android:src="@drawable/not_available_circle"
+                android:visibility="gone"
+                app:layout_constraintBottom_toTopOf="@+id/btn_prev_page"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/btn_filter_date"/>
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_success_history"
                 android:layout_width="match_parent"
