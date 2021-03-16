@@ -1,6 +1,7 @@
 package com.finalproject.presentations.splash
 
 import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -15,9 +16,13 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class SplashFragment : Fragment() {
+
+    @Inject
+    lateinit var sharedPreference : SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,13 +52,11 @@ class SplashFragment : Fragment() {
     }
 
     private fun onBoardingFinished() : Boolean {
-        val sharedPreference = requireActivity().getSharedPreferences(AppConstant.ON_BOARDING_FINISHED, Context.MODE_PRIVATE)
-        return sharedPreference.getBoolean("Finished", false)
+        return sharedPreference.getBoolean(AppConstant.ON_BOARDING_FINISHED, false)
     }
 
     private fun onLoginFinished() : Boolean {
-        val sharedPreferences = requireActivity().getSharedPreferences(AppConstant.ON_LOGIN_FINISHED, Context.MODE_PRIVATE)
-        return sharedPreferences.getBoolean("Login", false)
+        return sharedPreference.getBoolean(AppConstant.ON_LOGIN_FINISHED, false)
     }
 
     companion object {

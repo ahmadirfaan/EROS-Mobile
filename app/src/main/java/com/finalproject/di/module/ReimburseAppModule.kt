@@ -1,9 +1,12 @@
 package com.finalproject.di.module
 
+import android.content.Context
+import android.content.SharedPreferences
 import com.finalproject.utils.AppConstant
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -23,5 +26,11 @@ class ReimburseAppModule {
         return Retrofit.Builder()
             .baseUrl(AppConstant.BASE_URL)
             .addConverterFactory(gson).build()
+    }
+
+    @Singleton
+    @Provides
+    fun provideSharedPref(@ApplicationContext context : Context) : SharedPreferences {
+        return context.getSharedPreferences(AppConstant.APP_SHARED_PREF, Context.MODE_PRIVATE)
     }
 }

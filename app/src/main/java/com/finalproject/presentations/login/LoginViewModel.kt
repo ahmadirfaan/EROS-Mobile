@@ -34,6 +34,12 @@ class LoginViewModel @Inject constructor(
             return _loginAccount
         }
 
+    private var _checkFormLiveData = MutableLiveData<ResourceState>()
+    val checkFormLiveData : LiveData<ResourceState>
+        get() {
+            return _checkFormLiveData
+        }
+
     fun checkEmailPasswordLogin(email: String, password: String) {
         CoroutineScope(Dispatchers.Main).launch {
             _inputValidation.postValue(ResourceState.loading())
@@ -72,4 +78,6 @@ class LoginViewModel @Inject constructor(
             }
         }
     }
+
+    fun
 }

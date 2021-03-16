@@ -1,6 +1,7 @@
 package com.finalproject.presentations.login
 
 import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -25,6 +26,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class LoginFragment : Fragment() {
@@ -34,6 +36,9 @@ class LoginFragment : Fragment() {
     private val emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+"
     private lateinit var loadingDialog : AlertDialog
     private var isBackPressed = false
+
+    @Inject
+    lateinit var sharedPreferences: SharedPreferences
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -142,11 +147,8 @@ class LoginFragment : Fragment() {
                 ResourceStatus.LOADING -> loadingDialog.show()
                 ResourceStatus.SUCCESS -> {
                     val data = it.data as LoginResponse
-                    val sharedPreferences = requireActivity().getSharedPreferences(AppConstant.ON_LOGIN_FINISHED, Context.MODE_PRIVATE)
-                    val editor = sharedPreferences.edit()
-                    editor.putBoolean("Login", true)
-                    editor.putString("EmailUser", data.data?.email)
-                    editor.apply()
+                    sharedPreferences.edit().putBoolean(AppConstant.ON_LOGIN_FINISHED, true).apply()
+                    sharedPreferences.edit().putString(AppConstant.APP_ID_LOGIN, data.data?.id).apply()
                     loadingDialog.hide()
                     findNavController().navigate(R.id.action_loginFragment_to_homeEmployeeFragment)
                 }

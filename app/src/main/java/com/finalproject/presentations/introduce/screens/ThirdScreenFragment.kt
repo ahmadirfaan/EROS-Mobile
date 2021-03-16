@@ -1,6 +1,7 @@
 package com.finalproject.presentations.introduce.screens
 
 import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,9 +11,14 @@ import androidx.navigation.fragment.findNavController
 import com.finalproject.R
 import com.finalproject.databinding.FragmentThirdScreenBinding
 import com.finalproject.utils.AppConstant
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
-
+@AndroidEntryPoint
 class ThirdScreenFragment : Fragment() {
+
+    @Inject
+    lateinit var sharedPreferences: SharedPreferences
 
     private lateinit var binding: FragmentThirdScreenBinding
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,10 +38,7 @@ class ThirdScreenFragment : Fragment() {
     }
 
     private fun onBoardingFinished() {
-        val sharedPreference = requireActivity().getSharedPreferences(AppConstant.ON_BOARDING_FINISHED, Context.MODE_PRIVATE)
-        val editor = sharedPreference.edit()
-        editor.putBoolean("Finished", true)
-        editor.apply()
+        sharedPreferences.edit().putBoolean(AppConstant.ON_BOARDING_FINISHED, true).apply()
     }
 
     companion object {

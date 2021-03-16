@@ -5,6 +5,9 @@ class AppConstant {
         const val BASE_URL = "http://10.0.2.2:8081"
         const val ON_BOARDING_FINISHED = "OnBoardingFinished" //Untuk Shared Preferences
         const val ON_LOGIN_FINISHED = "OnLoginFinished" //Untuk Shared Preferences
+        const val APP_SHARED_PREF = "ApplicationSharedPref"
+        const val APP_ID_LOGIN = "ApplicationIdLogin"
+        const val APP_ID_EMPLOYEE = "ApplicationIdEmployee"
         val GENDER_ARRAYS = arrayListOf<String>("MALE", "FEMALE")
         val RELIGION_ARRAYS = arrayListOf<String>("MUSLIM", "CHRISTIAN", "HINDU", "BUDDHA", "KONG HU CU")
 //        val GRADE_ARRAYS = arrayListOf<Int>(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13)

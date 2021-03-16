@@ -101,5 +101,6 @@ data class EmployeeResponse(
 	val residenceAddress: String? = null,
 
 	@field:SerializedName("verifiedEmail")
-	val verifiedEmail: Boolean? = null
+	val verifiedEmail: Boolean? = null,
+
 )

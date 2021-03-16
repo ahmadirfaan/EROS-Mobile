@@ -1,6 +1,7 @@
 package com.finalproject.presentations.employee.account.profile
 
 import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -19,6 +20,7 @@ import com.finalproject.utils.AppConstant
 import com.finalproject.utils.LoadingDialog
 import com.finalproject.utils.ResourceStatus
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class AccountFragment : Fragment() {
@@ -26,6 +28,9 @@ class AccountFragment : Fragment() {
     private lateinit var binding: FragmentAccountBinding
     private lateinit var loadingDialog: AlertDialog
     private lateinit var viewModel: AccountFragmentViewModel
+
+    @Inject
+    lateinit var sharedPreferences: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,7 +50,10 @@ class AccountFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.fillProfileAccount("27af333f-ba7c-4a63-b35f-820b9cb0c6c5")
+        val idLogin = sharedPreferences.getString(AppConstant.APP_ID_LOGIN, "Tidak Tersedia")
+        idLogin?.let {
+            viewModel.fillProfileAccount(it)
+        }
         requireActivity().onBackPressedDispatcher.addCallback(this) {
             findNavController().navigate(R.id.action_accountFragment_to_homeEmployeeFragment2)
         }
@@ -53,10 +61,7 @@ class AccountFragment : Fragment() {
             findNavController().navigate(R.id.action_accountFragment_to_formProfileEmployeeFragment)
         }
         binding.btnLogOutAccount.setOnClickListener {
-            val sharedPreferences = requireActivity().getSharedPreferences(AppConstant.ON_LOGIN_FINISHED, Context.MODE_PRIVATE)
-            val editor = sharedPreferences.edit()
-            editor.clear()
-            editor.apply()
+            clearSharedPreferencesWhenLogOut()
             findNavController().navigate(R.id.action_accountFragment_to_loginFragment)
         }
 
@@ -84,6 +89,12 @@ class AccountFragment : Fragment() {
         })
     }
 
+    private fun clearSharedPreferencesWhenLogOut() {
+        sharedPreferences.edit().remove(AppConstant.ON_LOGIN_FINISHED).apply()
+        sharedPreferences.edit().remove(AppConstant.APP_ID_LOGIN).apply()
+        sharedPreferences.edit().remove(AppConstant.APP_ID_EMPLOYEE).apply()
+    }
+
     private fun settingProfile(employee: EmployeeResponse?) {
         binding.apply {
             employee?.apply {
@@ -106,15 +117,27 @@ class AccountFragment : Fragment() {
                 tvNumberPhoneAccount.text = employee.phoneNumber
                 tvEmergencyContactAccount.text = employee.emergencyNumber
                 tvMaritalStatusAccount.text = employee.maritalStatus
-                if (employee.maritalStatus.equals("SINGLE")) {
+                if (employee.maritalStatus.equals("SINGLE") || employee.maritalStatus == null) {
                     linearLayoutSpouseNameAccount.visibility = View.GONE
                     linearLayoutNumberChildrenAccount.visibility = View.GONE
                 } else if (employee.maritalStatus.equals("DIVORCED")) {
                     linearLayoutSpouseNameAccount.visibility = View.GONE
-                    tvNumberChildrenAccount.text = employee.numberOfChildren as String
+                    if(employee.numberOfChildren != null) {
+                        tvNumberChildrenAccount.text = employee.numberOfChildren as String
+                    } else {
+                        tvNumberChildrenAccount.text = employee.numberOfChildren
+                    }
                 } else {
-                    tvSpouseNameAccount.text = employee.spouseName as String
-                    tvNumberChildrenAccount.text = employee.numberOfChildren as String
+                    if(employee.spouseName != null) {
+                        tvSpouseNameAccount.text =  employee.spouseName as String
+                    } else {
+                        tvNumberChildrenAccount.text = employee.spouseName
+                    }
+                    if(employee.numberOfChildren != null) {
+                        tvNumberChildrenAccount.text = employee.numberOfChildren as String
+                    } else {
+                        tvNumberChildrenAccount.text = employee.numberOfChildren
+                    }
                 }
             }
 
