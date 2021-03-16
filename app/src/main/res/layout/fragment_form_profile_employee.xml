@@ -26,11 +26,13 @@
         android:layout_height="0dp"
         android:layout_marginTop="20dp"
         android:background="@color/white"
-        app:layout_constraintTop_toBottomOf="@+id/tv_title_form"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        >
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_title_form"
+        app:layout_constraintVertical_bias="0.0">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -38,13 +40,13 @@
 
             <TextView
                 android:id="@+id/tv_full_name"
-                android:layout_marginTop="15dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:text="Full Name"
                 android:layout_gravity="start"
-                android:textSize="15sp"/>
+                android:layout_marginTop="15dp"
+                android:text="Full Name"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_input_full_name"
@@ -68,14 +70,45 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
-                android:id="@+id/tv_place_birth"
-                android:layout_marginTop="15dp"
+                android:id="@+id/tv_mothers_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:text="Place Birth"
                 android:layout_gravity="start"
-                android:textSize="15sp"/>
+                android:layout_marginTop="15dp"
+                android:text="Mothers Name"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_mothers_name"
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:hintEnabled="false"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_full_name">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_mothers_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:hint="Insert Full Name"
+                    android:inputType="textPersonName"
+                    android:singleLine="true"
+                    android:textSize="20sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/tv_place_birth"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:layout_marginTop="15dp"
+                android:text="Place Birth"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_input_place_birth"
@@ -100,13 +133,13 @@
 
             <TextView
                 android:id="@+id/tv_date_birth"
-                android:layout_marginTop="15dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:text="Date Birth"
                 android:layout_gravity="start"
-                android:textSize="15sp"/>
+                android:layout_marginTop="15dp"
+                android:text="Date Birth"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_input_date_birth"
@@ -131,13 +164,13 @@
 
             <TextView
                 android:id="@+id/tv_input_gender"
-                android:layout_marginTop="15dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:text="Gender"
                 android:layout_gravity="start"
-                android:textSize="15sp"/>
+                android:layout_marginTop="15dp"
+                android:text="Gender"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
 
             <LinearLayout
                 android:id="@+id/linear_layout_gender"
@@ -164,13 +197,13 @@
 
             <TextView
                 android:id="@+id/tv_marital_status"
-                android:layout_marginTop="15dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:text="Marital Status"
                 android:layout_gravity="start"
-                android:textSize="15sp"/>
+                android:layout_marginTop="15dp"
+                android:text="Marital Status"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
 
             <LinearLayout
                 android:id="@+id/linear_layout_marital_status"
@@ -197,13 +230,13 @@
 
             <TextView
                 android:id="@+id/tv_name_couple"
-                android:layout_marginTop="15dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:text="Name Couple"
                 android:layout_gravity="start"
-                android:textSize="15sp"/>
+                android:layout_marginTop="15dp"
+                android:text="Name Couple"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_input_name_couple"
@@ -227,14 +260,45 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
-                android:id="@+id/tv_religion"
-                android:layout_marginTop="15dp"
+                android:id="@+id/tv_number_children"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:text="Religion"
                 android:layout_gravity="start"
-                android:textSize="15sp"/>
+                android:layout_marginTop="15dp"
+                android:text="Number Children"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_input_number_children"
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:hintEnabled="false"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_full_name">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_number_children"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:hint="Insert Number Children"
+                    android:inputType="number"
+                    android:singleLine="true"
+                    android:textSize="20sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/tv_religion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:layout_marginTop="15dp"
+                android:text="Religion"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
 
             <LinearLayout
                 android:id="@+id/linear_layout_religion"
@@ -261,13 +325,13 @@
 
             <TextView
                 android:id="@+id/tv_no_ktp"
-                android:layout_marginTop="15dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:text="Nomer KTP"
                 android:layout_gravity="start"
-                android:textSize="15sp"/>
+                android:layout_marginTop="15dp"
+                android:text="Nomer KTP"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_input_nomer_ktp"
@@ -292,13 +356,13 @@
 
             <TextView
                 android:id="@+id/tv_input_address"
-                android:layout_marginTop="15dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:text="Alamat Lengkap KTP"
                 android:layout_gravity="start"
-                android:textSize="15sp"/>
+                android:layout_marginTop="15dp"
+                android:text="Alamat Lengkap KTP"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_input_address"
@@ -315,23 +379,87 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/gray"
-                    android:hint="Address KTP"
                     android:gravity="top|left"
+                    android:hint="Address KTP"
                     android:inputType="textMultiLine"
-                    android:minLines="2"
                     android:maxLines="3"
+                    android:minLines="2"
+                    android:textSize="15sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/tv_no_npwp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:layout_marginTop="15dp"
+                android:text="Nomer NPWP"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_input_nomer_npwp"
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:hintEnabled="false"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_full_name">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_nomer_npwp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:hint="Nomer NPWP"
+                    android:inputType="number"
+                    android:singleLine="true"
+                    android:textSize="20sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/tv_input_address_npwp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:layout_marginTop="15dp"
+                android:text="Alamat Lengkap NPWP"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_input_address_npwp"
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                app:hintEnabled="false">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_address_npwp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/gray"
+                    android:gravity="top|left"
+                    android:hint="Address NPWP"
+                    android:inputType="textMultiLine"
+                    android:maxLines="3"
+                    android:minLines="2"
                     android:textSize="15sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
                 android:id="@+id/tv_input_domicile"
-                android:layout_marginTop="15dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:text="Alamat Domisili"
                 android:layout_gravity="start"
-                android:textSize="15sp"/>
+                android:layout_marginTop="15dp"
+                android:text="Alamat Domisili"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_input_domicle"
@@ -348,23 +476,23 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/gray"
-                    android:hint="Address Domicile"
                     android:gravity="top|left"
+                    android:hint="Address Domicile"
                     android:inputType="textMultiLine"
-                    android:minLines="2"
                     android:maxLines="3"
+                    android:minLines="2"
                     android:textSize="15sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
                 android:id="@+id/tv_blood_type"
-                android:layout_marginTop="15dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:text="Blood Type"
                 android:layout_gravity="start"
-                android:textSize="15sp"/>
+                android:layout_marginTop="15dp"
+                android:text="Blood Type"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
 
             <LinearLayout
                 android:id="@+id/linear_layout_blood_type"
@@ -380,7 +508,7 @@
                     android:layout_weight="3"
                     android:hint="Blood Type"
                     android:textAlignment="textStart"
-                    android:textSize="25sp" />
+                    android:textSize="20sp" />
 
                 <Spinner
                     android:id="@+id/spinner_blood_type"
@@ -391,13 +519,13 @@
 
             <TextView
                 android:id="@+id/tv_nama_rekening"
-                android:layout_marginTop="15dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:text="Nama Rekening"
                 android:layout_gravity="start"
-                android:textSize="15sp"/>
+                android:layout_marginTop="15dp"
+                android:text="Nama Rekening"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_input_nama_rekening"
@@ -422,13 +550,13 @@
 
             <TextView
                 android:id="@+id/tv_no_rekening"
-                android:layout_marginTop="15dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:text="Nomer Rekening"
                 android:layout_gravity="start"
-                android:textSize="15sp"/>
+                android:layout_marginTop="15dp"
+                android:text="Nomer Rekening"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_input_nomer_rekening"
@@ -453,13 +581,13 @@
 
             <TextView
                 android:id="@+id/tv_no_hp"
-                android:layout_marginTop="15dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:text="Nomer HP"
                 android:layout_gravity="start"
-                android:textSize="15sp"/>
+                android:layout_marginTop="15dp"
+                android:text="Nomer HP"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_input_nomer_hp"
@@ -484,13 +612,13 @@
 
             <TextView
                 android:id="@+id/tv_no_emergency"
-                android:layout_marginTop="15dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:text="Nomer Emergency"
                 android:layout_gravity="start"
-                android:textSize="15sp"/>
+                android:layout_marginTop="15dp"
+                android:text="Nomer Emergency"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_input_nomer_emergency"
@@ -516,11 +644,11 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_submit_form"
-                android:layout_marginTop="30dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="Submit Form"/>
+                android:layout_marginTop="30dp"
+                android:text="Submit Form" />
 
 
         </LinearLayout>

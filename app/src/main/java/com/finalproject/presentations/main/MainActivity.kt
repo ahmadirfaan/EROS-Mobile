@@ -42,6 +42,19 @@ class MainActivity : AppCompatActivity() {
                 }
                 R.id.homeEmployeeFragment -> {
                     showBottomNavEmployee()
+                    binding.bottomNavigationView.menu.getItem(0).isEnabled = false
+                    binding.bottomNavigationView.menu.getItem(1).isEnabled = true
+                    binding.bottomNavigationView.menu.getItem(2).isEnabled = true
+                }
+                R.id.historyOnProgressFragment, R.id.historySuccessFragment2 -> {
+                    binding.bottomNavigationView.menu.getItem(0).isEnabled = true
+                    binding.bottomNavigationView.menu.getItem(1).isEnabled = false
+                    binding.bottomNavigationView.menu.getItem(2).isEnabled = true
+                }
+                R.id.accountFragment -> {
+                    binding.bottomNavigationView.menu.getItem(0).isEnabled = true
+                    binding.bottomNavigationView.menu.getItem(1).isEnabled = true
+                    binding.bottomNavigationView.menu.getItem(2).isEnabled = false
                 }
                 R.id.claimGlassesFragment -> hideBottomNav()
                 R.id.claimInsuranceFragment -> hideBottomNav()
@@ -78,5 +91,7 @@ class MainActivity : AppCompatActivity() {
     private fun hideBottomNav() {
         binding.bottomNavigationView.visibility = View.GONE
     }
+
+
 
 }

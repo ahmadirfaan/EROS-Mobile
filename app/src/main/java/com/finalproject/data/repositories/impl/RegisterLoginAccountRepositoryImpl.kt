@@ -1,6 +1,7 @@
 package com.finalproject.data.repositories.impl
 
 import com.finalproject.data.api.RegisterLoginApi
+import com.finalproject.data.models.account.FindByIdLoginEmployeeResponse
 import com.finalproject.data.models.account.LoginResponse
 import com.finalproject.data.models.account.RegisterAccountRequest
 import com.finalproject.data.models.account.RegisterAccountResponse
@@ -15,6 +16,10 @@ class RegisterLoginAccountRepositoryImpl @Inject constructor(private val registe
 
     override suspend fun loginAccountEmployee(request: RegisterAccountRequest): Response<LoginResponse> {
         return registerLoginApi.loginAccountEmployee(request)
+    }
+
+    override suspend fun findEmployeeByIdLogin(idLogin: String): Response<FindByIdLoginEmployeeResponse> {
+        return registerLoginApi.findEmployeeByIdLogin(idLogin)
     }
 
 }

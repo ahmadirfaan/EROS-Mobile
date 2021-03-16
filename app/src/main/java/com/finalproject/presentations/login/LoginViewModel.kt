@@ -62,7 +62,7 @@ class LoginViewModel @Inject constructor(
                 val responseBody = response.body()
                 if(responseBody?.data == null) {
                     _loginAccount.postValue(ResourceState.failured(responseBody?.message))
-                } else if(responseBody?.data?.roleId != 4) {
+                } else if(responseBody?.data?.role?.id != 4) {
                     _loginAccount.postValue(ResourceState.failured("Admin Tidak Diperbolehkan Disini"))
                 } else {
                     _loginAccount.postValue(ResourceState.success(responseBody))

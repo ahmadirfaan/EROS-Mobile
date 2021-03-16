@@ -16,12 +16,21 @@ data class LoginResponse(
 
 data class Data(
 
-	@field:SerializedName("password")
-	val password: String? = null,
+	@field:SerializedName("role")
+	val role: Role? = null,
 
-	@field:SerializedName("roleId")
-	val roleId: Int? = null,
+	@field:SerializedName("id")
+	val id: String? = null,
 
 	@field:SerializedName("email")
 	val email: String? = null
+)
+
+data class Role(
+
+	@field:SerializedName("roleName")
+	val roleName: String? = null,
+
+	@field:SerializedName("id")
+	val id: Int? = null
 )

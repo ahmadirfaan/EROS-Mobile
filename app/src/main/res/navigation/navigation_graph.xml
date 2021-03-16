@@ -116,7 +116,7 @@
     </fragment>
     <fragment
         android:id="@+id/accountFragment"
-        android:name="com.finalproject.presentations.employee.account.AccountFragment"
+        android:name="com.finalproject.presentations.employee.account.profile.AccountFragment"
         android:label="fragment_account"
         tools:layout="@layout/fragment_account" >
         <action
