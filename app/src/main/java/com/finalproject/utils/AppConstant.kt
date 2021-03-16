@@ -9,9 +9,10 @@ class AppConstant {
         const val APP_ID_LOGIN = "ApplicationIdLogin"
         const val APP_ID_EMPLOYEE = "ApplicationIdEmployee"
         val GENDER_ARRAYS = arrayListOf<String>("MALE", "FEMALE")
-        val RELIGION_ARRAYS = arrayListOf<String>("MUSLIM", "CHRISTIAN", "HINDU", "BUDDHA", "KONG HU CU")
-//        val GRADE_ARRAYS = arrayListOf<Int>(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13)
+        val RELIGION_ARRAYS = arrayListOf<String>("ISLAM", "KRISTEN PROTESTAN", "KRISTEN KATOLIK", "BUDDHA", "HINDU", "KONG HU CU")
+
+        //val GRADE_ARRAYS = arrayListOf<Int>(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13)
         val MARITAL_STATUS_ARRAYS = arrayListOf<String>("MARRIED", "SINGLE", "DIVORCE")
-        val BLOOD_TYPE_ARRAY = arrayListOf<String>("A", "B", "AB", "O")
+        val BLOOD_TYPE_ARRAY = arrayListOf<String>("A", "B", "O", "AB")
     }
 }

@@ -5,6 +5,7 @@ import android.content.SharedPreferences
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -120,10 +121,8 @@ class LoginFragment : Fragment() {
         viewModel.inputValidation.observe(this, {
             when (it.status) {
                 ResourceStatus.LOADING -> {
-                    loadingDialog.show()
                 }
                 ResourceStatus.SUCCESS -> {
-                    loadingDialog.hide()
                     binding.apply {
                         val emailString = inputEmailLogin.editText?.text.toString()
                         val passswordString = inputPasswordLogin.editText?.text.toString()
@@ -137,7 +136,6 @@ class LoginFragment : Fragment() {
                     }
                 }
                 ResourceStatus.FAILURE -> {
-                    loadingDialog.hide()
                     Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
                 }
             }
@@ -146,11 +144,34 @@ class LoginFragment : Fragment() {
             when (it.status) {
                 ResourceStatus.LOADING -> loadingDialog.show()
                 ResourceStatus.SUCCESS -> {
+                    loadingDialog.hide()
                     val data = it.data as LoginResponse
-                    sharedPreferences.edit().putBoolean(AppConstant.ON_LOGIN_FINISHED, true).apply()
                     sharedPreferences.edit().putString(AppConstant.APP_ID_LOGIN, data.data?.id).apply()
                     loadingDialog.hide()
-                    findNavController().navigate(R.id.action_loginFragment_to_homeEmployeeFragment)
+                    sharedPreferences.getString(AppConstant.APP_ID_LOGIN, "Login ID")?.let {
+                            it1 -> viewModel.checkFormLiveData(it1)
+                    }
+                }
+                ResourceStatus.FAILURE -> {
+                    loadingDialog.hide()
+                    Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
+                }
+            }
+        })
+        viewModel.checkFormLiveData.observe(this, {
+            when (it.status) {
+                ResourceStatus.LOADING -> loadingDialog.show()
+                ResourceStatus.SUCCESS -> {
+                    loadingDialog.hide()
+                    val successCode = it?.data as Int
+                    when (successCode) {
+                        1 -> {
+                            findNavController().navigate(R.id.action_loginFragment_to_homeEmployeeFragment)
+                            sharedPreferences.edit().putBoolean(AppConstant.ON_LOGIN_FINISHED, true).apply()
+                        }
+                        2 -> findNavController().navigate(R.id.action_loginFragment_to_confirmAccountFragment)
+                        3 -> findNavController().navigate(R.id.action_loginFragment_to_formProfileEmployeeFragment)
+                    }
                 }
                 ResourceStatus.FAILURE -> {
                     loadingDialog.hide()
@@ -164,6 +185,7 @@ class LoginFragment : Fragment() {
         super.onDestroy()
         viewModel.inputValidation.removeObservers(this)
         viewModel.loginAccount.removeObservers(this)
+        loadingDialog.cancel()
     }
 
 
