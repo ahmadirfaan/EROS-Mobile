@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.addCallback
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -32,10 +33,19 @@ class LoginFragment : Fragment() {
     private lateinit var binding: FragmentLoginBinding
     private val emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+"
     private lateinit var loadingDialog : AlertDialog
+    private var isBackPressed = false
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        requireActivity().onBackPressedDispatcher.addCallback(this){
+            if(!isBackPressed) {
+                Toast.makeText(requireContext(), "Tekan Sekali lagi untuk keluar", Toast.LENGTH_SHORT).show()
+                isBackPressed = true
+            } else {
+                requireActivity().finish()
+            }
+        }
     }
 
     override fun onCreateView(
@@ -43,10 +53,10 @@ class LoginFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentLoginBinding.inflate(layoutInflater)
-//        CoroutineScope(Dispatchers.Main).launch {
-//            delay(1000)
-//            findNavController().navigate(R.id.action_loginFragment_to_homeEmployeeFragment)
-//        }
+        CoroutineScope(Dispatchers.Main).launch {
+            delay(1000)
+            findNavController().navigate(R.id.action_loginFragment_to_homeEmployeeFragment)
+        }
         initViewModel()
         subscribe()
         loadingDialog = LoadingDialog.build(requireContext())
