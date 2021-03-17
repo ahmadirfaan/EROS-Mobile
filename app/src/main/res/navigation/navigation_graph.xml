@@ -160,7 +160,7 @@
     </fragment>
     <fragment
         android:id="@+id/formProfileEmployeeFragment"
-        android:name="com.finalproject.presentations.employee.account.FormProfileEmployeeFragment"
+        android:name="com.finalproject.presentations.employee.account.formprofile.FormProfileEmployeeFragment"
         android:label="fragment_form_profile_employee"
         tools:layout="@layout/fragment_form_profile_employee" >
         <action

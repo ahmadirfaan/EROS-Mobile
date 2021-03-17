@@ -71,6 +71,20 @@ class AccountFragment : Fragment() {
         viewModel = ViewModelProvider(this).get(AccountFragmentViewModel::class.java)
     }
 
+    override fun onPause() {
+        super.onPause()
+        loadingDialog.cancel()
+        viewModel.setProfile.removeObservers(this)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        loadingDialog.cancel()
+        viewModel.setProfile.removeObservers(this)
+    }
+
+
+
     private fun subscribe() {
         viewModel.setProfile.observe(this, {
             when (it.status) {

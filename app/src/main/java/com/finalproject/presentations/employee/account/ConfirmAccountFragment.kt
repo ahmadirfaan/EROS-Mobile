@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import com.finalproject.R
 import com.finalproject.databinding.FragmentConfirmAccountBinding
 import com.finalproject.utils.AppConstant
 import dagger.hilt.android.AndroidEntryPoint
@@ -34,6 +36,9 @@ class ConfirmAccountFragment : Fragment() {
             requireActivity().finish()
         }
         clearSharedPreferences()
+        binding.btnGoEditForm.setOnClickListener {
+            findNavController().navigate(R.id.action_confirmAccountFragment_to_formProfileEmployeeFragment2)
+        }
         return binding.root
     }
 

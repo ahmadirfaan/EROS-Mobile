@@ -59,10 +59,10 @@ class LoginFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentLoginBinding.inflate(layoutInflater)
-//        CoroutineScope(Dispatchers.Main).launch {
-//            delay(1000)
-//            findNavController().navigate(R.id.action_loginFragment_to_homeEmployeeFragment)
-//        }
+        CoroutineScope(Dispatchers.Main).launch {
+            delay(1000)
+            findNavController().navigate(R.id.action_loginFragment_to_formProfileEmployeeFragment)
+        }
         initViewModel()
         subscribe()
         loadingDialog = LoadingDialog.build(requireContext())

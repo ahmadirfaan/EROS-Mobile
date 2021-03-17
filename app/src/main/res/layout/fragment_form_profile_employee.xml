@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:background="@color/gray"
     android:layout_height="match_parent"
-    tools:context=".presentations.employee.account.FormProfileEmployeeFragment">
+    tools:context=".presentations.employee.account.formprofile.FormProfileEmployeeFragment">
 
     <TextView
         android:id="@+id/tv_title_form"
@@ -192,6 +192,7 @@
                     android:id="@+id/spinner_gender"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:spinnerMode="dropdown"
                     android:layout_weight="1" />
             </LinearLayout>
 
@@ -224,6 +225,7 @@
                 <Spinner
                     android:id="@+id/spinner_marital_status"
                     android:layout_width="wrap_content"
+                    android:spinnerMode="dropdown"
                     android:layout_height="wrap_content"
                     android:layout_weight="1" />
             </LinearLayout>
@@ -319,6 +321,7 @@
                 <Spinner
                     android:id="@+id/spinner_religion"
                     android:layout_width="wrap_content"
+                    android:spinnerMode="dropdown"
                     android:layout_height="wrap_content"
                     android:layout_weight="1" />
             </LinearLayout>
@@ -348,6 +351,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@android:color/transparent"
+                    android:maxLength="16"
                     android:hint="Nomer KTP"
                     android:inputType="number"
                     android:singleLine="true"
@@ -385,6 +389,37 @@
                     android:maxLines="3"
                     android:minLines="2"
                     android:textSize="15sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/tv_input_postal_code"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:layout_marginTop="15dp"
+                android:text="Postal Code"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_input_postal_code"
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:hintEnabled="false"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_full_name">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_postal_code"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:hint="Kode Pos"
+                    android:inputType="number"
+                    android:singleLine="true"
+                    android:textSize="20sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
@@ -514,6 +549,7 @@
                     android:id="@+id/spinner_blood_type"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:spinnerMode="dropdown"
                     android:layout_weight="1" />
             </LinearLayout>
 

@@ -1,14 +1,8 @@
 package com.finalproject.data.api
 
-import com.finalproject.data.models.account.FindByIdLoginEmployeeResponse
-import com.finalproject.data.models.account.LoginResponse
-import com.finalproject.data.models.account.RegisterAccountRequest
-import com.finalproject.data.models.account.RegisterAccountResponse
+import com.finalproject.data.models.account.*
 import retrofit2.Response
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Path
+import retrofit2.http.*
 
 interface RegisterLoginApi {
 
@@ -20,4 +14,7 @@ interface RegisterLoginApi {
 
     @GET("/employee/idlogin/{idLogin}")
     suspend fun findEmployeeByIdLogin(@Path("idLogin") idLogin : String) : Response<FindByIdLoginEmployeeResponse>
+
+    @PUT("/employee/editform/{idEmployee}")
+    suspend fun editFormEmployeeProfile(@Path("idEmployee") idEmployee : String, @Body request : FormAccountRequest) : Response<EmployeeResponse>
 }
