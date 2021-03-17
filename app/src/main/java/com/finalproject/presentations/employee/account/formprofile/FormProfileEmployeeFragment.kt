@@ -1,5 +1,6 @@
 package com.finalproject.presentations.employee.account.formprofile
 
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -15,12 +16,14 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.finalproject.R
-import com.finalproject.data.models.account.RegisterAccountRequest
+import com.finalproject.data.models.account.FormAccountRequest
 import com.finalproject.databinding.FragmentFormProfileEmployeeBinding
 import com.finalproject.utils.AppConstant
+import com.finalproject.utils.DateUtils
 import com.finalproject.utils.LoadingDialog
 import com.finalproject.utils.ResourceStatus
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class FormProfileEmployeeFragment : Fragment() {
@@ -28,6 +31,11 @@ class FormProfileEmployeeFragment : Fragment() {
     private lateinit var binding: FragmentFormProfileEmployeeBinding
     private lateinit var viewModel: FormProfileEmployeeViewModel
     private lateinit var loadingDialog: AlertDialog
+
+    @Inject
+    lateinit var sharedPreferences: SharedPreferences
+
+    //Variable request Form Account
     private var fullname = ""
     private var mothersname = ""
     private var placebirth = ""
@@ -48,6 +56,13 @@ class FormProfileEmployeeFragment : Fragment() {
     private var accountNumber = ""
     private var numberPhone = ""
     private var numberEmergency = ""
+
+    //For Enum
+    private var genderInt: Int? = null
+    private var maritalStatusInt: Int? = null
+    private var religionInt: Int? = null
+    private var bloodTypeInt: Int? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -71,10 +86,16 @@ class FormProfileEmployeeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         validateNomerKTPOnRuntime()
-        binding.apply{
+        binding.apply {
+            etDateBirthName.isEnabled = false
+            dateIcon.setOnClickListener {
+                DateUtils.show(requireContext()) {
+                    etDateBirthName.setText(it)
+                }
+            }
             btnSubmitForm.setOnClickListener {
                 fillVariableWithTheInput()
-                if(nomerKtp.length == 16) {
+                if (nomerKtp.length == 16) {
                     viewModel.inputValidation(
                         fullname, mothersname, placebirth, datebirth,
                         gender, maritalStatus, spouseName, numberChildren,
@@ -101,6 +122,43 @@ class FormProfileEmployeeFragment : Fragment() {
 
     private fun subscribe() {
         viewModel.inputValidation.observe(this, {
+            when (it.status) {
+                ResourceStatus.LOADING -> {
+                    loadingDialog.show()
+                }
+                ResourceStatus.SUCCESS -> {
+                    loadingDialog.hide()
+                    val formRequest = FormAccountRequest(
+                        fullname = fullname, biologicalMothersName = mothersname, placeOfBirth = placebirth, dateOfBirth = datebirth,
+                        gender = genderInt, maritalStatus = maritalStatusInt, spouseName = spouseName, numberOfChildren = numberChildren.toInt(),
+                        religion = religionInt, nik = nomerKtp, ktpAddress = ktpAddress, postalCodeOfIdCard = postalCode,
+                        npwp = nomerNpwp, npwpAddress = npwpAddress, residenceAddress = residence, bloodType = bloodTypeInt,
+                        accountName = accountName, accountNumber = accountNumber, phoneNumber = numberPhone, emergencyNumber = numberEmergency
+                    )
+                    Log.d("Masuk Subscribe", "Start Subscribe Success")
+                    Log.d("Form Request : ", "$formRequest")
+//                    getIdEmployee()?.let { it1 ->
+//                        Log.d("ID Employee", it1)
+//                        viewModel.fillFormProfile(
+//                            it1,
+//                            request = formRequest
+//                        )
+//                    }
+                    getIdEmployee()?.let {
+                            it1 ->
+                        viewModel.fillEditFormProfileForFirstTime(
+                            idEmployee = it1, request = formRequest
+                        )}
+                    Log.d("Masuk Subscribe", "End Subscribe Success")
+
+                }
+                ResourceStatus.FAILURE -> {
+                    loadingDialog.hide()
+                    Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
+                }
+            }
+        })
+        viewModel.formLiveData.observe(this, {
             when (it.status) {
                 ResourceStatus.LOADING -> {
                     loadingDialog.show()
@@ -136,9 +194,9 @@ class FormProfileEmployeeFragment : Fragment() {
             residence = etDomicile.editableText.toString()
             bloodType = etInputBloodType.editableText.toString()
             accountName = etNamaRekening.editableText.toString()
-            accountNumber= etNomerRekening.editableText.toString()
+            accountNumber = etNomerRekening.editableText.toString()
             numberPhone = etNomerHp.editableText.toString()
-            numberEmergency= etNomerEmergency.editableText.toString()
+            numberEmergency = etNomerEmergency.editableText.toString()
         }
     }
 
@@ -151,6 +209,7 @@ class FormProfileEmployeeFragment : Fragment() {
             spinnerBloodType.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
                 override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                     etInputBloodType.setText(AppConstant.BLOOD_TYPE_ARRAY[position])
+                    bloodTypeInt = position
                 }
 
                 override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -185,6 +244,7 @@ class FormProfileEmployeeFragment : Fragment() {
             spinnerMaritalStatus.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
                 override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                     etInputMaritalStatus.setText(AppConstant.MARITAL_STATUS_ARRAYS[position])
+                    maritalStatusInt = position
                     when (position) {
                         0 -> {
                             tvNameCouple.visibility = View.VISIBLE
@@ -207,7 +267,6 @@ class FormProfileEmployeeFragment : Fragment() {
                             tvNumberChildren.visibility = View.VISIBLE
                             tilInputNumberChildren.visibility = View.VISIBLE
                         }
-
                     }
                 }
 
@@ -227,6 +286,7 @@ class FormProfileEmployeeFragment : Fragment() {
             etInputGender.isEnabled = false
             spinnerGender.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
                 override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                    genderInt = position
                     etInputGender.setText(AppConstant.GENDER_ARRAYS[position])
                 }
 
@@ -245,6 +305,7 @@ class FormProfileEmployeeFragment : Fragment() {
             etInputReligion.isEnabled = false
             spinnerReligion.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
                 override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                    religionInt = position
                     etInputReligion.setText(AppConstant.RELIGION_ARRAYS[position])
                 }
 
@@ -253,6 +314,10 @@ class FormProfileEmployeeFragment : Fragment() {
 
             }
         }
+    }
+
+    private fun getIdEmployee(): String? {
+       return sharedPreferences.getString(AppConstant.APP_ID_EMPLOYEE, "ID EMPLOYEE")
     }
 
     companion object {

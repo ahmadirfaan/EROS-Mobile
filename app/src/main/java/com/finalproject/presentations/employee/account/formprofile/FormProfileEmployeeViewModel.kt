@@ -1,8 +1,10 @@
 package com.finalproject.presentations.employee.account.formprofile
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.finalproject.data.models.account.FormAccountRequest
 import com.finalproject.data.repositories.registeraccount.RegisterLoginAccountRepository
 import com.finalproject.di.qualifier.RegisterLoginAccountRepoQualifier
 import com.finalproject.utils.ResourceState
@@ -16,11 +18,17 @@ import javax.inject.Inject
 @HiltViewModel
 class FormProfileEmployeeViewModel @Inject constructor(
     @RegisterLoginAccountRepoQualifier
-    private val registerLoginAccountRepo : RegisterLoginAccountRepository
-): ViewModel() {
+    private val registerLoginAccountRepo: RegisterLoginAccountRepository
+) : ViewModel() {
 
     private var _inputValidation = MutableLiveData<ResourceState>()
     val inputValidation: LiveData<ResourceState>
+        get() {
+            return _inputValidation
+        }
+
+    private var _formLiveData = MutableLiveData<ResourceState>()
+    val formLiveData: LiveData<ResourceState>
         get() {
             return _inputValidation
         }
@@ -40,7 +48,27 @@ class FormProfileEmployeeViewModel @Inject constructor(
             } else {
                 _inputValidation.postValue(ResourceState.failured("INPUT MUST NOT EMPTY"))
             }
+        }
+    }
 
+    fun fillEditFormProfileForFirstTime(idEmployee : String, request : FormAccountRequest) {
+        CoroutineScope(Dispatchers.Main).launch {
+            _inputValidation.postValue(ResourceState.loading())
+            val response = registerLoginAccountRepo.editFormEmployeeProfile(idEmployee = idEmployee, request = request)
+            val responseBody = response.body()
+            Log.d("Response Code", "Response Code : ${response.code()}")
+            if(response.isSuccessful) {
+                Log.d("Response Code", "Response Body Code : ${responseBody?.code}")
+                Log.d("Response Code", "Response Body MEssagea : ${responseBody?.message}")
+                if(responseBody?.code?.equals(200) == true) {
+                    _formLiveData.postValue(ResourceState.success(responseBody))
+                } else {
+                    Log.d("MASUK EDIT", "MASUKKK DONGG PLISSS")
+                    _formLiveData.postValue(ResourceState.failured(responseBody?.message.toString()))
+                }
+            } else {
+                _formLiveData.postValue(ResourceState.failured(response.message()))
+            }
         }
     }
 }

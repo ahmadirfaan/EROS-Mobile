@@ -1,10 +1,7 @@
 package com.finalproject.data.repositories.impl
 
 import com.finalproject.data.api.RegisterLoginApi
-import com.finalproject.data.models.account.FindByIdLoginEmployeeResponse
-import com.finalproject.data.models.account.LoginResponse
-import com.finalproject.data.models.account.RegisterAccountRequest
-import com.finalproject.data.models.account.RegisterAccountResponse
+import com.finalproject.data.models.account.*
 import com.finalproject.data.repositories.registeraccount.RegisterLoginAccountRepository
 import retrofit2.Response
 import javax.inject.Inject
@@ -20,6 +17,10 @@ class RegisterLoginAccountRepositoryImpl @Inject constructor(private val registe
 
     override suspend fun findEmployeeByIdLogin(idLogin: String): Response<FindByIdLoginEmployeeResponse> {
         return registerLoginApi.findEmployeeByIdLogin(idLogin)
+    }
+
+    override suspend fun editFormEmployeeProfile(idEmployee: String, request: FormAccountRequest): Response<FindByIdLoginEmployeeResponse> {
+        return registerLoginApi.editFormEmployeeProfile(idEmployee, request)
     }
 
 }

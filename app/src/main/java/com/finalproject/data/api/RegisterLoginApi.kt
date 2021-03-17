@@ -16,5 +16,5 @@ interface RegisterLoginApi {
     suspend fun findEmployeeByIdLogin(@Path("idLogin") idLogin : String) : Response<FindByIdLoginEmployeeResponse>
 
     @PUT("/employee/editform/{idEmployee}")
-    suspend fun editFormEmployeeProfile(@Path("idEmployee") idEmployee : String, @Body request : FormAccountRequest) : Response<EmployeeResponse>
+    suspend fun editFormEmployeeProfile(@Path("idEmployee") idEmployee : String, @Body request : FormAccountRequest) : Response<FindByIdLoginEmployeeResponse>
 }

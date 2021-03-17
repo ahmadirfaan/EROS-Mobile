@@ -100,12 +100,15 @@ class LoginViewModel @Inject constructor(
                         it.npwpAddress, it.phoneNumber, it.placeOfBirth, it.postalCodeOfIdCard,
                         it.religion, it.residenceAddress, it.spouseName, it.numberOfChildren
                     )
+                    sharedPreferences.edit().putString(AppConstant.APP_ID_EMPLOYEE, it.id).apply()
+                    Log.d("Nilai Form Is Null", formIsNull.toString())
                     if(!formIsNull && it.verifiedHc == true) {
-                        sharedPreferences.edit().putString(AppConstant.APP_ID_EMPLOYEE, it.id)
+                        Log.d("Masuk nomer 1 Success", "1")
                         _checkFormLiveData.postValue(ResourceState.success(1)) //Sudah mengisi form dan diverifikasi oleh HC
-                    } else if(!formIsNull && it.verifiedHc == false) {
+                    } else if(!formIsNull && (it.verifiedHc == false || it.verifiedHc == null)) {
                         _checkFormLiveData.postValue(ResourceState.success(2)) //Sudah mengisi form tapi belum diverifikasi oleh HC
                     }  else {
+                        Log.d("Masuk nomer 3 Success", "3")
                         _checkFormLiveData.postValue(ResourceState.success(3)) //Belum mengisi form dan belum diverifikasi oleh HC
                     }
                 }
@@ -118,6 +121,7 @@ class LoginViewModel @Inject constructor(
     private fun checkFormIsNull(vararg input : Any?) : Boolean {
         val check = ArrayList<Int>()
         for (i in input) {
+            Log.d("I-nya adalahah", "$i")
             if (i == null) {
                 check.add(1)
             }
@@ -126,6 +130,6 @@ class LoginViewModel @Inject constructor(
             return false //Logic ketika data semua sudah keisi
         }
         Log.d("check Array Validasi", "SIZE ARRAY ${check.size}")
-        return check.size == input.size || check.size < input.size
+        return check.size <= input.size
     }
 }

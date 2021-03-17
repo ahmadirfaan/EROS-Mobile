@@ -3,22 +3,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@color/gray"
     android:layout_height="match_parent"
+    android:background="@color/gray"
     tools:context=".presentations.employee.account.formprofile.FormProfileEmployeeFragment">
 
     <TextView
         android:id="@+id/tv_title_form"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/lato_black"
         android:layout_gravity="center"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        android:fontFamily="@font/lato_black"
         android:text="Form \n Profile Employee"
         android:textColor="@color/black"
-        android:textSize="30sp" />
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ScrollView
         android:id="@+id/scroll_view"
@@ -66,7 +66,7 @@
                     android:hint="Insert Full Name"
                     android:inputType="textPersonName"
                     android:singleLine="true"
-                    android:textSize="20sp" />
+                    android:textSize="15sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
@@ -89,16 +89,17 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_full_name">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/et_mothers_name"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@android:color/transparent"
-                    android:hint="Insert Full Name"
-                    android:inputType="textPersonName"
-                    android:singleLine="true"
-                    android:textSize="20sp" />
             </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_mothers_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:hint="Insert Mothers Name"
+                android:inputType="textPersonName"
+                android:singleLine="true"
+                android:textSize="15sp" />
 
             <TextView
                 android:id="@+id/tv_place_birth"
@@ -128,7 +129,7 @@
                     android:hint="Insert Place Birth"
                     android:inputType="textPersonName"
                     android:singleLine="true"
-                    android:textSize="20sp" />
+                    android:textSize="15sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
@@ -141,26 +142,42 @@
                 android:textColor="@color/black"
                 android:textSize="15sp" />
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/til_input_date_birth"
-                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+            <LinearLayout
+                android:id="@+id/linear_layout_date_birth"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:hintEnabled="false"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_full_name">
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/et_date_birth_name"
-                    android:layout_width="match_parent"
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_input_date_birth"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@android:color/transparent"
-                    android:hint="Insert Date Birth"
-                    android:inputType="textPersonName"
-                    android:singleLine="true"
-                    android:textSize="20sp" />
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:layout_weight="2"
+                    app:hintEnabled="false">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_date_birth_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/transparent"
+                        android:hint="Insert Date Birth"
+                        android:inputType="text"
+                        android:singleLine="true"
+                        android:textSize="15sp" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <ImageView
+                    android:id="@+id/date_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_height="30dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/ic_baseline_calendar_today_24" />
+
+            </LinearLayout>
+
 
             <TextView
                 android:id="@+id/tv_input_gender"
@@ -186,14 +203,14 @@
                     android:layout_weight="3"
                     android:hint="GENDER"
                     android:textAlignment="textStart"
-                    android:textSize="20sp" />
+                    android:textSize="15sp" />
 
                 <Spinner
                     android:id="@+id/spinner_gender"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:spinnerMode="dropdown"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    android:spinnerMode="dropdown" />
             </LinearLayout>
 
             <TextView
@@ -220,14 +237,14 @@
                     android:layout_weight="3"
                     android:hint="MARITAL STATUS"
                     android:textAlignment="textStart"
-                    android:textSize="20sp" />
+                    android:textSize="15sp" />
 
                 <Spinner
                     android:id="@+id/spinner_marital_status"
                     android:layout_width="wrap_content"
-                    android:spinnerMode="dropdown"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    android:spinnerMode="dropdown" />
             </LinearLayout>
 
             <TextView
@@ -258,7 +275,7 @@
                     android:hint="Insert Name Couple"
                     android:inputType="textPersonName"
                     android:singleLine="true"
-                    android:textSize="20sp" />
+                    android:textSize="15sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
@@ -289,7 +306,7 @@
                     android:hint="Insert Number Children"
                     android:inputType="number"
                     android:singleLine="true"
-                    android:textSize="20sp" />
+                    android:textSize="15sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
@@ -316,14 +333,14 @@
                     android:layout_weight="3"
                     android:hint="RELIGION"
                     android:textAlignment="textStart"
-                    android:textSize="20sp" />
+                    android:textSize="15sp" />
 
                 <Spinner
                     android:id="@+id/spinner_religion"
                     android:layout_width="wrap_content"
-                    android:spinnerMode="dropdown"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    android:spinnerMode="dropdown" />
             </LinearLayout>
 
             <TextView
@@ -351,11 +368,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@android:color/transparent"
-                    android:maxLength="16"
                     android:hint="Nomer KTP"
                     android:inputType="number"
+                    android:maxLength="16"
                     android:singleLine="true"
-                    android:textSize="20sp" />
+                    android:textSize="15sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
@@ -419,7 +436,7 @@
                     android:hint="Kode Pos"
                     android:inputType="number"
                     android:singleLine="true"
-                    android:textSize="20sp" />
+                    android:textSize="15sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
@@ -450,7 +467,7 @@
                     android:hint="Nomer NPWP"
                     android:inputType="number"
                     android:singleLine="true"
-                    android:textSize="20sp" />
+                    android:textSize="15sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
@@ -543,14 +560,14 @@
                     android:layout_weight="3"
                     android:hint="Blood Type"
                     android:textAlignment="textStart"
-                    android:textSize="20sp" />
+                    android:textSize="15sp" />
 
                 <Spinner
                     android:id="@+id/spinner_blood_type"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:spinnerMode="dropdown"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    android:spinnerMode="dropdown" />
             </LinearLayout>
 
             <TextView
@@ -581,7 +598,7 @@
                     android:hint="Nama Rekening Bank"
                     android:inputType="text"
                     android:singleLine="true"
-                    android:textSize="20sp" />
+                    android:textSize="15sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
@@ -612,7 +629,7 @@
                     android:hint="Nomer Rekening Bank"
                     android:inputType="number"
                     android:singleLine="true"
-                    android:textSize="20sp" />
+                    android:textSize="15sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
@@ -643,7 +660,7 @@
                     android:hint="Nomer Hp"
                     android:inputType="number"
                     android:singleLine="true"
-                    android:textSize="20sp" />
+                    android:textSize="15sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
@@ -674,7 +691,7 @@
                     android:hint="Nomer Emergency"
                     android:inputType="number"
                     android:singleLine="true"
-                    android:textSize="20sp" />
+                    android:textSize="15sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
 
