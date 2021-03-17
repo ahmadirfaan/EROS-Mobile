@@ -16,6 +16,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.finalproject.R
+import com.finalproject.data.models.account.EmployeeResponse
 import com.finalproject.data.models.account.FormAccountRequest
 import com.finalproject.databinding.FragmentFormProfileEmployeeBinding
 import com.finalproject.utils.AppConstant
@@ -64,18 +65,24 @@ class FormProfileEmployeeFragment : Fragment() {
     private var bloodTypeInt: Int? = null
 
 
+    //Data Employee
+    private var dataUpdate: EmployeeResponse? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        arguments?.apply {
+            dataUpdate = this.getParcelable(AppConstant.SEND_BUNDLE_DATA_EMPLOYEE)
+        }
+        binding = FragmentFormProfileEmployeeBinding.inflate(layoutInflater)
+        initViewModel()
+        subscribe()
+        loadingDialog = LoadingDialog.build(requireContext())
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentFormProfileEmployeeBinding.inflate(layoutInflater)
-        initViewModel()
-        subscribe()
-        loadingDialog = LoadingDialog.build(requireContext())
         onSpinnerItemBloodType()
         onSpinnerItemMaritalStatus()
         onSpinnerItemGender()
@@ -86,6 +93,9 @@ class FormProfileEmployeeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         validateNomerKTPOnRuntime()
+        if (dataUpdate != null) {
+            setTextIfDataNotNull()
+        }
         binding.apply {
             etDateBirthName.isEnabled = false
             dateIcon.setOnClickListener {
@@ -108,6 +118,7 @@ class FormProfileEmployeeFragment : Fragment() {
                 }
             }
         }
+
     }
 
     override fun onPause() {
@@ -144,11 +155,11 @@ class FormProfileEmployeeFragment : Fragment() {
 //                            request = formRequest
 //                        )
 //                    }
-                    getIdEmployee()?.let {
-                            it1 ->
+                    getIdEmployee()?.let { it1 ->
                         viewModel.fillEditFormProfileForFirstTime(
                             idEmployee = it1, request = formRequest
-                        )}
+                        )
+                    }
                     Log.d("Masuk Subscribe", "End Subscribe Success")
 
                 }
@@ -165,7 +176,11 @@ class FormProfileEmployeeFragment : Fragment() {
                 }
                 ResourceStatus.SUCCESS -> {
                     loadingDialog.hide()
-                    findNavController().navigate(R.id.action_formProfileEmployeeFragment_to_confirmAccountFragment)
+                    if(dataUpdate != null) {
+                        findNavController().popBackStack()
+                    } else {
+                        findNavController().navigate(R.id.action_formProfileEmployeeFragment_to_confirmAccountFragment)
+                    }
                 }
                 ResourceStatus.FAILURE -> {
                     loadingDialog.hide()
@@ -173,6 +188,54 @@ class FormProfileEmployeeFragment : Fragment() {
                 }
             }
         })
+    }
+
+    private fun setTextIfDataNotNull() {
+        binding.apply {
+            etFullName.setText(dataUpdate?.fullname)
+            etMothersName.setText(dataUpdate?.biologicalMothersName)
+            etPlaceBirthName.setText(dataUpdate?.placeOfBirth)
+            etDateBirthName.setText(dataUpdate?.dateOfBirth)
+            etNameCouple.setText(dataUpdate?.spouseName)
+            etNumberChildren.setText(dataUpdate?.numberOfChildren.toString())
+            etNomerKtp.setText(dataUpdate?.nik)
+            etAddress.setText(dataUpdate?.ktpAddress)
+            etPostalCode.setText(dataUpdate?.postalCodeOfIdCard)
+            etNomerNpwp.setText(dataUpdate?.npwp)
+            etAddressNpwp.setText(dataUpdate?.npwpAddress)
+            etDomicile.setText(dataUpdate?.residenceAddress)
+            etNamaRekening.setText(dataUpdate?.accountName)
+            etNomerRekening.setText(dataUpdate?.accountNumber)
+            etNomerHp.setText(dataUpdate?.phoneNumber)
+            etNomerEmergency.setText(dataUpdate?.emergencyNumber)
+            tvTitleForm.setText("Change Data Employee")
+            btnSubmitForm.text = "Edit Data"
+            //Logic For Enum
+            when(dataUpdate?.gender) {
+                "MALE" -> spinnerGender.setSelection(0)
+                "FEMALE" -> spinnerGender.setSelection(1)
+            }
+            when(dataUpdate?.maritalStatus) {
+                "MARRIED" -> spinnerMaritalStatus.setSelection(0)
+                "SINGLE" -> spinnerMaritalStatus.setSelection(1)
+                "DIVORCE" -> spinnerMaritalStatus.setSelection(2)
+            }
+            when(dataUpdate?.religion) {
+                "ISLAM" -> spinnerReligion.setSelection(0)
+                "PROTESTAN"-> spinnerReligion.setSelection(1)
+                "KATOLIK" -> spinnerReligion.setSelection(2)
+                "BUDDHA" -> spinnerReligion.setSelection(3)
+                "HINDU" -> spinnerReligion.setSelection(4)
+                "KONGHUCU" -> spinnerReligion.setSelection(5)
+            }
+            when(dataUpdate?.bloodType) {
+                "A" -> spinnerBloodType.setSelection(0)
+                "B" -> spinnerBloodType.setSelection(1)
+                "O" -> spinnerBloodType.setSelection(2)
+                "AB" -> spinnerBloodType.setSelection(3)
+            }
+
+        }
     }
 
     private fun fillVariableWithTheInput() {
@@ -317,7 +380,7 @@ class FormProfileEmployeeFragment : Fragment() {
     }
 
     private fun getIdEmployee(): String? {
-       return sharedPreferences.getString(AppConstant.APP_ID_EMPLOYEE, "ID EMPLOYEE")
+        return sharedPreferences.getString(AppConstant.APP_ID_EMPLOYEE, "ID EMPLOYEE")
     }
 
     companion object {

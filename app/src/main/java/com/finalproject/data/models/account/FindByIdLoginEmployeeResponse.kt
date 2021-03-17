@@ -1,6 +1,8 @@
 package com.finalproject.data.models.account
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
 data class FindByIdLoginEmployeeResponse(
 
@@ -14,6 +16,7 @@ data class FindByIdLoginEmployeeResponse(
 	val message: Any? = null
 )
 
+@Parcelize
 data class EmployeeResponse(
 
 	@field:SerializedName("gender")
@@ -29,7 +32,7 @@ data class EmployeeResponse(
 	val bloodType: String? = null,
 
 	@field:SerializedName("employeeStatus")
-	val employeeStatus: Any? = null,
+	val employeeStatus: String? = null,
 
 	@field:SerializedName("npwpAddress")
 	val npwpAddress: String? = null,
@@ -38,10 +41,10 @@ data class EmployeeResponse(
 	val nik: String? = null,
 
 	@field:SerializedName("joinDate")
-	val joinDate: Any? = null,
+	val joinDate: String? = null,
 
 	@field:SerializedName("nip")
-	val nip: Any? = null,
+	val nip: String? = null,
 
 	@field:SerializedName("id")
 	val id: String? = null,
@@ -68,16 +71,16 @@ data class EmployeeResponse(
 	val verifiedHc: Boolean? = null,
 
 	@field:SerializedName("employeeType")
-	val employeeType: Any? = null,
+	val employeeType: String? = null,
 
 	@field:SerializedName("phoneNumber")
 	val phoneNumber: String? = null,
 
 	@field:SerializedName("numberOfChildren")
-	val numberOfChildren: Any? = null,
+	val numberOfChildren: Int? = null,
 
 	@field:SerializedName("grade")
-	val grade: Any? = null,
+	val grade: String? = null,
 
 	@field:SerializedName("biologicalMothersName")
 	val biologicalMothersName: String? = null,
@@ -86,13 +89,13 @@ data class EmployeeResponse(
 	val postalCodeOfIdCard: String? = null,
 
 	@field:SerializedName("idLogin")
-	val idLogin: Any? = null,
+	val idLogin: String? = null,
 
 	@field:SerializedName("fullname")
 	val fullname: String? = null,
 
 	@field:SerializedName("spouseName")
-	val spouseName: Any? = null,
+	val spouseName: String? = null,
 
 	@field:SerializedName("maritalStatus")
 	val maritalStatus: String? = null,
@@ -103,4 +106,4 @@ data class EmployeeResponse(
 	@field:SerializedName("verifiedEmail")
 	val verifiedEmail: Boolean? = null,
 
-)
+) : Parcelable

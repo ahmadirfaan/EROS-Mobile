@@ -5,7 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/blue_enigma"
     android:layout_height="match_parent"
-    tools:context=".presentations.employee.account.ConfirmAccountFragment">
+    tools:context=".presentations.employee.account.confirmaccount.ConfirmAccountFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <androidx.cardview.widget.CardView

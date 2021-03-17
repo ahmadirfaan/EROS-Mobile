@@ -1,10 +1,12 @@
-package com.finalproject.presentations.employee.account.profile
+package com.finalproject.presentations.employee.account.confirmaccount
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.finalproject.data.repositories.registeraccount.RegisterLoginAccountRepository
 import com.finalproject.di.qualifier.RegisterLoginAccountRepoQualifier
+import com.finalproject.utils.AppConstant
 import com.finalproject.utils.ResourceState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
@@ -13,36 +15,16 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class AccountFragmentViewModel @Inject constructor(
+class ConfirmAccountViewModel @Inject constructor(
     @RegisterLoginAccountRepoQualifier
-    private val registerLoginAccountRepo: RegisterLoginAccountRepository
-) : ViewModel() {
-
-    private var _setProfile = MutableLiveData<ResourceState>()
-    val setProfile : LiveData<ResourceState>
-    get() {
-        return _setProfile
-    }
+    private val registerLoginAccountRepo : RegisterLoginAccountRepository
+): ViewModel() {
 
     private var _sendBundleData = MutableLiveData<ResourceState>()
     val sendBundleData : LiveData<ResourceState>
         get() {
             return _sendBundleData
         }
-
-
-    fun fillProfileAccount(idLogin : String) {
-        CoroutineScope(Dispatchers.Main).launch {
-            _setProfile.postValue(ResourceState.loading())
-            val response = registerLoginAccountRepo.findEmployeeByIdLogin(idLogin)
-            if(response.isSuccessful) {
-                val responseBody = response.body()
-                _setProfile.postValue(ResourceState.success(responseBody?.data))
-            } else {
-                _setProfile.postValue(ResourceState.failured(response.message()))
-            }
-        }
-    }
 
     fun sendBundleDataForEditAccount(idLogin : String) {
         CoroutineScope(Dispatchers.Default).launch {
@@ -59,5 +41,4 @@ class AccountFragmentViewModel @Inject constructor(
             }
         }
     }
-
 }

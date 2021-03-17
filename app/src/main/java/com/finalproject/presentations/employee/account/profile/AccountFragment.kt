@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.addCallback
 import androidx.appcompat.app.AlertDialog
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -58,7 +59,9 @@ class AccountFragment : Fragment() {
             findNavController().navigate(R.id.action_accountFragment_to_homeEmployeeFragment2)
         }
         binding.btnEditAccount.setOnClickListener {
-            findNavController().navigate(R.id.action_accountFragment_to_formProfileEmployeeFragment)
+           idLogin?.let {
+               viewModel.sendBundleDataForEditAccount(it)
+           }
         }
         binding.btnLogOutAccount.setOnClickListener {
             clearSharedPreferencesWhenLogOut()
@@ -98,6 +101,20 @@ class AccountFragment : Fragment() {
                     val profileAccount = it?.data as EmployeeResponse?
                     Log.d("Employe Response", profileAccount.toString())
                     settingProfile(profileAccount)
+                }
+            }
+        })
+        viewModel.sendBundleData.observe(this, {
+            when(it.status) {
+                ResourceStatus.LOADING -> loadingDialog.show()
+                ResourceStatus.FAILURE -> {
+                    loadingDialog.hide()
+                    Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
+                }
+                ResourceStatus.SUCCESS -> {
+                    val data = it.data as EmployeeResponse
+                    val bundle = bundleOf(AppConstant.SEND_BUNDLE_DATA_EMPLOYEE to data)
+                    findNavController().navigate(R.id.action_accountFragment_to_formProfileEmployeeFragment, bundle)
                 }
             }
         })
@@ -159,10 +176,14 @@ class AccountFragment : Fragment() {
     }
 
     private fun subStringAddress(address : String) : String {
-        if(address.length < 35) {
-            return "${address.substring(0, 18)}\n${address.substring(18, address.length)}"
-        } else {
+        if(address.length > 35) {
             return "${address.substring(0, 20)}\n${address.substring(20, 35)}\n${address.substring(35, address.length)}"
+        } else if(address.length > 20) {
+            return "${address.substring(0, 18)}\n${address.substring(18, address.length)}"
+        } else if(address.length > 15) {
+            return "${address.substring(0, 10)}\n${address.substring(10, address.length)}"
+        } else {
+            return address
         }
     }
 

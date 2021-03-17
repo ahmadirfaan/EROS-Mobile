@@ -166,6 +166,9 @@
         <action
             android:id="@+id/action_formProfileEmployeeFragment_to_confirmAccountFragment"
             app:destination="@id/confirmAccountFragment" />
+        <argument
+            android:name="BundleDataEmployee"
+            app:argType="com.finalproject.data.models.account.EmployeeResponse" />
     </fragment>
     <fragment
         android:id="@+id/forgetPasswordFragment"
@@ -194,7 +197,7 @@
         tools:layout="@layout/fragment_claim_pregnant" />
     <fragment
         android:id="@+id/confirmAccountFragment"
-        android:name="com.finalproject.presentations.employee.account.ConfirmAccountFragment"
+        android:name="com.finalproject.presentations.employee.account.confirmaccount.ConfirmAccountFragment"
         android:label="fragment_confirm_account"
         tools:layout="@layout/fragment_confirm_account" >
         <action
