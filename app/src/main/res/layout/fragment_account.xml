@@ -25,6 +25,7 @@
                 android:layout_height="143dp"
                 android:src="@drawable/account_circle_300_blue" />
 
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -40,7 +41,19 @@
                     android:textSize="25sp"
                     android:textStyle="bold" />
             </LinearLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_change_password"
+                android:layout_marginTop="20dp"
+                android:backgroundTint="@android:color/holo_orange_dark"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="Change Password"
+                app:cornerRadius="40dp"/>
         </LinearLayout>
+
+
 
         <LinearLayout
             android:id="@+id/linear_layout_container_account"

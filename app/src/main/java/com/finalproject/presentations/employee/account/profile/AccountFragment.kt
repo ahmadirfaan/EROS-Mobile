@@ -39,9 +39,6 @@ class AccountFragment : Fragment() {
         initViewModel()
         subscribe()
         idLogin = sharedPreferences.getString(AppConstant.APP_ID_LOGIN, "Tidak Tersedia")
-        idLogin?.let {
-            viewModel.fillProfileAccount(it)
-        }
     }
 
     override fun onCreateView(
@@ -50,7 +47,9 @@ class AccountFragment : Fragment() {
     ): View? {
         binding = FragmentAccountBinding.inflate(layoutInflater)
         loadingDialog = LoadingDialog.build(requireContext())
-
+        idLogin?.let {
+            viewModel.fillProfileAccount(it)
+        }
         return binding.root
     }
 
@@ -60,15 +59,21 @@ class AccountFragment : Fragment() {
         requireActivity().onBackPressedDispatcher.addCallback(this) {
             findNavController().navigate(R.id.action_accountFragment_to_homeEmployeeFragment2)
         }
-        binding.btnEditAccount.setOnClickListener {
-           idLogin?.let {
-               viewModel.sendBundleDataForEditAccount(it)
-           }
+        binding.apply {
+            btnEditAccount.setOnClickListener {
+                idLogin?.let {
+                    viewModel.sendBundleDataForEditAccount(it)
+                }
+            }
+            btnLogOutAccount.setOnClickListener {
+                clearSharedPreferencesWhenLogOut()
+                findNavController().navigate(R.id.action_accountFragment_to_loginFragment)
+            }
+            btnChangePassword.setOnClickListener {
+                findNavController().navigate(R.id.action_accountFragment_to_changePasswordFragment)
+            }
         }
-        binding.btnLogOutAccount.setOnClickListener {
-            clearSharedPreferencesWhenLogOut()
-            findNavController().navigate(R.id.action_accountFragment_to_loginFragment)
-        }
+
 
     }
 

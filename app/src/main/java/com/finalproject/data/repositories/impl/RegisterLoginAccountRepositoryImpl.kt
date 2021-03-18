@@ -23,4 +23,12 @@ class RegisterLoginAccountRepositoryImpl @Inject constructor(private val registe
         return registerLoginApi.editFormEmployeeProfile(idEmployee, request)
     }
 
+    override suspend fun changePasswordByIdLogin(request: ChangePasswordRequest): Response<LoginResponse> {
+        return registerLoginApi.changePasswordByIdLogin(request)
+    }
+
+    override suspend fun forgotPassword(request: ForgotPasswordRequest): Response<ForgotPasswordResponse> {
+        return registerLoginApi.forgotPassword(request)
+    }
+
 }

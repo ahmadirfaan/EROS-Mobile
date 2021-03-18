@@ -181,7 +181,6 @@ class LoginFragment : Fragment() {
         super.onPause()
         Log.d("ON PAUSE LOGIN FRAGMENT", "ON PAUSE LOGIN FRAGMENT")
         clearText()
-        clearObservers()
     }
 
     override fun onResume() {

@@ -21,7 +21,7 @@ class SignUpFragment : Fragment() {
     private lateinit var viewModel: SignUpViewModel
     private val emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+"
     private lateinit var emailTextWatcher: TextWatcher
-    private lateinit var passwordTextWatcher : TextWatcher
+    private lateinit var confirmPasswordTextWatcher : TextWatcher
 
     override fun onCreate(savedInstanceState: Bundle?) {
         initViewModel()
@@ -69,7 +69,7 @@ class SignUpFragment : Fragment() {
                 }
             }
         }
-        passwordTextWatcher = object : TextWatcher{
+        confirmPasswordTextWatcher = object : TextWatcher{
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }
 
@@ -90,7 +90,7 @@ class SignUpFragment : Fragment() {
 
         }
         binding.signUpInputEmail.editText?.addTextChangedListener(emailTextWatcher)
-        binding.signUpConfirmPassword.editText?.addTextChangedListener(passwordTextWatcher)
+        binding.signUpConfirmPassword.editText?.addTextChangedListener(confirmPasswordTextWatcher)
     }
 
     private fun initViewModel() {
@@ -124,6 +124,7 @@ class SignUpFragment : Fragment() {
     override fun onPause() {
         super.onPause()
         clearText()
+        clearObserver()
     }
 
 

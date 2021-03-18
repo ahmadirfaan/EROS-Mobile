@@ -17,4 +17,10 @@ interface RegisterLoginApi {
 
     @PUT("/employee/editform/{idEmployee}")
     suspend fun editFormEmployeeProfile(@Path("idEmployee") idEmployee : String, @Body request : FormAccountRequest) : Response<FindByIdLoginEmployeeResponse>
+
+    @PUT("/employee/ganti-password")
+    suspend fun changePasswordByIdLogin(@Body request: ChangePasswordRequest) : Response<LoginResponse>
+
+    @POST("/forgot-password")
+    suspend fun forgotPassword(@Body request : ForgotPasswordRequest) : Response<ForgotPasswordResponse>
 }

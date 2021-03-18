@@ -137,6 +137,9 @@
             app:launchSingleTop="true"
             app:popUpTo="@id/accountFragment"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_accountFragment_to_changePasswordFragment"
+            app:destination="@id/changePasswordFragment" />
     </fragment>
     <fragment
         android:id="@+id/claimGlassesFragment"
@@ -204,4 +207,9 @@
             android:id="@+id/action_confirmAccountFragment_to_formProfileEmployeeFragment2"
             app:destination="@id/formProfileEmployeeFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/changePasswordFragment"
+        android:name="com.finalproject.presentations.employee.account.changepassword.ChangePasswordFragment"
+        android:label="fragment_change_password"
+        tools:layout="@layout/fragment_change_password" />
 </navigation>

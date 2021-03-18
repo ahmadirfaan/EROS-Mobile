@@ -47,11 +47,13 @@ class MainActivity : AppCompatActivity() {
                     binding.bottomNavigationView.menu.getItem(2).isEnabled = true
                 }
                 R.id.historyOnProgressFragment, R.id.historySuccessFragment2 -> {
+                    showBottomNavEmployee()
                     binding.bottomNavigationView.menu.getItem(0).isEnabled = true
                     binding.bottomNavigationView.menu.getItem(1).isEnabled = false
                     binding.bottomNavigationView.menu.getItem(2).isEnabled = true
                 }
                 R.id.accountFragment -> {
+                    showBottomNavEmployee()
                     binding.bottomNavigationView.menu.getItem(0).isEnabled = true
                     binding.bottomNavigationView.menu.getItem(1).isEnabled = true
                     binding.bottomNavigationView.menu.getItem(2).isEnabled = false
@@ -61,6 +63,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.claimPregnantFragment -> hideBottomNav()
                 R.id.claimSPDFragment -> hideBottomNav()
                 R.id.claimTrainingFragment -> hideBottomNav()
+                R.id.changePasswordFragment -> hideBottomNav()
             }
         }
 
