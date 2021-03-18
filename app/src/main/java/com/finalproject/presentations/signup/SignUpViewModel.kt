@@ -34,33 +34,42 @@ class SignUpViewModel @Inject constructor(@RegisterLoginAccountRepoQualifier pri
 
     fun checkInputEmailPassword(email: String, password: String, confirmPassword: String) {
         CoroutineScope(Dispatchers.Main).launch {
-            _inputValidation.postValue(ResourceState.loading())
-            delay(2000)
-            val check = ArrayList<Int>()
-            if (!email.isBlank() && email.matches(emailPattern.toRegex())) {
-                check.add(1)
+            try {
+                _inputValidation.postValue(ResourceState.loading())
+                delay(2000)
+                val check = ArrayList<Int>()
+                if (!email.isBlank() && email.matches(emailPattern.toRegex())) {
+                    check.add(1)
+                }
+                if (!password.isBlank() && password.contentEquals(confirmPassword)) {
+                    check.add(1)
+                }
+                Log.d("ARRAY LIST SIGN UP EMAIL", check.toString())
+                if (check.size == 2) {
+                    _inputValidation.postValue(ResourceState.success(true))
+                } else {
+                    _inputValidation.postValue(ResourceState.failured("Something Wrong"))
+                }
+            } catch (e : Exception) {
+                e.printStackTrace()
             }
-            if (!password.isBlank() && password.contentEquals(confirmPassword)) {
-                check.add(1)
-            }
-            Log.d("ARRAY LIST SIGN UP EMAIL", check.toString())
-            if (check.size == 2) {
-                _inputValidation.postValue(ResourceState.success(true))
-            } else {
-                _inputValidation.postValue(ResourceState.failured("Something Wrong"))
-            }
+
         }
     }
 
     fun registerAccount(request: RegisterAccountRequest) {
         CoroutineScope(Dispatchers.Main).launch {
-            _createAccountLiveData.postValue(ResourceState.loading())
-            val response = registerAccountRepo.createAccountEmployee(request)
-            if (response.isSuccessful) {
-                val responseBody = response.body()
-                _createAccountLiveData.postValue(ResourceState.success(responseBody?.data))
-            } else {
-                _createAccountLiveData.postValue(ResourceState.failured("Ada yang salah dalam memproses akun"))
+            try {
+                _createAccountLiveData.postValue(ResourceState.loading())
+                val response = registerAccountRepo.createAccountEmployee(request)
+                if (response.isSuccessful) {
+                    val responseBody = response.body()
+                    _createAccountLiveData.postValue(ResourceState.success(responseBody?.data))
+                } else {
+                    _createAccountLiveData.postValue(ResourceState.failured("Ada yang salah dalam memproses akun"))
+                }
+            } catch (e : Exception) {
+                e.printStackTrace()
             }
         }
     }

@@ -32,11 +32,16 @@ class AccountFragment : Fragment() {
 
     @Inject
     lateinit var sharedPreferences: SharedPreferences
+    private var idLogin : String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initViewModel()
         subscribe()
+        idLogin = sharedPreferences.getString(AppConstant.APP_ID_LOGIN, "Tidak Tersedia")
+        idLogin?.let {
+            viewModel.fillProfileAccount(it)
+        }
     }
 
     override fun onCreateView(
@@ -51,10 +56,7 @@ class AccountFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val idLogin = sharedPreferences.getString(AppConstant.APP_ID_LOGIN, "Tidak Tersedia")
-        idLogin?.let {
-            viewModel.fillProfileAccount(it)
-        }
+
         requireActivity().onBackPressedDispatcher.addCallback(this) {
             findNavController().navigate(R.id.action_accountFragment_to_homeEmployeeFragment2)
         }
@@ -73,20 +75,6 @@ class AccountFragment : Fragment() {
     private fun initViewModel() {
         viewModel = ViewModelProvider(this).get(AccountFragmentViewModel::class.java)
     }
-
-    override fun onPause() {
-        super.onPause()
-        loadingDialog.cancel()
-        viewModel.setProfile.removeObservers(this)
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        loadingDialog.cancel()
-        viewModel.setProfile.removeObservers(this)
-    }
-
-
 
     private fun subscribe() {
         viewModel.setProfile.observe(this, {
@@ -129,6 +117,11 @@ class AccountFragment : Fragment() {
     private fun settingProfile(employee: EmployeeResponse?) {
         binding.apply {
             employee?.apply {
+                if(employee.gender.equals("MALE")) {
+                    accountPhoto.setImageResource(R.drawable.male)
+                } else {
+                    accountPhoto.setImageResource(R.drawable.female)
+                }
                 tvFullnameAccount.text = employee.fullname
                 tvAddressKtpAccount.text = employee.ktpAddress
                 tvBiologicalMothersAccount.text = employee.biologicalMothersName
@@ -173,6 +166,11 @@ class AccountFragment : Fragment() {
             }
 
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        loadingDialog.cancel()
     }
 
     private fun subStringAddress(address : String) : String {

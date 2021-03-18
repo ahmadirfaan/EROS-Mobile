@@ -20,8 +20,8 @@ import javax.inject.Inject
 @HiltViewModel
 class LoginViewModel @Inject constructor(
     @RegisterLoginAccountRepoQualifier
-    private val registerLoginAccountRepo : RegisterLoginAccountRepository
-    ): ViewModel() {
+    private val registerLoginAccountRepo: RegisterLoginAccountRepository
+) : ViewModel() {
 
 
     @Inject
@@ -41,84 +41,97 @@ class LoginViewModel @Inject constructor(
         }
 
     private var _checkFormLiveData = MutableLiveData<ResourceState>()
-    val checkFormLiveData : LiveData<ResourceState>
+    val checkFormLiveData: LiveData<ResourceState>
         get() {
             return _checkFormLiveData
         }
 
     fun checkEmailPasswordLogin(email: String, password: String) {
         CoroutineScope(Dispatchers.Main).launch {
-            _inputValidation.postValue(ResourceState.loading())
-            delay(2000)
-            val check = ArrayList<Int>()
-            if (!email.isBlank() && email.matches(emailPattern.toRegex())) {
-                check.add(1)
-            }
-            if (!password.isBlank()) {
-                check.add(1)
-            }
-            Log.d("ARRAY LIST SIGN UP EMAIL", check.toString())
-            if (check.size == 2) {
-                _inputValidation.postValue(ResourceState.success(true))
-            } else {
-                _inputValidation.postValue(ResourceState.failured("Something Wrong"))
-            }
-        }
-    }
-
-    fun loginAccountToHome(request : RegisterAccountRequest) {
-        CoroutineScope(Dispatchers.Main).launch {
-            _loginAccount.postValue(ResourceState.loading())
-            val response = registerLoginAccountRepo.loginAccountEmployee(request)
-            if (response.isSuccessful) {
-                val responseBody = response.body()
-                if(responseBody?.data == null) {
-                    _loginAccount.postValue(ResourceState.failured(responseBody?.message))
-                } else if(responseBody?.data?.role?.id != 4) {
-                    _loginAccount.postValue(ResourceState.failured("Admin Tidak Diperbolehkan Disini"))
+            try {
+                _inputValidation.postValue(ResourceState.loading())
+                delay(2000)
+                val check = ArrayList<Int>()
+                if (!email.isBlank() && email.matches(emailPattern.toRegex())) {
+                    check.add(1)
+                }
+                if (!password.isBlank()) {
+                    check.add(1)
+                }
+                Log.d("ARRAY LIST SIGN UP EMAIL", check.toString())
+                if (check.size == 2) {
+                    _inputValidation.postValue(ResourceState.success(true))
                 } else {
-                    _loginAccount.postValue(ResourceState.success(responseBody))
+                    _inputValidation.postValue(ResourceState.failured("Something Wrong"))
                 }
-            } else {
-                _loginAccount.postValue(ResourceState.failured(response.message()))
+            } catch (e: Exception) {
+                e.printStackTrace()
             }
+
         }
     }
 
-    fun checkFormLiveData(idLogin : String) {
-        CoroutineScope(Dispatchers.Default).launch {
-            val response = registerLoginAccountRepo.findEmployeeByIdLogin(idLogin)
-            val responseBody = response.body()
-            _checkFormLiveData.postValue(ResourceState.loading())
-            if(response.isSuccessful) {
-                val employeeResponse = responseBody?.data
-                employeeResponse?.let {
-                    val formIsNull = checkFormIsNull(
-                        it.accountName, it.accountNumber, it.biologicalMothersName, it.bloodType,
-                        it.dateOfBirth, it.emergencyNumber, it.fullname, it.gender,
-                        it.ktpAddress, it.maritalStatus, it.nik, it.npwp,
-                        it.npwpAddress, it.phoneNumber, it.placeOfBirth, it.postalCodeOfIdCard,
-                        it.religion, it.residenceAddress, it.spouseName, it.numberOfChildren
-                    )
-                    sharedPreferences.edit().putString(AppConstant.APP_ID_EMPLOYEE, it.id).apply()
-                    Log.d("Nilai Form Is Null", formIsNull.toString())
-                    if(!formIsNull && it.verifiedHc == true) {
-                        Log.d("Masuk nomer 1 Success", "1")
-                        _checkFormLiveData.postValue(ResourceState.success(1)) //Sudah mengisi form dan diverifikasi oleh HC
-                    } else if(!formIsNull && (it.verifiedHc == false || it.verifiedHc == null)) {
-                        _checkFormLiveData.postValue(ResourceState.success(2)) //Sudah mengisi form tapi belum diverifikasi oleh HC
-                    }  else {
-                        Log.d("Masuk nomer 3 Success", "3")
-                        _checkFormLiveData.postValue(ResourceState.success(3)) //Belum mengisi form dan belum diverifikasi oleh HC
+    fun loginAccountToHome(request: RegisterAccountRequest) {
+        CoroutineScope(Dispatchers.Main).launch {
+            try {
+                _loginAccount.postValue(ResourceState.loading())
+                val response = registerLoginAccountRepo.loginAccountEmployee(request)
+                if (response.isSuccessful) {
+                    val responseBody = response.body()
+                    if (responseBody?.data == null) {
+                        _loginAccount.postValue(ResourceState.failured(responseBody?.message))
+                    } else if (responseBody?.data?.role?.id != 4) {
+                        _loginAccount.postValue(ResourceState.failured("Admin Tidak Diperbolehkan Disini"))
+                    } else {
+                        _loginAccount.postValue(ResourceState.success(responseBody))
                     }
+                } else {
+                    _loginAccount.postValue(ResourceState.failured(response.message()))
                 }
-            } else {
-                _checkFormLiveData.postValue(ResourceState.failured(responseBody?.message as String?))
+            } catch (e: Exception) {
+                e.printStackTrace()
             }
         }
     }
 
-    private fun checkFormIsNull(vararg input : Any?) : Boolean {
+    fun checkFormLiveData(idLogin: String) {
+        CoroutineScope(Dispatchers.Default).launch {
+            try {
+                val response = registerLoginAccountRepo.findEmployeeByIdLogin(idLogin)
+                val responseBody = response.body()
+                _checkFormLiveData.postValue(ResourceState.loading())
+                if (response.isSuccessful) {
+                    val employeeResponse = responseBody?.data
+                    employeeResponse?.let {
+                        val formIsNull = checkFormIsNull(
+                            it.accountName, it.accountNumber, it.biologicalMothersName, it.bloodType,
+                            it.dateOfBirth, it.emergencyNumber, it.fullname, it.gender,
+                            it.ktpAddress, it.maritalStatus, it.nik, it.npwp,
+                            it.npwpAddress, it.phoneNumber, it.placeOfBirth, it.postalCodeOfIdCard,
+                            it.religion, it.residenceAddress, it.spouseName, it.numberOfChildren
+                        )
+                        sharedPreferences.edit().putString(AppConstant.APP_ID_EMPLOYEE, it.id).apply()
+                        Log.d("Nilai Form Is Null", formIsNull.toString())
+                        if (!formIsNull && it.verifiedHc == true) {
+                            Log.d("Masuk nomer 1 Success", "1")
+                            _checkFormLiveData.postValue(ResourceState.success(1)) //Sudah mengisi form dan diverifikasi oleh HC
+                        } else if (!formIsNull && (it.verifiedHc == false || it.verifiedHc == null)) {
+                            _checkFormLiveData.postValue(ResourceState.success(2)) //Sudah mengisi form tapi belum diverifikasi oleh HC
+                        } else {
+                            Log.d("Masuk nomer 3 Success", "3")
+                            _checkFormLiveData.postValue(ResourceState.success(3)) //Belum mengisi form dan belum diverifikasi oleh HC
+                        }
+                    }
+                } else {
+                    _checkFormLiveData.postValue(ResourceState.failured(responseBody?.message as String?))
+                }
+            } catch (e : Exception) {
+                e.printStackTrace()
+            }
+        }
+    }
+
+    private fun checkFormIsNull(vararg input: Any?): Boolean {
         val check = ArrayList<Int>()
         for (i in input) {
             Log.d("I-nya adalahah", "$i")
@@ -126,7 +139,7 @@ class LoginViewModel @Inject constructor(
                 check.add(1)
             }
         }
-        if(check.size == 0) {
+        if (check.size == 0) {
             return false //Logic ketika data semua sudah keisi
         }
         Log.d("check Array Validasi", "SIZE ARRAY ${check.size}")

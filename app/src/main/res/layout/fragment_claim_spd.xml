@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@color/blue_enigma"
     android:layout_height="match_parent"
+    android:background="@color/blue_enigma"
     tools:context=".presentations.employee.claim.spd.ClaimSPDFragment">
 
     <androidx.cardview.widget.CardView
@@ -42,38 +42,102 @@
                 android:textSize="25sp" />
 
             <TextView
+                android:id="@+id/tv_title_claim_nominal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Tanggal Awal Perjalanan"
-                android:textColor="@color/black" />
+                android:layout_gravity="start"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="15dp"
+                android:background="@color/white"
+                android:fontFamily="@font/lato_regular"
+                android:text="Jumlah yang Akan Diklaim"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
 
             <EditText
-                android:id="@+id/tv_start_date"
-                android:hint="Tanggal Awal Perjalanan"
+                android:id="@+id/inpt_claim"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp" />
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="15dp"
+                android:hint="Input Klaim"
+                android:inputType="number" />
 
             <TextView
-                android:layout_marginTop="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Tanggal Akhir Perjalanan"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="15dp"
+                android:text="Tanggal Awal Perjalanan (Year-Month-Date)"
                 android:textColor="@color/black" />
 
-            <EditText
-                android:id="@+id/tv_end_date"
-                android:hint="Tanggal Akhir Perjalanan"
+            <LinearLayout
+                android:id="@+id/linear_layout_date_start"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp" />
+                android:layout_marginStart="15dp"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="15dp">
+
+                <EditText
+                    android:id="@+id/et_start_date"
+                    android:layout_width="wrap_content"
+                    android:layout_weight="2"
+                    android:enabled="false"
+                    android:layout_height="wrap_content"
+                    android:hint="Input Tanggal Awal Perjalanan" />
+
+                <ImageView
+                    android:id="@+id/date_icon_start"
+                    android:layout_width="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_height="30dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/ic_baseline_calendar_today_24" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="15dp"
+                android:text="Tanggal Akhir Perjalanan (Year-Month-Date)"
+                android:textColor="@color/black" />
+
+        <LinearLayout
+            android:id="@+id/linear_layout_date_end"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="15dp">
+
+            <EditText
+                android:id="@+id/et_end_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:enabled="false"
+                android:layout_weight="2"
+                android:hint="Input Tanggal Akhir Perjalanan"/>
+
+            <ImageView
+                android:id="@+id/date_icon_end"
+                android:layout_width="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:src="@drawable/ic_baseline_calendar_today_24" />
+        </LinearLayout>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_upload_files"
-                android:layout_marginTop="25dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
+                android:layout_marginTop="25dp"
                 android:text="Upload Files"
                 android:textColor="@color/white"
                 android:textSize="15sp" />

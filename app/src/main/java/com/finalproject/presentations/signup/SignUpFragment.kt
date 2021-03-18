@@ -20,8 +20,12 @@ class SignUpFragment : Fragment() {
     private lateinit var binding: FragmentSignUpBinding
     private lateinit var viewModel: SignUpViewModel
     private val emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+"
+    private lateinit var emailTextWatcher: TextWatcher
+    private lateinit var passwordTextWatcher : TextWatcher
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        initViewModel()
+        subscribe()
         super.onCreate(savedInstanceState)
     }
 
@@ -30,8 +34,7 @@ class SignUpFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentSignUpBinding.inflate(layoutInflater)
-        initViewModel()
-        subscribe()
+
         return binding.root
     }
 
@@ -43,13 +46,17 @@ class SignUpFragment : Fragment() {
                 val passwordString = signUpInputPassword.editText?.text.toString()
                 val confirmPasswordString = signUpConfirmPassword.editText?.text.toString()
                 val emailString = signUpInputEmail.editText?.text.toString()
-                viewModel.checkInputEmailPassword(password = passwordString, email = emailString, confirmPassword = confirmPasswordString)
+                if(passwordString.length < 8 ) {
+                    Toast.makeText(requireContext(), "Panjang Password Minimal 8", Toast.LENGTH_SHORT).show()
+                } else {
+                    viewModel.checkInputEmailPassword(password = passwordString, email = emailString, confirmPassword = confirmPasswordString)
+                }
             }
         }
     }
 
     private fun validateDetailsOnRuntime() {
-        binding.signUpInputEmail.editText?.addTextChangedListener(object : TextWatcher {
+        emailTextWatcher = object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }
 
@@ -61,8 +68,8 @@ class SignUpFragment : Fragment() {
                     binding.signUpInputEmail.editText?.error="Please enter a valid email address"
                 }
             }
-        })
-        binding.signUpConfirmPassword.editText?.addTextChangedListener(object : TextWatcher{
+        }
+        passwordTextWatcher = object : TextWatcher{
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }
 
@@ -71,11 +78,19 @@ class SignUpFragment : Fragment() {
 
             override fun afterTextChanged(s: Editable?) {
                 if(!binding.signUpInputPassword.editText?.text.toString().contentEquals(s.toString())) {
-                    binding.signUpConfirmPassword.editText?.error = "Password do not match"
+                    val editTextConfirmPass = binding.signUpConfirmPassword.editText
+                    editTextConfirmPass?.error = "Password do not match"
+                    if(editTextConfirmPass?.error != null) {
+                        binding.signUpConfirmPassword.isPasswordVisibilityToggleEnabled = false
+                    }
+                } else {
+                    binding.signUpConfirmPassword.isPasswordVisibilityToggleEnabled = true
                 }
             }
 
-        })
+        }
+        binding.signUpInputEmail.editText?.addTextChangedListener(emailTextWatcher)
+        binding.signUpConfirmPassword.editText?.addTextChangedListener(passwordTextWatcher)
     }
 
     private fun initViewModel() {
@@ -89,17 +104,41 @@ class SignUpFragment : Fragment() {
                     Toast.makeText(requireContext(), "Loading", Toast.LENGTH_SHORT).show()
                 }
                 ResourceStatus.SUCCESS -> {
-                    val emailString = binding.signUpInputEmail.editText?.text.toString()
-                    val passwordString = binding.signUpInputPassword.editText?.text.toString()
-                    val registerAccount = RegisterAccountRequest(email = emailString, password = passwordString)
-                    viewModel.registerAccount(request = registerAccount)
-                    Toast.makeText(requireContext(), "Success Create Account", Toast.LENGTH_SHORT).show()
+                    binding.apply {
+                        val emailString = signUpInputEmail.editText?.text.toString()
+                        val passwordString = signUpInputPassword.editText?.text.toString()
+                        val registerAccount = RegisterAccountRequest(email = emailString, password = passwordString)
+                        viewModel.registerAccount(request = registerAccount)
+                        Toast.makeText(requireContext(), "Success Create Account", Toast.LENGTH_SHORT).show()
+                        clearText()
+                    }
+
                 }
                 ResourceStatus.FAILURE -> {
                     Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
                 }
             }
         })
+    }
+
+    override fun onPause() {
+        super.onPause()
+        clearText()
+    }
+
+
+    private fun clearText() {
+        binding.apply {
+            signUpInputEmail.editText?.setText("")
+            signUpInputPassword.editText?.setText("")
+            signUpConfirmPassword.editText?.setText("")
+            signUpInputEmail.editText?.error = null
+        }
+    }
+
+    private fun clearObserver() {
+        viewModel.inputValidation.removeObservers(this)
+        viewModel.createAccountLiveData.removeObservers(this)
     }
 
     companion object {

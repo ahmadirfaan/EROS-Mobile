@@ -1,6 +1,5 @@
 package com.finalproject.presentations.login
 
-import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.text.Editable
@@ -23,10 +22,6 @@ import com.finalproject.utils.AppConstant
 import com.finalproject.utils.LoadingDialog
 import com.finalproject.utils.ResourceStatus
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -35,8 +30,9 @@ class LoginFragment : Fragment() {
     private lateinit var viewModel: LoginViewModel
     private lateinit var binding: FragmentLoginBinding
     private val emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+"
-    private lateinit var loadingDialog : AlertDialog
+    private lateinit var loadingDialog: AlertDialog
     private var isBackPressed = false
+    private lateinit var emailTextWatcher: TextWatcher
 
     @Inject
     lateinit var sharedPreferences: SharedPreferences
@@ -44,8 +40,10 @@ class LoginFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        requireActivity().onBackPressedDispatcher.addCallback(this){
-            if(!isBackPressed) {
+        initViewModel()
+        subscribe()
+        requireActivity().onBackPressedDispatcher.addCallback(this) {
+            if (!isBackPressed) {
                 Toast.makeText(requireContext(), "Tekan Sekali lagi untuk keluar", Toast.LENGTH_SHORT).show()
                 isBackPressed = true
             } else {
@@ -61,16 +59,16 @@ class LoginFragment : Fragment() {
         binding = FragmentLoginBinding.inflate(layoutInflater)
 //        CoroutineScope(Dispatchers.Main).launch {
 //            delay(1000)
-//            findNavController().navigate(R.id.action_loginFragment_to_formProfileEmployeeFragment)
+//            findNavController().navigate(R.id.action_loginFragment_to_homeEmployeeFragment)
 //        }
-        initViewModel()
-        subscribe()
+
         loadingDialog = LoadingDialog.build(requireContext())
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        validateEmailOnRuntime()
         binding.apply {
             btnLogin.setOnClickListener {
                 val usernameString = inputEmailLogin.editText?.text.toString()
@@ -83,11 +81,7 @@ class LoginFragment : Fragment() {
             btnForgotPassword.setOnClickListener {
                 findNavController().navigate(R.id.action_loginFragment_to_forgetPasswordFragment)
             }
-//            btnForgotPassword.setOnClickListener {
-//                clearSharedPreferencesFinishBoarding()
-//            }
         }
-        validateEmailOnRuntime()
     }
 
 //    Untuk mengetes onBoarding Finished
@@ -98,7 +92,7 @@ class LoginFragment : Fragment() {
 
     //Untuk mengecek apakah input email yang dijalankan sudah memenuhi kriteria inputan sebuah email
     private fun validateEmailOnRuntime() {
-        binding.inputEmailLogin.editText?.addTextChangedListener(object : TextWatcher {
+        emailTextWatcher = object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }
 
@@ -110,7 +104,8 @@ class LoginFragment : Fragment() {
                     binding.inputEmailLogin.editText?.error = "Please enter a valid email address"
                 }
             }
-        })
+        }
+        binding.inputEmailLogin.editText?.addTextChangedListener(emailTextWatcher)
     }
 
     private fun initViewModel() {
@@ -148,8 +143,8 @@ class LoginFragment : Fragment() {
                     val data = it.data as LoginResponse
                     sharedPreferences.edit().putString(AppConstant.APP_ID_LOGIN, data.data?.id).apply()
                     loadingDialog.hide()
-                    sharedPreferences.getString(AppConstant.APP_ID_LOGIN, "Login ID")?.let {
-                            it1 -> viewModel.checkFormLiveData(it1)
+                    sharedPreferences.getString(AppConstant.APP_ID_LOGIN, "Login ID")?.let { it1 ->
+                        viewModel.checkFormLiveData(it1)
                     }
                 }
                 ResourceStatus.FAILURE -> {
@@ -181,11 +176,35 @@ class LoginFragment : Fragment() {
         })
     }
 
+
+    override fun onPause() {
+        super.onPause()
+        Log.d("ON PAUSE LOGIN FRAGMENT", "ON PAUSE LOGIN FRAGMENT")
+        clearText()
+        clearObservers()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.d("ON RESUME LOGIN FRAGMENT", "ON RESUME LOGIN FRAGMENT")
+        binding.etUsername.error = null
+    }
+
     override fun onDestroy() {
         super.onDestroy()
+        Log.d("ON DESTROY LOGIN FRAGMENT", "ON DESTROY LOGIN FRAGMENT")
+    }
+
+    private fun clearText() {
+        binding.inputEmailLogin.editText?.text = null
+        binding.inputPasswordLogin.editText?.text = null
+        loadingDialog.cancel()
+    }
+
+    private fun clearObservers() {
         viewModel.inputValidation.removeObservers(this)
         viewModel.loginAccount.removeObservers(this)
-        loadingDialog.cancel()
+        viewModel.checkFormLiveData.removeObservers(this)
     }
 
 

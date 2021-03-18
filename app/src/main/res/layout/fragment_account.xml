@@ -20,7 +20,7 @@
             android:orientation="vertical">
 
             <ImageView
-                android:id="@+id/imageView"
+                android:id="@+id/account_photo"
                 android:layout_width="match_parent"
                 android:layout_height="143dp"
                 android:src="@drawable/account_circle_300_blue" />
@@ -75,7 +75,6 @@
                     android:layout_weight="3"
                     android:fontFamily="@font/lato_regular"
                     android:gravity="center_horizontal"
-                    android:text="Ahmad Irfaan Hibatullah"
                     android:textColor="@color/black"
                     android:textSize="20sp"
                     android:textStyle="bold" />
@@ -106,7 +105,6 @@
                     android:layout_weight="3"
                     android:fontFamily="@font/lato_regular"
                     android:gravity="center_horizontal"
-                    android:text="Etis Pratyaswanti"
                     android:textColor="@color/black"
                     android:textSize="20sp"
                     android:textStyle="bold" />
@@ -138,7 +136,6 @@
                     android:layout_weight="4"
                     android:fontFamily="@font/lato_regular"
                     android:gravity="center_horizontal"
-                    android:text="Surabaya"
                     android:textColor="@color/black"
                     android:textSize="20sp"
                     android:textStyle="bold" />
@@ -170,7 +167,6 @@
                     android:layout_weight="4"
                     android:fontFamily="@font/lato_regular"
                     android:gravity="center_horizontal"
-                    android:text="22/08/1996"
                     android:textColor="@color/black"
                     android:textSize="20sp"
                     android:textStyle="bold" />
@@ -202,7 +198,6 @@
                     android:layout_weight="4"
                     android:fontFamily="@font/lato_regular"
                     android:gravity="center_horizontal"
-                    android:text="Man"
                     android:textColor="@color/black"
                     android:textSize="20sp"
                     android:textStyle="bold" />
@@ -233,7 +228,6 @@
                     android:layout_weight="4"
                     android:fontFamily="@font/lato_regular"
                     android:gravity="center"
-                    android:text="Married"
                     android:textColor="@color/black"
                     android:textSize="20sp"
                     android:textStyle="bold" />
@@ -264,7 +258,6 @@
                     android:layout_weight="4"
                     android:fontFamily="@font/lato_regular"
                     android:gravity="center"
-                    android:text="Enzy Storia"
                     android:textColor="@color/black"
                     android:textSize="20sp"
                     android:textStyle="bold" />
@@ -296,7 +289,6 @@
                     android:layout_weight="4"
                     android:fontFamily="@font/lato_regular"
                     android:gravity="center"
-                    android:text="1"
                     android:textColor="@color/black"
                     android:textSize="20sp"
                     android:textStyle="bold" />
@@ -328,7 +320,6 @@
                     android:layout_weight="4"
                     android:fontFamily="@font/lato_regular"
                     android:gravity="center"
-                    android:text="Muslim"
                     android:textColor="@color/black"
                     android:textSize="20sp"
                     android:textStyle="bold" />
@@ -360,7 +351,6 @@
                     android:layout_weight="4"
                     android:fontFamily="@font/lato_regular"
                     android:gravity="center"
-                    android:text="Jl. Gayungsari Barat 9/14,\nSurabaya"
                     android:textColor="@color/black"
                     android:textSize="20sp"
                     android:textStyle="bold" />
@@ -391,7 +381,6 @@
                     android:layout_weight="4"
                     android:fontFamily="@font/lato_regular"
                     android:gravity="center"
-                    android:text="60235"
                     android:textColor="@color/black"
                     android:textSize="20sp"
                     android:textStyle="bold" />
@@ -423,7 +412,6 @@
                     android:layout_weight="4"
                     android:fontFamily="@font/lato_regular"
                     android:gravity="center"
-                    android:text="Jl. H. Dahlan No.75,\nJakarta Selatan"
                     android:textColor="@color/black"
                     android:textSize="20sp"
                     android:textStyle="bold" />
@@ -455,7 +443,6 @@
                     android:layout_weight="4"
                     android:fontFamily="@font/lato_regular"
                     android:gravity="center"
-                    android:text="Jl. H. Dahlan No.75,\nJakarta Selatan"
                     android:textColor="@color/black"
                     android:textSize="20sp"
                     android:textStyle="bold" />
@@ -486,7 +473,6 @@
                     android:layout_weight="3"
                     android:fontFamily="@font/lato_regular"
                     android:gravity="center"
-                    android:text="B"
                     android:textColor="@color/black"
                     android:textSize="20sp"
                     android:textStyle="bold" />
@@ -517,7 +503,6 @@
                     android:layout_weight="3"
                     android:fontFamily="@font/lato_regular"
                     android:gravity="center"
-                    android:text="Mandiri"
                     android:textColor="@color/black"
                     android:textSize="20sp"
                     android:textStyle="bold" />
@@ -548,7 +533,6 @@
                     android:layout_weight="3"
                     android:fontFamily="@font/lato_regular"
                     android:gravity="center"
-                    android:text="1400017997876"
                     android:textColor="@color/black"
                     android:textSize="20sp"
                     android:textStyle="bold" />
@@ -569,7 +553,7 @@
                     android:layout_weight="1"
                     android:fontFamily="@font/lato_regular"
                     android:gravity="center_vertical"
-                    android:text="NIK"
+                    android:text="No KTP"
                     android:textColor="@color/black"
                     android:textSize="20sp" />
 
@@ -580,7 +564,6 @@
                     android:layout_weight="3"
                     android:fontFamily="@font/lato_regular"
                     android:gravity="center_horizontal"
-                    android:text="357822208960001"
                     android:textColor="@color/black"
                     android:textSize="20sp"
                     android:textStyle="bold" />
@@ -612,7 +595,6 @@
                     android:layout_weight="3"
                     android:fontFamily="@font/lato_regular"
                     android:gravity="center_horizontal"
-                    android:text="912620903609000"
                     android:textColor="@color/black"
                     android:textSize="20sp"
                     android:textStyle="bold" />
@@ -644,7 +626,6 @@
                     android:layout_weight="3"
                     android:fontFamily="@font/lato_regular"
                     android:gravity="start"
-                    android:text="085707121623"
                     android:textColor="@color/black"
                     android:textSize="20sp"
                     android:textStyle="bold" />
@@ -677,7 +658,6 @@
                     android:layout_weight="3"
                     android:fontFamily="@font/lato_regular"
                     android:gravity="start"
-                    android:text="085706233524"
                     android:textColor="@color/black"
                     android:textSize="20sp"
                     android:textStyle="bold" />

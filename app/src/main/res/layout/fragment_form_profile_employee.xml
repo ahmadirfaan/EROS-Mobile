@@ -436,6 +436,7 @@
                     android:background="@android:color/transparent"
                     android:hint="Kode Pos"
                     android:inputType="number"
+                    android:maxLength="5"
                     android:singleLine="true"
                     android:textSize="15sp" />
             </com.google.android.material.textfield.TextInputLayout>
