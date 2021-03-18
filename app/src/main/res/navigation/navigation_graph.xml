@@ -53,6 +53,9 @@
         <action
             android:id="@+id/action_loginFragment_to_confirmAccountFragment"
             app:destination="@id/confirmAccountFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_instructionsPagerFragment"
+            app:destination="@id/instructionsPagerFragment" />
     </fragment>
     <fragment
         android:id="@+id/homeAdminHCFragment"
@@ -212,4 +215,9 @@
         android:name="com.finalproject.presentations.employee.account.changepassword.ChangePasswordFragment"
         android:label="fragment_change_password"
         tools:layout="@layout/fragment_change_password" />
+    <fragment
+        android:id="@+id/instructionsPagerFragment"
+        android:name="com.finalproject.presentations.instructions.InstructionsPagerFragment"
+        android:label="fragment_instructions_pager"
+        tools:layout="@layout/fragment_instructions_pager" />
 </navigation>
