@@ -1,4 +1,4 @@
-package com.finalproject.presentations.employee.history.onprogress
+package com.finalproject.presentations.employee.history.success
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -16,8 +16,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class HistoryOnProgressViewModel
-@Inject
+class HistorySuccessViewModel @Inject
 constructor(
     @ReimburseRepoQualifier
     private val reimbursementRepository: ReimbursementRepository
@@ -35,8 +34,7 @@ constructor(
             return _onDetailReimburseLiveData
         }
 
-
-    fun getAllHistoryProgress(request: ReimbursementListRequest) {
+    fun getAllHistorySuccess(request: ReimbursementListRequest) {
         CoroutineScope(Dispatchers.Main).launch {
             try {
                 _reimburseListLiveData.postValue(ResourceState.loading())
@@ -47,13 +45,13 @@ constructor(
                         _reimburseListLiveData.postValue(ResourceState.failured(responseBody.message))
                     } else {
                         val listHistory = responseBody?.data
-                        val onProgressHistory = listHistory?.filter {
-                            it?.statusSuccess != true
+                        val onSuccesHistory = listHistory?.filter {
+                            it?.statusSuccess == true
                         }
-                        if (onProgressHistory.isNullOrEmpty()) {
+                        if (onSuccesHistory.isNullOrEmpty()) {
                             _reimburseListLiveData.postValue(ResourceState.failured("Data Tidak ada"))
                         } else {
-                            _reimburseListLiveData.postValue(ResourceState.success(onProgressHistory))
+                            _reimburseListLiveData.postValue(ResourceState.success(onSuccesHistory))
                         }
                     }
                 } else {
@@ -75,7 +73,5 @@ constructor(
                 e.printStackTrace()
             }
         }
-
     }
-
 }

@@ -119,6 +119,9 @@
             app:launchSingleTop="true"
             app:popUpTo="@id/historyOnProgressFragment"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_historyOnProgressFragment_to_detailReimbursementFragment"
+            app:destination="@id/detailReimbursementFragment" />
     </fragment>
     <fragment
         android:id="@+id/accountFragment"
@@ -163,6 +166,9 @@
         <action
             android:id="@+id/action_historySuccessFragment2_to_homeEmployeeFragment"
             app:destination="@id/homeEmployeeFragment" />
+        <action
+            android:id="@+id/action_historySuccessFragment2_to_detailReimbursementFragment"
+            app:destination="@id/detailReimbursementFragment" />
     </fragment>
     <fragment
         android:id="@+id/formProfileEmployeeFragment"
@@ -220,4 +226,13 @@
         android:name="com.finalproject.presentations.instructions.InstructionsPagerFragment"
         android:label="fragment_instructions_pager"
         tools:layout="@layout/fragment_instructions_pager" />
+    <fragment
+        android:id="@+id/detailReimbursementFragment"
+        android:name="com.finalproject.presentations.employee.claim.detail.DetailReimbursementFragment"
+        android:label="fragment_detail_reimbursement"
+        tools:layout="@layout/fragment_detail_reimbursement" >
+        <argument
+            android:name="Reimbursement"
+            app:argType="com.finalproject.data.models.reimburse.ReimbursementResponse" />
+    </fragment>
 </navigation>

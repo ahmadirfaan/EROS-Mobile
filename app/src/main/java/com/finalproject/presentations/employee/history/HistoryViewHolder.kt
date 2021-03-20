@@ -6,13 +6,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.finalproject.data.models.reimburse.ReimbursementResponse
 import com.finalproject.databinding.LayoutRvReimbursementBinding
 
-class HistoryViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
+class HistoryViewHolder(private val view: View, private val historyClickListener: HistoryClickListener) : RecyclerView.ViewHolder(view) {
 
     private val binding = LayoutRvReimbursementBinding.bind(view)
 
     fun bind(reimbursement: ReimbursementResponse) {
         binding.apply {
             tvNameEmployee.text = "Name : ${reimbursement?.employeeId?.fullname}"
+            tvDateClaim.text = "Tanggal Klaim : ${reimbursement?.dateOfClaimSubmission?.substring(0,10)}"
             when (reimbursement?.categoryId?.id) {
                 "1" -> tvCategoryReimbursement.text = "Category : Kacamata"
                 "2" -> tvCategoryReimbursement.text = "Category : Pelatihan"
@@ -39,6 +40,9 @@ class HistoryViewHolder(private val view: View) : RecyclerView.ViewHolder(view) 
             }
             val stringDisbursement = reimbursement?.disbursementDate?.substring(0, 10)
             tvDateDisbursement.text = "Tanggal Pencairan : $stringDisbursement"
+            btnDetailReimbursement.setOnClickListener {
+                historyClickListener.onDetail(reimbursement)
+            }
         }
 
     }
