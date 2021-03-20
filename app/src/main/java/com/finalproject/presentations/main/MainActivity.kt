@@ -1,17 +1,23 @@
 package com.finalproject.presentations.main
 
+import android.Manifest
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
-import android.text.TextUtils.isEmpty
 import android.view.View
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.core.view.isEmpty
-import androidx.core.view.isNotEmpty
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.finalproject.R
 import com.finalproject.databinding.ActivityMainBinding
+import com.finalproject.utils.AppConstant
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -20,6 +26,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var navHostFragment: NavHostFragment
     private lateinit var navController: NavController
+//    private val REQ_CAMERA = 150
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,7 +36,7 @@ class MainActivity : AppCompatActivity() {
         navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment_container) as NavHostFragment
         navController = navHostFragment.findNavController()
         setupNav()
-
+        checkForPermission(Manifest.permission.READ_EXTERNAL_STORAGE, "Penyimpanan", AppConstant.STORAGE_READ_PERMISSION_CODE)
     }
 
     private fun setupNav() {
@@ -95,6 +102,47 @@ class MainActivity : AppCompatActivity() {
         binding.bottomNavigationView.visibility = View.GONE
     }
 
+    private fun checkForPermission(permission: String, name: String, requestCode: Int) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            when {
+//                ContextCompat.checkSelfPermission(applicationContext, permission) == PackageManager.PERMISSION_GRANTED -> {
+//                    Toast.makeText(applicationContext, "$name permission granted", Toast.LENGTH_SHORT).show()
+//                }
+                shouldShowRequestPermissionRationale(permission) -> showDialog(permission, name, requestCode)
+                else -> ActivityCompat.requestPermissions(this, arrayOf(permission), requestCode)
+            }
+        }
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        fun innerCheck(name: String) {
+            if (grantResults.isEmpty() || grantResults[0] != PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(applicationContext, "$name Ditolak", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(applicationContext, "$name Diberikan", Toast.LENGTH_SHORT).show()
+            }
+        }
+        when (requestCode) {
+            AppConstant.STORAGE_READ_PERMISSION_CODE -> innerCheck("Akses izin ke Penyimpanan")
+//            AppConstant.STORAGE_WRITE_PERMISSION_CODE -> innerCheck("Write Storage")
+//            REQ_CAMERA -> innerCheck("CAMERA")
+        }
+    }
+
+    private fun showDialog(permission: String, name: String, requestCode: Int) {
+        val builder = AlertDialog.Builder(this)
+
+        builder.apply {
+            setMessage("Untuk Menggunakan Aplikasi dibutuhkan ijin ke $name")
+            setTitle("Membutuhkan Ijin")
+            setPositiveButton("Ok") { dialog, which ->
+                ActivityCompat.requestPermissions(this@MainActivity, arrayOf(permission), requestCode)
+            }
+        }
+        val dialog = builder.create()
+        dialog.show()
+    }
 
 
 }

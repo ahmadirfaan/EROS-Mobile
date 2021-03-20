@@ -39,16 +39,22 @@ class SignUpViewModel @Inject constructor(@RegisterLoginAccountRepoQualifier pri
                 delay(2000)
                 val check = ArrayList<Int>()
                 if (!email.isBlank() && email.matches(emailPattern.toRegex())) {
-                    check.add(1)
+                    check.add(5)
                 }
                 if (!password.isBlank() && password.contentEquals(confirmPassword)) {
-                    check.add(1)
+                    check.add(0)
                 }
                 Log.d("ARRAY LIST SIGN UP EMAIL", check.toString())
                 if (check.size == 2) {
                     _inputValidation.postValue(ResourceState.success(true))
-                } else {
-                    _inputValidation.postValue(ResourceState.failured("Something Wrong"))
+                } else if(check.size == 0) {
+                    _inputValidation.postValue(ResourceState.failured("Format Email Salah serta Password dan Confirm Password Tidak Sama"))
+                }else {
+                    if(check[0] == 5) {
+                        _inputValidation.postValue(ResourceState.failured("Password dan Confirm Password Harus Sama"))
+                    } else if(check[0] == 0) {
+                        _inputValidation.postValue(ResourceState.failured("Masukkan Email dengan Benar"))
+                    }
                 }
             } catch (e : Exception) {
                 e.printStackTrace()
@@ -62,11 +68,15 @@ class SignUpViewModel @Inject constructor(@RegisterLoginAccountRepoQualifier pri
             try {
                 _createAccountLiveData.postValue(ResourceState.loading())
                 val response = registerAccountRepo.createAccountEmployee(request)
+                val responseBody = response.body()
                 if (response.isSuccessful) {
-                    val responseBody = response.body()
-                    _createAccountLiveData.postValue(ResourceState.success(responseBody?.data))
+                    if(responseBody?.code?.equals(200) == true) {
+                        _createAccountLiveData.postValue(ResourceState.success(responseBody?.data))
+                    } else {
+                        _createAccountLiveData.postValue(ResourceState.failured("Email sudah digunakan"))
+                    }
                 } else {
-                    _createAccountLiveData.postValue(ResourceState.failured("Ada yang salah dalam memproses akun"))
+                    _createAccountLiveData.postValue(ResourceState.failured(response.message()))
                 }
             } catch (e : Exception) {
                 e.printStackTrace()

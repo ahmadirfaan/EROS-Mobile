@@ -1,8 +1,10 @@
 package com.finalproject.presentations.employee.home
 
+import android.content.pm.PackageManager
 import android.graphics.Color
 import android.graphics.ColorFilter
 import android.graphics.PorterDuff
+import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -11,6 +13,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.addCallback
+import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.findNavController
 import com.finalproject.R
 import com.finalproject.databinding.FragmentHomeEmployeeBinding
@@ -66,6 +69,15 @@ class HomeEmployeeFragment : Fragment() {
         isBackPressed = false
     }
 
+    private fun checkForPermission(permission : String, requestCode : Int) {
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            when {
+                ContextCompat.checkSelfPermission(requireContext(), permission) == PackageManager.PERMISSION_GRANTED -> {
+
+                }
+            }
+        }
+    }
     companion object {
         @JvmStatic
         fun newInstance() = HomeEmployeeFragment()

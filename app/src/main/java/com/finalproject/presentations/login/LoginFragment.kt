@@ -73,7 +73,11 @@ class LoginFragment : Fragment() {
             btnLogin.setOnClickListener {
                 val usernameString = inputEmailLogin.editText?.text.toString()
                 val passswordString = inputPasswordLogin.editText?.text.toString()
-                viewModel.checkEmailPasswordLogin(email = usernameString, password = passswordString)
+                if(usernameString.matches(emailPattern.toRegex())) {
+                    viewModel.checkEmailPasswordLogin(email = usernameString, password = passswordString)
+                } else {
+                    Toast.makeText(requireContext(), "Harap Masukkan Email yang Benar", Toast.LENGTH_SHORT).show()
+                }
             }
             btnSignUp.setOnClickListener {
                 findNavController().navigate(R.id.action_loginFragment_to_signUpFragment)
@@ -119,6 +123,7 @@ class LoginFragment : Fragment() {
         viewModel.inputValidation.observe(this, {
             when (it.status) {
                 ResourceStatus.LOADING -> {
+                    loadingDialog.show()
                 }
                 ResourceStatus.SUCCESS -> {
                     binding.apply {
@@ -145,7 +150,6 @@ class LoginFragment : Fragment() {
                     loadingDialog.hide()
                     val data = it.data as LoginResponse
                     sharedPreferences.edit().putString(AppConstant.APP_ID_LOGIN, data.data?.id).apply()
-                    loadingDialog.hide()
                     sharedPreferences.getString(AppConstant.APP_ID_LOGIN, "Login ID")?.let { it1 ->
                         viewModel.checkFormLiveData(it1)
                     }

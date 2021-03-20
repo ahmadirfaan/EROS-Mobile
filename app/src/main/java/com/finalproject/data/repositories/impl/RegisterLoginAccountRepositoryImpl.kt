@@ -7,6 +7,7 @@ import retrofit2.Response
 import javax.inject.Inject
 
 class RegisterLoginAccountRepositoryImpl @Inject constructor(private val registerLoginApi: RegisterLoginApi) : RegisterLoginAccountRepository {
+
     override suspend fun createAccountEmployee(request: RegisterAccountRequest): Response<RegisterAccountResponse> {
         return registerLoginApi.createAccountEmployee(request)
     }

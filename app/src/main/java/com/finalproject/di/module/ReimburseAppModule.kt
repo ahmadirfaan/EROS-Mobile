@@ -18,7 +18,7 @@ class ReimburseAppModule {
 
     @Singleton
     @Provides
-    fun provideGsonConvert(): GsonConverterFactory = GsonConverterFactory.create()
+    fun provideGsonConverter(): GsonConverterFactory = GsonConverterFactory.create()
 
     @Singleton
     @Provides

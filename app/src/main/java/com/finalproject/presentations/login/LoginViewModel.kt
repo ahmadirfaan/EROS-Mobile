@@ -75,6 +75,7 @@ class LoginViewModel @Inject constructor(
         CoroutineScope(Dispatchers.Main).launch {
             try {
                 _loginAccount.postValue(ResourceState.loading())
+                Log.d("INI LOGIN 1", "LOGIN 1")
                 val response = registerLoginAccountRepo.loginAccountEmployee(request)
                 if (response.isSuccessful) {
                     val responseBody = response.body()
@@ -83,6 +84,7 @@ class LoginViewModel @Inject constructor(
                     } else if (responseBody?.data?.role?.id != 4) {
                         _loginAccount.postValue(ResourceState.failured("Admin Tidak Diperbolehkan Disini"))
                     } else {
+                        Log.d("INI LOGIN 2", "LOGIN 2")
                         _loginAccount.postValue(ResourceState.success(responseBody))
                     }
                 } else {
@@ -97,9 +99,9 @@ class LoginViewModel @Inject constructor(
     fun checkFormLiveData(idLogin: String) {
         CoroutineScope(Dispatchers.Default).launch {
             try {
+                _checkFormLiveData.postValue(ResourceState.loading())
                 val response = registerLoginAccountRepo.findEmployeeByIdLogin(idLogin)
                 val responseBody = response.body()
-                _checkFormLiveData.postValue(ResourceState.loading())
                 if (response.isSuccessful) {
                     val employeeResponse = responseBody?.data
                     employeeResponse?.let {

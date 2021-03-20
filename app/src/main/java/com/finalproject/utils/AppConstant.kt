@@ -3,6 +3,8 @@ package com.finalproject.utils
 class AppConstant {
     companion object {
         const val BASE_URL = "http://10.0.2.2:8081"
+        const val STORAGE_READ_PERMISSION_CODE = 98;
+        const val STORAGE_WRITE_PERMISSION_CODE = 95;
         const val ON_BOARDING_FINISHED = "OnBoardingFinished" //Untuk Shared Preferences
         const val ON_LOGIN_FINISHED = "OnLoginFinished" //Untuk Shared Preferences
         const val APP_SHARED_PREF = "ApplicationSharedPref"

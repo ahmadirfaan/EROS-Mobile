@@ -7,10 +7,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.finalproject.data.models.account.RegisterAccountRequest
 import com.finalproject.databinding.FragmentSignUpBinding
+import com.finalproject.utils.LoadingDialog
 import com.finalproject.utils.ResourceStatus
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -22,10 +25,12 @@ class SignUpFragment : Fragment() {
     private val emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+"
     private lateinit var emailTextWatcher: TextWatcher
     private lateinit var confirmPasswordTextWatcher : TextWatcher
+    private lateinit var loadingDialog : AlertDialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         initViewModel()
         subscribe()
+        loadingDialog = LoadingDialog.build(requireContext())
         super.onCreate(savedInstanceState)
     }
 
@@ -51,6 +56,9 @@ class SignUpFragment : Fragment() {
                 } else {
                     viewModel.checkInputEmailPassword(password = passwordString, email = emailString, confirmPassword = confirmPasswordString)
                 }
+            }
+            btnBackLogin.setOnClickListener{
+                findNavController().popBackStack()
             }
         }
     }
@@ -101,21 +109,35 @@ class SignUpFragment : Fragment() {
         viewModel.inputValidation.observe(this, {
             when(it.status) {
                 ResourceStatus.LOADING -> {
-                    Toast.makeText(requireContext(), "Loading", Toast.LENGTH_SHORT).show()
+                    loadingDialog.show()
                 }
                 ResourceStatus.SUCCESS -> {
+                    loadingDialog.hide()
                     binding.apply {
                         val emailString = signUpInputEmail.editText?.text.toString()
                         val passwordString = signUpInputPassword.editText?.text.toString()
                         val registerAccount = RegisterAccountRequest(email = emailString, password = passwordString)
                         viewModel.registerAccount(request = registerAccount)
-                        Toast.makeText(requireContext(), "Success Create Account", Toast.LENGTH_SHORT).show()
-                        clearText()
                     }
 
                 }
                 ResourceStatus.FAILURE -> {
+                    loadingDialog.hide()
                     Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
+                }
+            }
+        })
+        viewModel.createAccountLiveData.observe(this, {
+            when(it.status) {
+                ResourceStatus.LOADING -> loadingDialog.show()
+                ResourceStatus.FAILURE -> {
+                    loadingDialog.hide()
+                    Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
+                }
+                ResourceStatus.SUCCESS -> {
+                    loadingDialog.hide()
+                    Toast.makeText(requireContext(), "Success Create Account", Toast.LENGTH_SHORT).show()
+                    clearText()
                 }
             }
         })
@@ -125,6 +147,7 @@ class SignUpFragment : Fragment() {
         super.onPause()
         clearText()
         clearObserver()
+        loadingDialog.cancel()
     }
 
 

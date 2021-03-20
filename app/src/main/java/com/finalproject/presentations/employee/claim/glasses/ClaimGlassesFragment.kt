@@ -1,16 +1,20 @@
 package com.finalproject.presentations.employee.claim.glasses
 
+import android.Manifest
+import android.content.pm.PackageManager
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.finalproject.R
+import android.widget.Toast
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import com.finalproject.databinding.FragmentClaimGlassesBinding
 
 class ClaimGlassesFragment : Fragment() {
 
-    private lateinit var binding : FragmentClaimGlassesBinding
+    private lateinit var binding: FragmentClaimGlassesBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,6 +27,15 @@ class ClaimGlassesFragment : Fragment() {
     ): View? {
         return binding.root
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.apply {
+            binding.btnUploadFiles.setOnClickListener {
+            }
+        }
+    }
+
 
     companion object {
 

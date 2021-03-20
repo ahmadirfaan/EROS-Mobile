@@ -52,9 +52,12 @@ class ChangePasswordFragment : Fragment() {
         binding.apply {
             btnChangePassword.setOnClickListener {
                 val inputPassword = changeInputPassword.editText?.text.toString()
+                val confirmPassword = changeConfirmPassword.editText?.text.toString()
                 if (inputPassword.length < 8) {
                     Toast.makeText(requireContext(), "Password Length Must Be Min 8 length", Toast.LENGTH_SHORT).show()
-                } else {
+                } else if(!inputPassword.equals(confirmPassword)) {
+                    Toast.makeText(requireContext(), "Password And Confirm Password Not Same", Toast.LENGTH_SHORT).show()
+                }else {
                     val request = ChangePasswordRequest(password = inputPassword, idLogin = getIdLogin() )
                     viewModel.changePassword(request)
                 }

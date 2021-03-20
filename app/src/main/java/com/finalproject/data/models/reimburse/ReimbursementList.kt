@@ -1,23 +1,62 @@
-package com.finalproject.data.models.account
+package com.finalproject.data.models.reimburse
 
-import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
-import kotlinx.android.parcel.Parcelize
 
-data class FindByIdLoginEmployeeResponse(
+data class ReimbursementList(
 
 	@field:SerializedName("code")
 	val code: Int? = null,
 
 	@field:SerializedName("data")
-	val data: EmployeeResponse? = null,
+	val data: List<ReimbursementResponse?>? = null,
 
 	@field:SerializedName("message")
 	val message: Any? = null
 )
 
-@Parcelize
-data class EmployeeResponse(
+data class ReimbursementResponse(
+
+	@field:SerializedName("dateOfClaimSubmission")
+	val dateOfClaimSubmission: String? = null,
+
+	@field:SerializedName("endDate")
+	val endDate: String? = null,
+
+	@field:SerializedName("statusOnHc")
+	val statusOnHc: Boolean? = null,
+
+	@field:SerializedName("employeeId")
+	val employeeId: EmployeeId? = null,
+
+	@field:SerializedName("statusSuccess")
+	val statusSuccess: Boolean? = null,
+
+	@field:SerializedName("borneCost")
+	val borneCost: Int? = null,
+
+	@field:SerializedName("disbursementDate")
+	val disbursementDate: String? = null,
+
+	@field:SerializedName("statusReject")
+	val statusReject: Boolean? = null,
+
+	@field:SerializedName("id")
+	val id: String? = null,
+
+	@field:SerializedName("statusOnFinance")
+	val statusOnFinance: Boolean? = null,
+
+	@field:SerializedName("categoryId")
+	val categoryId: CategoryId? = null,
+
+	@field:SerializedName("startDate")
+	val startDate: String? = null,
+
+	@field:SerializedName("claimFee")
+	val claimFee: Int? = null
+)
+
+data class EmployeeId(
 
 	@field:SerializedName("gender")
 	val gender: String? = null,
@@ -79,6 +118,9 @@ data class EmployeeResponse(
 	@field:SerializedName("numberOfChildren")
 	val numberOfChildren: Int? = null,
 
+	@field:SerializedName("grade")
+	val grade: String? = null,
+
 	@field:SerializedName("biologicalMothersName")
 	val biologicalMothersName: String? = null,
 
@@ -86,7 +128,7 @@ data class EmployeeResponse(
 	val postalCodeOfIdCard: String? = null,
 
 	@field:SerializedName("idLogin")
-	val idLogin: String? = null,
+	val idLogin: Any? = null,
 
 	@field:SerializedName("fullname")
 	val fullname: String? = null,
@@ -101,6 +143,14 @@ data class EmployeeResponse(
 	val residenceAddress: String? = null,
 
 	@field:SerializedName("verifiedEmail")
-	val verifiedEmail: Boolean? = null,
+	val verifiedEmail: Boolean? = null
+)
 
-) : Parcelable
+data class CategoryId(
+
+	@field:SerializedName("id")
+	val id: String? = null,
+
+	@field:SerializedName("categoryName")
+	val categoryName: String? = null
+)

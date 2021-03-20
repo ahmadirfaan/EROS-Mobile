@@ -179,15 +179,15 @@ class AccountFragment : Fragment() {
     }
 
     private fun subStringAddress(address : String) : String {
-        if(address.length > 35) {
-            return "${address.substring(0, 20)}\n${address.substring(20, 35)}\n${address.substring(35, address.length)}"
-        } else if(address.length > 20) {
-            return "${address.substring(0, 18)}\n${address.substring(18, address.length)}"
-        } else if(address.length > 15) {
-            return "${address.substring(0, 10)}\n${address.substring(10, address.length)}"
-        } else {
+//        if(address.length > 35) {
+//            return "${address.substring(0, 20)}\n${address.substring(20, 35)}\n${address.substring(35, address.length)}"
+//        } else if(address.length > 20) {
+//            return "${address.substring(0, 18)}\n${address.substring(18, address.length)}"
+//        } else if(address.length > 15) {
+//            return "${address.substring(0, 10)}\n${address.substring(10, address.length)}"
+//        } else {
             return address
-        }
+//        }
     }
 
     companion object {
