@@ -151,7 +151,11 @@
         android:id="@+id/claimGlassesFragment"
         android:name="com.finalproject.presentations.employee.claim.glasses.ClaimGlassesFragment"
         android:label="fragment_claim_glasses"
-        tools:layout="@layout/fragment_claim_glasses" />
+        tools:layout="@layout/fragment_claim_glasses" >
+        <action
+            android:id="@+id/action_claimGlassesFragment_to_openPdfFragment"
+            app:destination="@id/openPdfFragment" />
+    </fragment>
     <fragment
         android:id="@+id/historySuccessFragment2"
         android:name="com.finalproject.presentations.employee.history.success.HistorySuccessFragment"
@@ -234,5 +238,11 @@
         <argument
             android:name="Reimbursement"
             app:argType="com.finalproject.data.models.reimburse.ReimbursementResponse" />
+    </fragment>
+    <fragment
+        android:id="@+id/openPdfFragment"
+        android:name="com.finalproject.presentations.employee.claim.detaildocument.OpenPdfFragment"
+        android:label="fragment_open_pdf"
+        tools:layout="@layout/fragment_open_pdf" >
     </fragment>
 </navigation>

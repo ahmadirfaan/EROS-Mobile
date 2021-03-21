@@ -119,7 +119,8 @@ class MainActivity : AppCompatActivity() {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         fun innerCheck(name: String) {
             if (grantResults.isEmpty() || grantResults[0] != PackageManager.PERMISSION_GRANTED) {
-                Toast.makeText(applicationContext, "$name Ditolak", Toast.LENGTH_SHORT).show()
+                Toast.makeText(applicationContext, "$name Tidak Diberikan, maka aplikasi berhenti", Toast.LENGTH_SHORT).show()
+                finish()
             } else {
                 Toast.makeText(applicationContext, "$name Diberikan", Toast.LENGTH_SHORT).show()
             }

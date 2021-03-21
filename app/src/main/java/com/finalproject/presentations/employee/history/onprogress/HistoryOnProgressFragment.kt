@@ -130,7 +130,7 @@ class HistoryOnProgressFragment : Fragment() {
             spinnerFilter.adapter = adapterFilter
             spinnerFilter.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
                 override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                    tvTitleFilterBy.text = HistoryConstant.arrayFilter[position]
+//                    tvTitleFilterBy.text = HistoryConstant.arrayFilter[position]
                     when (position) {
                         0 -> {
                             linearLayoutVerticalFilterCategory.visibility = View.GONE
