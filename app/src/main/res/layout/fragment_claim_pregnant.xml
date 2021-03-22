@@ -34,10 +34,10 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="15dp"
-                android:layout_marginBottom="50dp"
+                android:layout_marginBottom="10dp"
                 android:background="@color/white"
                 android:fontFamily="@font/lato_black"
-                android:text="Add Claim Pregnant"
+                android:text="Klaim Kehamilan"
                 android:textColor="@color/black"
                 android:textSize="25sp" />
 
@@ -55,7 +55,7 @@
                 android:textSize="15sp" />
 
             <EditText
-                android:id="@+id/inpt_claim"
+                android:id="@+id/input_claim"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -70,10 +70,17 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="15dp"
-                android:layout_marginBottom="50dp"
                 android:text="Upload Files"
                 android:textColor="@color/white"
                 android:textSize="15sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="File yang diupload harus berformat .pdf dan Maksimal 5MB"
+                android:layout_gravity="center"
+                android:layout_marginBottom="30dp"
+                android:textColor="@color/red_danger"/>
 
             <TextView
                 android:id="@+id/tv_name_file"
@@ -81,8 +88,21 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="20dp"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="20sp"
                 android:layout_marginBottom="50dp"
-                android:text="Nama File" />
+                android:text="" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_see_file"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:visibility="gone"
+                android:text="Lihat File"
+                android:textColor="@color/white"
+                android:textSize="15sp" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_submit_form_pregnant"

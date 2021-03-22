@@ -12,7 +12,7 @@ class LoadingDialog {
     companion object {
         fun build(context: Context): AlertDialog {
             val inflate = LayoutInflater.from(context).inflate(R.layout.layout_loading_dialog, null)
-            val dialog = AlertDialog.Builder(context).setView(inflate).setCancelable(true).create()
+            val dialog = AlertDialog.Builder(context).setView(inflate).setCancelable(false).create()
             dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.WHITE))
             return dialog
         }

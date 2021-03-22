@@ -1,12 +1,9 @@
 package com.finalproject.data.api
 
-import com.finalproject.data.models.reimburse.ReimburseListByDateCategory
-import com.finalproject.data.models.reimburse.ReimburseListByDateRequest
-import com.finalproject.data.models.reimburse.ReimbursementList
-import com.finalproject.data.models.reimburse.ReimbursementListRequest
+import com.finalproject.data.models.reimburse.*
+import okhttp3.MultipartBody
 import retrofit2.Response
-import retrofit2.http.Body
-import retrofit2.http.POST
+import retrofit2.http.*
 
 interface ReimburseApi {
     @POST("/reimburse/filter-category-employee")
@@ -15,6 +12,13 @@ interface ReimburseApi {
     @POST("/reimburse/filter-date-employee")
     suspend fun getAllReimburseByDate(@Body request : ReimburseListByDateRequest) : Response<ReimbursementList>
 
-    @POST("reimburse/filter-date-category-employee")
+    @POST("/reimburse/filter-date-category-employee")
     suspend fun getAllReimburseByDateAndCategory(@Body request : ReimburseListByDateCategory) : Response<ReimbursementList>
+
+    @POST("/reimburse")
+    suspend fun addReimbursement(@Body request : AddReimbursementRequest) : Response<AddReimbursementResponse>
+
+    @Multipart
+    @POST("/bill/{idReimburse}/upload/file")
+    suspend fun uploadFileIdReimburse(@Path("idReimburse") idReimburse : String, @Part filePdf : MultipartBody.Part) : Response<UploadResponse>
 }

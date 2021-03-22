@@ -195,22 +195,38 @@
         android:id="@+id/claimInsuranceFragment"
         android:name="com.finalproject.presentations.employee.claim.insurance.ClaimInsuranceFragment"
         android:label="fragment_claim_insurance"
-        tools:layout="@layout/fragment_claim_insurance" />
+        tools:layout="@layout/fragment_claim_insurance" >
+        <action
+            android:id="@+id/action_claimInsuranceFragment_to_openPdfFragment"
+            app:destination="@id/openPdfFragment" />
+    </fragment>
     <fragment
         android:id="@+id/claimSPDFragment"
         android:name="com.finalproject.presentations.employee.claim.spd.ClaimSPDFragment"
         android:label="fragment_claim_spd"
-        tools:layout="@layout/fragment_claim_spd" />
+        tools:layout="@layout/fragment_claim_spd" >
+        <action
+            android:id="@+id/action_claimSPDFragment_to_openPdfFragment"
+            app:destination="@id/openPdfFragment" />
+    </fragment>
     <fragment
         android:id="@+id/claimTrainingFragment"
         android:name="com.finalproject.presentations.employee.claim.training.ClaimTrainingFragment"
         android:label="fragment_claim_training"
-        tools:layout="@layout/fragment_claim_training" />
+        tools:layout="@layout/fragment_claim_training" >
+        <action
+            android:id="@+id/action_claimTrainingFragment_to_openPdfFragment"
+            app:destination="@id/openPdfFragment" />
+    </fragment>
     <fragment
         android:id="@+id/claimPregnantFragment"
         android:name="com.finalproject.presentations.employee.claim.pregnant.ClaimPregnantFragment"
         android:label="fragment_claim_pregnant"
-        tools:layout="@layout/fragment_claim_pregnant" />
+        tools:layout="@layout/fragment_claim_pregnant" >
+        <action
+            android:id="@+id/action_claimPregnantFragment_to_openPdfFragment"
+            app:destination="@id/openPdfFragment" />
+    </fragment>
     <fragment
         android:id="@+id/confirmAccountFragment"
         android:name="com.finalproject.presentations.employee.account.confirmaccount.ConfirmAccountFragment"

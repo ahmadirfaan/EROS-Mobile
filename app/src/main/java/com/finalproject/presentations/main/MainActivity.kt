@@ -36,7 +36,8 @@ class MainActivity : AppCompatActivity() {
         navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment_container) as NavHostFragment
         navController = navHostFragment.findNavController()
         setupNav()
-        checkForPermission(Manifest.permission.READ_EXTERNAL_STORAGE, "Penyimpanan", AppConstant.STORAGE_READ_PERMISSION_CODE)
+        checkForPermission(Manifest.permission.READ_EXTERNAL_STORAGE, "Membaca Penyimpanan", AppConstant.STORAGE_READ_PERMISSION_CODE)
+        checkForPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE, "Menulis Penyimpanan", AppConstant.STORAGE_WRITE_PERMISSION_CODE)
     }
 
     private fun setupNav() {
@@ -145,6 +146,8 @@ class MainActivity : AppCompatActivity() {
         val dialog = builder.create()
         dialog.show()
     }
+
+
 
 
 }
