@@ -85,9 +85,6 @@ class LoginFragment : Fragment() {
             btnForgotPassword.setOnClickListener {
                 findNavController().navigate(R.id.action_loginFragment_to_forgetPasswordFragment)
             }
-            btnInstructions.setOnClickListener {
-                findNavController().navigate(R.id.action_loginFragment_to_instructionsPagerFragment)
-            }
         }
     }
 

@@ -53,9 +53,6 @@
         <action
             android:id="@+id/action_loginFragment_to_confirmAccountFragment"
             app:destination="@id/confirmAccountFragment" />
-        <action
-            android:id="@+id/action_loginFragment_to_instructionsPagerFragment"
-            app:destination="@id/instructionsPagerFragment" />
     </fragment>
     <fragment
         android:id="@+id/homeAdminHCFragment"
@@ -81,6 +78,9 @@
         <action
             android:id="@+id/action_homeEmployeeFragment_to_claimPregnantFragment"
             app:destination="@id/claimPregnantFragment" />
+        <action
+            android:id="@+id/action_homeEmployeeFragment_to_instructionsPagerFragment"
+            app:destination="@id/instructionsPagerFragment" />
     </fragment>
     <fragment
         android:id="@+id/signUpFragment"
