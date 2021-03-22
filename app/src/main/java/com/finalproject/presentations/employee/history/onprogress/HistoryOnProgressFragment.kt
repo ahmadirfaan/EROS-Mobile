@@ -42,6 +42,7 @@ class HistoryOnProgressFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         loadingDialog = LoadingDialog.build(requireContext())
+        binding = FragmentHistoryOnprogressBinding.inflate(layoutInflater)
         initViewModel()
         subscribe()
         historyViewAdapter = HistoryViewAdapter(viewModel)
@@ -51,7 +52,6 @@ class HistoryOnProgressFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentHistoryOnprogressBinding.inflate(layoutInflater)
         return binding.root
     }
 
@@ -61,7 +61,7 @@ class HistoryOnProgressFragment : Fragment() {
             findNavController().navigate(R.id.action_historyOnProgressFragment_to_homeEmployeeFragment2)
         }
         onSpinnerFilterBy()
-        onSpinnerFilterCategory()
+        onRadioButtonFilterCategory()
         binding.apply {
             etDateStart.isEnabled = false
             etDateEndDate.isEnabled = false
@@ -79,8 +79,12 @@ class HistoryOnProgressFragment : Fragment() {
                 findNavController().navigate(R.id.action_historyOnProgressFragment_to_historySuccessFragment2)
             }
             btnFilterCategory.setOnClickListener {
-                val request = ReimbursementListRequest(employeeId = getEmployeeId(), categoryId = categoryId)
-                viewModel.getAllHistoryProgressByCategory(request)
+                if(categoryId.isBlank()) {
+                    Toast.makeText(requireContext(), "Anda belum memilih kategori", Toast.LENGTH_SHORT).show()
+                } else {
+                    val request = ReimbursementListRequest(employeeId = getEmployeeId(), categoryId = categoryId)
+                    viewModel.getAllHistoryProgressByCategory(request)
+                }
             }
             btnFilterDate.setOnClickListener {
                 val startDate = etDateStart.editableText.toString()
@@ -105,8 +109,11 @@ class HistoryOnProgressFragment : Fragment() {
                     Toast.makeText(requireContext(), "Anda Belum memasukkan data untuk tanggal akhir", Toast.LENGTH_SHORT).show()
                 } else if (startDate.isBlank()) {
                     Toast.makeText(requireContext(), "Anda belum memasukkan data untuk tanggal awal", Toast.LENGTH_SHORT).show()
-                } else {
-                    val request = ReimburseListByDateCategory(startDate = startDate, endDate = endDate, employeeId = getEmployeeId(), categoryId = categoryId)
+                } else if(categoryId.isBlank()) {
+                    Toast.makeText(requireContext(), "Anda belum memilih kategori", Toast.LENGTH_SHORT).show()
+                }else {
+                    val request =
+                        ReimburseListByDateCategory(startDate = startDate, endDate = endDate, employeeId = getEmployeeId(), categoryId = categoryId)
                     viewModel.getAllHistoryProgressByDateCategory(request)
                 }
             }
@@ -131,15 +138,16 @@ class HistoryOnProgressFragment : Fragment() {
                     loadingDialog.hide()
                     Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
                     binding.apply {
-                        tvNotAvalaible.text = "Data Tidak Ditemukan"
-                        tvNotAvalaible.visibility = View.VISIBLE
+                        linearLayoutDataNotFound.visibility = View.VISIBLE
+                        linearLayoutDataChooseFilter.visibility = View.GONE
                         rvOnProgressHistory.visibility = View.GONE
                     }
                 }
                 ResourceStatus.SUCCESS -> {
                     loadingDialog.hide()
                     binding.apply {
-                        tvNotAvalaible.visibility = View.GONE
+                        linearLayoutDataNotFound.visibility = View.GONE
+                        linearLayoutDataChooseFilter.visibility = View.GONE
                         rvOnProgressHistory.visibility = View.VISIBLE
                     }
                     val listHistory = it.data as List<ReimbursementResponse>
@@ -171,17 +179,17 @@ class HistoryOnProgressFragment : Fragment() {
             spinnerFilter.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
                 override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
 //                    tvTitleFilterBy.text = HistoryConstant.arrayFilter[position]
-                    tvNotAvalaible.text = "Silahkan Filter Untuk Melihat Data"
-                    tvNotAvalaible.visibility = View.VISIBLE
+                    linearLayoutDataChooseFilter.visibility = View.VISIBLE
                     rvOnProgressHistory.visibility = View.GONE
                     when (position) {
                         0 -> {
                             linearLayoutVerticalFilterCategory.visibility = View.VISIBLE
                             linearLayoutVerticalFilterDate.visibility = View.VISIBLE
-                            tvTitleFilterCategory.visibility = View.GONE
-                            tvTitleFilterDate.visibility = View.GONE
+                            tvTitleFilterCategory.visibility = View.VISIBLE
+                            tvTitleFilterDate.visibility = View.VISIBLE
                             btnFilterCategory.visibility = View.GONE
                             btnFilterDate.visibility = View.GONE
+                            btnFilterCategoryDate.visibility = View.VISIBLE
                         }
                         1 -> {
                             linearLayoutVerticalFilterDate.visibility = View.VISIBLE
@@ -211,19 +219,16 @@ class HistoryOnProgressFragment : Fragment() {
         }
     }
 
-    private fun onSpinnerFilterCategory() {
+    private fun onRadioButtonFilterCategory() {
         binding.apply {
-            val adapterCategory = ArrayAdapter<String>(requireContext(), android.R.layout.simple_spinner_dropdown_item, HistoryConstant.arrayCategory)
-            spinnerKategori.adapter = adapterCategory
-            spinnerKategori.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-                override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                    var positionCategory = position + 1
-                    categoryId = positionCategory.toString()
+            radioButtonGroup.setOnCheckedChangeListener { group, checkedId ->
+                when (checkedId) {
+                    radioButtonKacamata.id -> categoryId = "1"
+                    radioButtonPelatihan.id -> categoryId = "2"
+                    radioButtonMelahirkan.id -> categoryId = "3"
+                    radioButtonDinas.id -> categoryId = "4"
+                    radioButtonAsuransi.id -> categoryId = "5"
                 }
-
-                override fun onNothingSelected(parent: AdapterView<*>?) {
-                }
-
             }
         }
     }

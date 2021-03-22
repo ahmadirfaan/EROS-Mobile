@@ -108,7 +108,7 @@
                     android:id="@+id/tv_title_filter_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Filter Date"
+                    android:text="Pilih Tanggal"
                     android:textColor="@color/black"
                     android:layout_gravity="center"
                     android:textSize="25sp"
@@ -209,7 +209,7 @@
                     android:id="@+id/tv_title_filter_category"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Filter Category"
+                    android:text="Pilih Kategori"
                     android:layout_gravity="center"
                     android:textColor="@color/black"
                     android:textSize="25sp"
@@ -219,17 +219,77 @@
 
                 <LinearLayout
                     android:id="@+id/layout_sorting_kategori"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="20dp"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:orientation="horizontal">
 
-                    <Spinner
-                        android:id="@+id/spinner_kategori"
-                        android:layout_weight="3"
-                        android:layout_gravity="center"
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"/>
+                    <RadioGroup
+                        android:id="@+id/radio_button_group"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <RadioButton
+                            android:id="@+id/radio_button_kacamata"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="5dp"
+                            android:background="@drawable/radio_selector"
+                            android:button="@android:color/transparent"
+                            android:elevation="4dp"
+                            android:padding="10dp"
+                            android:text="Kacamata"
+                            android:textColor="@drawable/text_color" />
+
+                        <RadioButton
+                            android:id="@+id/radio_button_pelatihan"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/radio_selector"
+                            android:button="@android:color/transparent"
+                            android:elevation="4dp"
+                            android:padding="10dp"
+                            android:layout_marginRight="5dp"
+                            android:text="Pelatihan"
+                            android:textColor="@drawable/text_color" />
+
+                        <RadioButton
+                            android:id="@+id/radio_button_melahirkan"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/radio_selector"
+                            android:button="@android:color/transparent"
+                            android:layout_marginRight="5dp"
+                            android:elevation="4dp"
+                            android:padding="10dp"
+                            android:text="Melahirkan"
+                            android:textColor="@drawable/text_color" />
+
+                        <RadioButton
+                            android:id="@+id/radio_button_dinas"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/radio_selector"
+                            android:button="@android:color/transparent"
+                            android:elevation="4dp"
+                            android:layout_marginRight="5dp"
+                            android:padding="10dp"
+                            android:textColor="@drawable/text_color"
+                            android:text="Dinas" />
+
+                        <RadioButton
+                            android:id="@+id/radio_button_asuransi"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="5dp"
+                            android:background="@drawable/radio_selector"
+                            android:button="@android:color/transparent"
+                            android:textColor="@drawable/text_color"
+                            android:elevation="4dp"
+                            android:padding="10dp"
+                            android:text="Asuransi" />
+                    </RadioGroup>
                 </LinearLayout>
 
 
@@ -254,19 +314,60 @@
                 android:layout_gravity="end"/>
 
 
-            <TextView
-                android:id="@+id/tv_not_avalaible"
+            <LinearLayout
+                android:id="@+id/linear_layout_data_choose_filter"
                 android:layout_width="match_parent"
                 android:layout_height="500dp"
-                android:text="Data Tidak ada\nSilahkan Lakukan Transaksi Dulu"
-                android:textColor="@color/black"
-                android:textSize="50sp"
-                android:gravity="center_horizontal|center_vertical"
+                android:background="@color/white"
                 android:visibility="gone"
-                app:layout_constraintBottom_toTopOf="@+id/btn_prev_page"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/btn_filter_date"/>
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="400dp"
+                    android:src="@drawable/icon_choose_filter"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:textSize="25sp"
+                    android:layout_gravity="center"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/lato_black"
+                    android:text="Silahkan Lakukan Filter"/>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/linear_layout_data_not_found"
+                android:layout_width="match_parent"
+                android:layout_height="500dp"
+                android:background="@color/white"
+                android:visibility="gone"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="400dp"
+                    android:src="@drawable/empty_data_icon"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:textSize="25sp"
+                    android:layout_gravity="center"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/lato_black"
+                    android:text="Maaf, Data Tidak Ditemukan"/>
+
+            </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_success_history"

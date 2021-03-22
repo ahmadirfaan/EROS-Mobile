@@ -5,6 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.activity.addCallback
+import androidx.navigation.fragment.findNavController
 import com.finalproject.R
 import com.finalproject.data.models.reimburse.ReimbursementResponse
 import com.finalproject.databinding.FragmentDetailReimbursementBinding
@@ -28,6 +31,9 @@ class DetailReimbursementFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        requireActivity().onBackPressedDispatcher.addCallback(this) {
+            findNavController().popBackStack()
+        }
         return binding.root
     }
 
