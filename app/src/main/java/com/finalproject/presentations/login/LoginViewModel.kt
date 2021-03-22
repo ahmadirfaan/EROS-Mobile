@@ -1,4 +1,4 @@
-package com.finalproject.presentations.login
+ package com.finalproject.presentations.login
 
 import android.content.SharedPreferences
 import android.util.Log
@@ -99,29 +99,35 @@ class LoginViewModel @Inject constructor(
     fun checkFormLiveData(idLogin: String) {
         CoroutineScope(Dispatchers.Default).launch {
             try {
+                Log.d("INI LOGIN 3", "Login 3")
                 _checkFormLiveData.postValue(ResourceState.loading())
                 val response = registerLoginAccountRepo.findEmployeeByIdLogin(idLogin)
                 val responseBody = response.body()
                 if (response.isSuccessful) {
-                    val employeeResponse = responseBody?.data
-                    employeeResponse?.let {
-                        val formIsNull = checkFormIsNull(
-                            it.accountName, it.accountNumber, it.biologicalMothersName, it.bloodType,
-                            it.dateOfBirth, it.emergencyNumber, it.fullname, it.gender,
-                            it.ktpAddress, it.maritalStatus, it.nik, it.npwp,
-                            it.npwpAddress, it.phoneNumber, it.placeOfBirth, it.postalCodeOfIdCard,
-                            it.religion, it.residenceAddress, it.spouseName, it.numberOfChildren
-                        )
-                        sharedPreferences.edit().putString(AppConstant.APP_ID_EMPLOYEE, it.id).apply()
-                        Log.d("Nilai Form Is Null", formIsNull.toString())
-                        if (!formIsNull && it.verifiedHc == true) {
-                            Log.d("Masuk nomer 1 Success", "1")
-                            _checkFormLiveData.postValue(ResourceState.success(1)) //Sudah mengisi form dan diverifikasi oleh HC
-                        } else if (!formIsNull && (it.verifiedHc == false || it.verifiedHc == null)) {
-                            _checkFormLiveData.postValue(ResourceState.success(2)) //Sudah mengisi form tapi belum diverifikasi oleh HC
-                        } else {
-                            Log.d("Masuk nomer 3 Success", "3")
-                            _checkFormLiveData.postValue(ResourceState.success(3)) //Belum mengisi form dan belum diverifikasi oleh HC
+                    if(responseBody?.code != 200) {
+                        _checkFormLiveData.postValue(ResourceState.failured(responseBody?.message))
+                    } else {
+                        Log.d("INI LOGIN 3.1", "Login 3.1")
+                        val employeeResponse = responseBody?.data
+                        employeeResponse?.let {
+                            val formIsNull = checkFormIsNull(
+                                it.accountName, it.accountNumber, it.biologicalMothersName, it.bloodType,
+                                it.dateOfBirth, it.emergencyNumber, it.fullname, it.gender,
+                                it.ktpAddress, it.maritalStatus, it.nik, it.npwp,
+                                it.npwpAddress, it.phoneNumber, it.placeOfBirth, it.postalCodeOfIdCard,
+                                it.religion, it.residenceAddress, it.spouseName, it.numberOfChildren
+                            )
+                            sharedPreferences.edit().putString(AppConstant.APP_ID_EMPLOYEE, it.id).apply()
+                            Log.d("Nilai Form Is Null", formIsNull.toString())
+                            if (!formIsNull && it.verifiedHc == true) {
+                                Log.d("Masuk nomer 1 Success", "1")
+                                _checkFormLiveData.postValue(ResourceState.success(1)) //Sudah mengisi form dan diverifikasi oleh HC
+                            } else if (!formIsNull && (it.verifiedHc == false || it.verifiedHc == null)) {
+                                _checkFormLiveData.postValue(ResourceState.success(2)) //Sudah mengisi form tapi belum diverifikasi oleh HC
+                            } else {
+                                Log.d("Masuk nomer 3 Success", "3")
+                                _checkFormLiveData.postValue(ResourceState.success(3)) //Belum mengisi form dan belum diverifikasi oleh HC
+                            }
                         }
                     }
                 } else {

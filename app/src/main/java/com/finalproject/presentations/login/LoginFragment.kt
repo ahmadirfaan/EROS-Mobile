@@ -126,6 +126,7 @@ class LoginFragment : Fragment() {
                     loadingDialog.show()
                 }
                 ResourceStatus.SUCCESS -> {
+                    loadingDialog.hide()
                     binding.apply {
                         val emailString = inputEmailLogin.editText?.text.toString()
                         val passswordString = inputPasswordLogin.editText?.text.toString()
@@ -139,6 +140,7 @@ class LoginFragment : Fragment() {
                     }
                 }
                 ResourceStatus.FAILURE -> {
+                    loadingDialog.hide()
                     Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
                 }
             }

@@ -223,23 +223,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
-                    <TextView
-                        android:id="@+id/tv_sorting_kategori"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Kacamata"
-                        android:layout_weight="2"
-                        android:textAlignment="center"
-                        android:textColor="@color/black"
-                        android:textSize="20sp"/>
-
                     <Spinner
                         android:id="@+id/spinner_kategori"
-                        android:layout_weight="2"
-                        android:layout_width="wrap_content"
+                        android:layout_weight="3"
+                        android:layout_gravity="center"
+                        android:layout_width="match_parent"
                         android:layout_height="50dp"/>
                 </LinearLayout>
-
 
 
 
@@ -250,12 +240,17 @@
                     android:layout_marginTop="24dp"
                     android:text="Filter Category"
                     android:layout_gravity="end"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="1.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_sorting_kategori" />
+                     />
 
             </LinearLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_filter_category_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="Filter Category And Date"
+                android:layout_gravity="end"/>
 
 
             <TextView
@@ -277,6 +272,7 @@
                 android:layout_width="match_parent"
                 android:background="@color/white"
                 android:layout_height="500dp"
+                android:layout_marginTop="20dp"
                 app:layout_constraintBottom_toTopOf="@id/btn_prev_page"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

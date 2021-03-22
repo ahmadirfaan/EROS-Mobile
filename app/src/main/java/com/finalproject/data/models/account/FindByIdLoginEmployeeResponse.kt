@@ -13,7 +13,7 @@ data class FindByIdLoginEmployeeResponse(
 	val data: EmployeeResponse? = null,
 
 	@field:SerializedName("message")
-	val message: Any? = null
+	val message: String? = null
 )
 
 @Parcelize

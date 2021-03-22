@@ -16,15 +16,14 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.finalproject.R
+import com.finalproject.data.models.reimburse.ReimburseListByDateCategory
+import com.finalproject.data.models.reimburse.ReimburseListByDateRequest
 import com.finalproject.data.models.reimburse.ReimbursementListRequest
 import com.finalproject.data.models.reimburse.ReimbursementResponse
 import com.finalproject.databinding.FragmentHistorySuccessBinding
 import com.finalproject.presentations.employee.history.HistoryViewAdapter
-import com.finalproject.presentations.employee.history.onprogress.HistoryOnProgressViewModel
-import com.finalproject.utils.AppConstant
-import com.finalproject.utils.HistoryConstant
-import com.finalproject.utils.LoadingDialog
-import com.finalproject.utils.ResourceStatus
+import com.finalproject.presentations.employee.history.HistoryViewModel
+import com.finalproject.utils.*
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -32,9 +31,9 @@ import javax.inject.Inject
 class HistorySuccessFragment : Fragment() {
 
     private lateinit var binding: FragmentHistorySuccessBinding
-    private lateinit var viewModel: HistorySuccessViewModel
-    private lateinit var historyViewAdapter : HistoryViewAdapter
-    private lateinit var loadingDialog : AlertDialog
+    private lateinit var viewModel: HistoryViewModel
+    private lateinit var historyViewAdapter: HistoryViewAdapter
+    private lateinit var loadingDialog: AlertDialog
     private var categoryId = ""
 
 
@@ -64,15 +63,55 @@ class HistorySuccessFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.tvMoveFragmentHistoryOnProgress.setOnClickListener {
-            findNavController().navigate(R.id.action_historySuccessFragment2_to_historyOnProgressFragment)
-        }
         onSpinnerFilterBy()
         onSpinnerFilterCategory()
         binding.apply {
+            etDateStart.isEnabled = false
+            etDateEndDate.isEnabled = false
+            dateIconStart.setOnClickListener {
+                DateUtils.show(requireContext()) {
+                    etDateStart.setText(it)
+                }
+            }
+            dateIconEnd.setOnClickListener {
+                DateUtils.show(requireContext()) {
+                    etDateEndDate.setText(it)
+                }
+            }
+            tvMoveFragmentHistoryOnProgress.setOnClickListener {
+                findNavController().navigate(R.id.action_historySuccessFragment2_to_historyOnProgressFragment)
+            }
             btnFilterCategory.setOnClickListener {
                 val request = ReimbursementListRequest(employeeId = getEmployeeId(), categoryId = categoryId)
-                viewModel.getAllHistorySuccess(request)
+                viewModel.getAllHistorySuccessByCategory(request)
+            }
+            btnFilterDate.setOnClickListener {
+                val startDate = etDateStart.editableText.toString()
+                val endDate = etDateEndDate.editableText.toString()
+                if (startDate.isBlank() && endDate.isBlank()) {
+                    Toast.makeText(requireContext(), "Dua Field Belum Anda Pilih", Toast.LENGTH_SHORT).show()
+                } else if (endDate.isBlank()) {
+                    Toast.makeText(requireContext(), "Anda Belum memasukkan data untuk tanggal akhir", Toast.LENGTH_SHORT).show()
+                } else if (startDate.isBlank()) {
+                    Toast.makeText(requireContext(), "Anda belum memasukkan data untuk tanggal awal", Toast.LENGTH_SHORT).show()
+                } else {
+                    val request = ReimburseListByDateRequest(startDate = startDate, endDate = endDate, employeeId = getEmployeeId())
+                    viewModel.getAllHistorySuccessByDate(request)
+                }
+            }
+            btnFilterCategoryDate.setOnClickListener {
+                val startDate = etDateStart.editableText.toString()
+                val endDate = etDateEndDate.editableText.toString()
+                if (startDate.isBlank() && endDate.isBlank()) {
+                    Toast.makeText(requireContext(), "Dua Field Belum Anda Pilih", Toast.LENGTH_SHORT).show()
+                } else if (endDate.isBlank()) {
+                    Toast.makeText(requireContext(), "Anda Belum memasukkan data untuk tanggal akhir", Toast.LENGTH_SHORT).show()
+                } else if (startDate.isBlank()) {
+                    Toast.makeText(requireContext(), "Anda belum memasukkan data untuk tanggal awal", Toast.LENGTH_SHORT).show()
+                } else {
+                    val request = ReimburseListByDateCategory(startDate = startDate, endDate = endDate, employeeId = getEmployeeId(), categoryId = categoryId)
+                    viewModel.getAllHistorySuccessByDateCategory(request)
+                }
             }
         }
         binding.rvSuccessHistory.apply {
@@ -83,12 +122,12 @@ class HistorySuccessFragment : Fragment() {
     }
 
     private fun initViewModel() {
-        viewModel = ViewModelProvider(this).get(HistorySuccessViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(HistoryViewModel::class.java)
     }
 
     private fun subscribe() {
         viewModel.reimburseListLiveData.observe(this, {
-            when(it.status) {
+            when (it.status) {
                 ResourceStatus.LOADING -> loadingDialog.show()
                 ResourceStatus.FAILURE -> {
                     loadingDialog.hide()
@@ -123,7 +162,7 @@ class HistorySuccessFragment : Fragment() {
         })
     }
 
-    private fun getEmployeeId() : String? {
+    private fun getEmployeeId(): String? {
         return sharedPreferences.getString(AppConstant.APP_ID_EMPLOYEE, "ID Employee")
     }
 
@@ -133,23 +172,35 @@ class HistorySuccessFragment : Fragment() {
             spinnerFilter.adapter = adapterFilter
             spinnerFilter.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
                 override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                    tvTitleFilterBy.text = HistoryConstant.arrayFilter[position]
+                    tvNotAvalaible.text = "Silahkan Filter Untuk Melihat Data"
+                    tvNotAvalaible.visibility = View.VISIBLE
+                    rvSuccessHistory.visibility = View.GONE
                     when (position) {
                         0 -> {
-                            linearLayoutVerticalFilterCategory.visibility = View.GONE
-                            linearLayoutVerticalFilterDate.visibility = View.GONE
-                            tvNotAvalaible.text = "Silahkan Pilih Filter Untuk Melihat Data"
-                            tvNotAvalaible.visibility = View.VISIBLE
-                            binding.rvSuccessHistory.visibility = View.GONE
+                            linearLayoutVerticalFilterCategory.visibility = View.VISIBLE
+                            linearLayoutVerticalFilterDate.visibility = View.VISIBLE
+                            tvTitleFilterCategory.visibility = View.GONE
+                            tvTitleFilterDate.visibility = View.GONE
+                            btnFilterCategory.visibility = View.GONE
+                            btnFilterDate.visibility = View.GONE
                         }
                         1 -> {
                             linearLayoutVerticalFilterDate.visibility = View.VISIBLE
                             linearLayoutVerticalFilterCategory.visibility = View.GONE
+                            tvTitleFilterCategory.visibility = View.GONE
+                            tvTitleFilterDate.visibility = View.VISIBLE
+                            btnFilterCategory.visibility = View.GONE
+                            btnFilterCategoryDate.visibility = View.GONE
+                            btnFilterDate.visibility = View.VISIBLE
                         }
                         2 -> {
                             linearLayoutVerticalFilterCategory.visibility = View.VISIBLE
                             linearLayoutVerticalFilterDate.visibility = View.GONE
-
+                            tvTitleFilterCategory.visibility = View.VISIBLE
+                            tvTitleFilterDate.visibility = View.GONE
+                            btnFilterCategory.visibility = View.VISIBLE
+                            btnFilterDate.visibility = View.GONE
+                            btnFilterCategoryDate.visibility = View.GONE
                         }
                     }
                 }
@@ -167,7 +218,6 @@ class HistorySuccessFragment : Fragment() {
             spinnerKategori.adapter = adapterCategory
             spinnerKategori.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
                 override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                    binding.tvSortingKategori.text = HistoryConstant.arrayCategory[position]
                     var positionCategory = position + 1
                     categoryId = positionCategory.toString()
                 }
@@ -178,7 +228,6 @@ class HistorySuccessFragment : Fragment() {
             }
         }
     }
-
 
 
     companion object {

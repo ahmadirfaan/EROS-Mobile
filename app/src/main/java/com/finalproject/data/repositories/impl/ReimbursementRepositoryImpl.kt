@@ -2,6 +2,8 @@ package com.finalproject.data.repositories.impl
 
 import com.finalproject.data.api.RegisterLoginApi
 import com.finalproject.data.api.ReimburseApi
+import com.finalproject.data.models.reimburse.ReimburseListByDateCategory
+import com.finalproject.data.models.reimburse.ReimburseListByDateRequest
 import com.finalproject.data.models.reimburse.ReimbursementList
 import com.finalproject.data.models.reimburse.ReimbursementListRequest
 import com.finalproject.data.repositories.registeraccount.RegisterLoginAccountRepository
@@ -14,5 +16,14 @@ class ReimbursementRepositoryImpl @Inject constructor(
 
     override suspend fun getAllReimburse(request: ReimbursementListRequest): Response<ReimbursementList> {
         return reimburseApi.getAllReimburse(request)
+    }
+
+    override suspend fun getAllReimburseByDate(request: ReimburseListByDateRequest): Response<ReimbursementList> {
+        return reimburseApi.getAllReimburseByDate(request)
+
+    }
+
+    override suspend fun getAllReimburseByDateAndCategory(request: ReimburseListByDateCategory): Response<ReimbursementList> {
+        return reimburseApi.getAllReimburseByDateAndCategory(request)
     }
 }
