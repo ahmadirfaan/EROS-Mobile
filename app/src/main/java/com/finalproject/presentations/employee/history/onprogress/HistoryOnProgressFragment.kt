@@ -140,7 +140,7 @@ class HistoryOnProgressFragment : Fragment() {
                     binding.apply {
                         linearLayoutDataNotFound.visibility = View.VISIBLE
                         linearLayoutDataChooseFilter.visibility = View.GONE
-                        rvOnProgressHistory.visibility = View.GONE
+                        linearLayoutRvProgress.visibility = View.GONE
                     }
                 }
                 ResourceStatus.SUCCESS -> {
@@ -148,7 +148,7 @@ class HistoryOnProgressFragment : Fragment() {
                     binding.apply {
                         linearLayoutDataNotFound.visibility = View.GONE
                         linearLayoutDataChooseFilter.visibility = View.GONE
-                        rvOnProgressHistory.visibility = View.VISIBLE
+                        linearLayoutRvProgress.visibility = View.VISIBLE
                     }
                     val listHistory = it.data as List<ReimbursementResponse>
                     historyViewAdapter.setHistoryList(listHistory)
@@ -180,7 +180,7 @@ class HistoryOnProgressFragment : Fragment() {
                 override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
 //                    tvTitleFilterBy.text = HistoryConstant.arrayFilter[position]
                     linearLayoutDataChooseFilter.visibility = View.VISIBLE
-                    rvOnProgressHistory.visibility = View.GONE
+                    linearLayoutRvProgress.visibility = View.GONE
                     when (position) {
                         0 -> {
                             linearLayoutVerticalFilterCategory.visibility = View.VISIBLE

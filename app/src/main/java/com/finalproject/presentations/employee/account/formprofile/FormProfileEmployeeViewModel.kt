@@ -53,22 +53,28 @@ class FormProfileEmployeeViewModel @Inject constructor(
 
     fun fillEditFormProfileForFirstTime(idEmployee : String, request : FormAccountRequest) {
         CoroutineScope(Dispatchers.Main).launch {
-            _inputValidation.postValue(ResourceState.loading())
-            val response = registerLoginAccountRepo.editFormEmployeeProfile(idEmployee = idEmployee, request = request)
-            val responseBody = response.body()
-            Log.d("Response Code", "Response Code : ${response.code()}")
-            if(response.isSuccessful) {
-                Log.d("Response Code", "Response Body Code : ${responseBody?.code}")
-                Log.d("Response Code", "Response Body MEssagea : ${responseBody?.message}")
-                if(responseBody?.code?.equals(200) == true) {
-                    _formLiveData.postValue(ResourceState.success(responseBody))
+            try {
+                _inputValidation.postValue(ResourceState.loading())
+                val response = registerLoginAccountRepo.editFormEmployeeProfile(idEmployee = idEmployee, request = request)
+                val responseBody = response.body()
+                Log.d("Response Code", "Response Code : ${response.code()}")
+                if(response.isSuccessful) {
+                    Log.d("Response Code", "Response Body Code : ${responseBody?.code}")
+                    Log.d("Response Code", "Response Body MEssagea : ${responseBody?.message}")
+                    if(responseBody?.code?.equals(200) == true) {
+                        _formLiveData.postValue(ResourceState.success(responseBody))
+                    } else {
+                        Log.d("MASUK EDIT", "MASUKKK DONGG PLISSS")
+                        _formLiveData.postValue(ResourceState.failured(responseBody?.message.toString()))
+                    }
                 } else {
-                    Log.d("MASUK EDIT", "MASUKKK DONGG PLISSS")
-                    _formLiveData.postValue(ResourceState.failured(responseBody?.message.toString()))
+                    _formLiveData.postValue(ResourceState.failured(response.message()))
                 }
-            } else {
-                _formLiveData.postValue(ResourceState.failured(response.message()))
+            } catch (e : Exception) {
+                e.printStackTrace()
+                _inputValidation.postValue(ResourceState.failured("Mohon Maaf Aplikasi Sedang Bermasalah :D"))
             }
+
         }
     }
 }

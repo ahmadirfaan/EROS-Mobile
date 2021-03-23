@@ -61,6 +61,11 @@ class HistorySuccessFragment : Fragment() {
         return binding.root
     }
 
+    override fun onPause() {
+        super.onPause()
+        loadingDialog.cancel()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         onSpinnerFilterBy()
@@ -142,7 +147,7 @@ class HistorySuccessFragment : Fragment() {
                     binding.apply {
                         linearLayoutDataNotFound.visibility = View.VISIBLE
                         linearLayoutDataChooseFilter.visibility = View.GONE
-                        rvSuccessHistory.visibility = View.GONE
+                        linearLayoutRvSuccess.visibility = View.GONE
                     }
                 }
                 ResourceStatus.SUCCESS -> {
@@ -150,7 +155,7 @@ class HistorySuccessFragment : Fragment() {
                     binding.apply {
                         linearLayoutDataNotFound.visibility = View.GONE
                         linearLayoutDataChooseFilter.visibility = View.GONE
-                        rvSuccessHistory.visibility = View.VISIBLE
+                        linearLayoutRvSuccess.visibility = View.VISIBLE
                     }
                     val listHistory = it.data as List<ReimbursementResponse>
                     historyViewAdapter.setHistoryList(listHistory)
@@ -181,7 +186,7 @@ class HistorySuccessFragment : Fragment() {
             spinnerFilter.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
                 override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                     linearLayoutDataChooseFilter.visibility = View.VISIBLE
-                    rvSuccessHistory.visibility = View.GONE
+                    linearLayoutRvSuccess.visibility = View.GONE
                     when (position) {
                         0 -> {
                             linearLayoutVerticalFilterCategory.visibility = View.VISIBLE

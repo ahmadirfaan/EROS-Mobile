@@ -323,8 +323,9 @@
                 android:id="@+id/linear_layout_data_choose_filter"
                 android:layout_width="match_parent"
                 android:layout_height="500dp"
+                android:layout_marginTop="20dp"
                 android:background="@color/white"
-                android:visibility="visible"
+                android:visibility="gone"
                 android:orientation="vertical">
 
                 <ImageView
@@ -351,6 +352,7 @@
                 android:id="@+id/linear_layout_data_not_found"
                 android:layout_width="match_parent"
                 android:layout_height="500dp"
+                android:layout_marginTop="20dp"
                 android:background="@color/white"
                 android:visibility="gone"
                 android:orientation="vertical">
@@ -375,17 +377,38 @@
             </LinearLayout>
 
 
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_on_progress_history"
+            <LinearLayout
+                android:id="@+id/linear_layout_rv_progress"
                 android:layout_width="match_parent"
-                android:layout_height="500dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:background="@color/white"
-                app:layout_constraintBottom_toTopOf="@id/btn_prev_page"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btn_filter_date" />
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="List Data Reimbursement"
+                    android:textSize="25sp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/lato_black"
+                    android:textColor="@color/black"
+                    android:layout_gravity="center"
+                    />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_on_progress_history"
+                    android:layout_width="match_parent"
+                    android:layout_height="500dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@color/white"
+                    app:layout_constraintBottom_toTopOf="@id/btn_prev_page"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/btn_filter_date" />
+
+            </LinearLayout>
+
+
 
 
             <LinearLayout

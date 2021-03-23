@@ -70,15 +70,6 @@ class HomeEmployeeFragment : Fragment() {
         isBackPressed = false
     }
 
-    private fun checkForPermission(permission: String, requestCode: Int) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            when {
-                ContextCompat.checkSelfPermission(requireContext(), permission) == PackageManager.PERMISSION_GRANTED -> {
-
-                }
-            }
-        }
-    }
 
     companion object {
         @JvmStatic

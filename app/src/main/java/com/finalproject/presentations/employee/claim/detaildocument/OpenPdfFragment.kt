@@ -35,7 +35,7 @@ class OpenPdfFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         if(uriFile != null) {
             binding.pdfView.apply {
-                fromUri(uriFile?.toUri()).enableSwipe(true).load()
+                fromUri(uriFile?.toUri()).enableSwipe(true).swipeHorizontal(true).load()
             }
         } else {
             binding.warningFile.visibility = View.VISIBLE

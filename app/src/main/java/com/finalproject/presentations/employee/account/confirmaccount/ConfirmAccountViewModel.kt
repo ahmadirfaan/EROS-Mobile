@@ -28,17 +28,24 @@ class ConfirmAccountViewModel @Inject constructor(
 
     fun sendBundleDataForEditAccount(idLogin : String) {
         CoroutineScope(Dispatchers.Default).launch {
-            val response = registerLoginAccountRepo.findEmployeeByIdLogin(idLogin)
-            val responseBody = response.body()
-            _sendBundleData.postValue(ResourceState.loading())
-            if(response.isSuccessful) {
-                val employeeResponse = responseBody?.data
-                employeeResponse?.let {
-                    _sendBundleData.postValue(ResourceState.success(it))
+            try {
+                val response = registerLoginAccountRepo.findEmployeeByIdLogin(idLogin)
+                val responseBody = response.body()
+                _sendBundleData.postValue(ResourceState.loading())
+                if(response.isSuccessful) {
+                    val employeeResponse = responseBody?.data
+                    employeeResponse?.let {
+                        _sendBundleData.postValue(ResourceState.success(it))
+                    }
+                } else {
+                    _sendBundleData.postValue(ResourceState.failured(responseBody?.message as String?))
                 }
-            } else {
-                _sendBundleData.postValue(ResourceState.failured(responseBody?.message as String?))
             }
+            catch (e : Exception) {
+                e.printStackTrace()
+                _sendBundleData.postValue(ResourceState.failured("Mohon Maaf Aplikasi Sedang Bermasalah :D"))
+            }
+
         }
     }
 }

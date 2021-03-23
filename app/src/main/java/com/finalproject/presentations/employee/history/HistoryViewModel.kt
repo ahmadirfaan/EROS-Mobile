@@ -62,6 +62,7 @@ constructor(
                 }
             } catch (e: Exception) {
                 e.printStackTrace()
+                _reimburseListLiveData.postValue(ResourceState.failured("Mohon Maaf Aplikasi Sedang Bermasalah :D"))
             }
 
         }
@@ -92,6 +93,7 @@ constructor(
                 }
             } catch (e: Exception) {
                 e.printStackTrace()
+                _reimburseListLiveData.postValue(ResourceState.failured("Mohon Maaf Aplikasi Sedang Bermasalah :D"))
             }
 
         }
@@ -122,6 +124,7 @@ constructor(
                 }
             } catch (e: Exception) {
                 e.printStackTrace()
+                _reimburseListLiveData.postValue(ResourceState.failured("Mohon Maaf Aplikasi Sedang Bermasalah :D"))
             }
 
         }
@@ -152,6 +155,7 @@ constructor(
                 }
             } catch (e: Exception) {
                 e.printStackTrace()
+                _reimburseListLiveData.postValue(ResourceState.failured("Mohon Maaf Aplikasi Sedang Bermasalah :D"))
             }
 
         }
@@ -182,6 +186,7 @@ constructor(
                 }
             } catch (e: Exception) {
                 e.printStackTrace()
+                _reimburseListLiveData.postValue(ResourceState.failured("Mohon Maaf Aplikasi Sedang Bermasalah :D"))
             }
 
         }
@@ -212,6 +217,7 @@ constructor(
                 }
             } catch (e: Exception) {
                 e.printStackTrace()
+                _reimburseListLiveData.postValue(ResourceState.failured("Mohon Maaf Aplikasi Sedang Bermasalah :D"))
             }
 
         }
@@ -224,6 +230,7 @@ constructor(
                 _onDetailReimburseLiveData.postValue(ResourceState.success(reimburse))
             } catch (e: Exception) {
                 e.printStackTrace()
+                _onDetailReimburseLiveData.postValue(ResourceState.failured("Mohon Maaf Aplikasi Sedang Bermasalah :D"))
             }
         }
     }

@@ -42,6 +42,7 @@ class ChangePasswordRequestViewModel @Inject constructor(
                 }
             } catch (e : Exception) {
                 e.printStackTrace()
+                _changePasswordLiveData.postValue(ResourceState.failured("Mohon Maaf Aplikasi Sedang Bermasalah :D"))
             }
         }
     }

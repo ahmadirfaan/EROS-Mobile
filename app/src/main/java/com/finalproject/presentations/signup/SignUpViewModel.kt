@@ -58,6 +58,7 @@ class SignUpViewModel @Inject constructor(@RegisterLoginAccountRepoQualifier pri
                 }
             } catch (e : Exception) {
                 e.printStackTrace()
+                _inputValidation.postValue(ResourceState.failured("Mohon Maaf Aplikasi Sedang Bermasalah :D"))
             }
 
         }
@@ -80,6 +81,7 @@ class SignUpViewModel @Inject constructor(@RegisterLoginAccountRepoQualifier pri
                 }
             } catch (e : Exception) {
                 e.printStackTrace()
+                _createAccountLiveData.postValue(ResourceState.failured("Mohon Maaf Aplikasi Sedang Bermasalah :D"))
             }
         }
     }

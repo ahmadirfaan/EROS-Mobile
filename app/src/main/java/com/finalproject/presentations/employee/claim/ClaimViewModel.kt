@@ -54,6 +54,7 @@ constructor(
                 }
             } catch (e: Exception) {
                 e.printStackTrace()
+                _addReimbursementLiveData.postValue(ResourceState.failured("Mohon Maaf Aplikasi Sedang Bermasalah :D"))
             }
         }
     }
@@ -75,6 +76,8 @@ constructor(
                 }
             } catch (e: Exception) {
                 e.printStackTrace()
+                _uploadFileLiveData.postValue(ResourceState.failured("Mohon Maaf Aplikasi Sedang Bermasalah :D"))
+
             }
         }
     }

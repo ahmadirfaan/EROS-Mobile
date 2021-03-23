@@ -254,11 +254,23 @@
         <argument
             android:name="Reimbursement"
             app:argType="com.finalproject.data.models.reimburse.ReimbursementResponse" />
+        <action
+            android:id="@+id/action_detailReimbursementFragment_to_webViewPdfFragment"
+            app:destination="@id/webViewPdfFragment" />
     </fragment>
     <fragment
         android:id="@+id/openPdfFragment"
         android:name="com.finalproject.presentations.employee.claim.detaildocument.OpenPdfFragment"
         android:label="fragment_open_pdf"
         tools:layout="@layout/fragment_open_pdf" >
+    </fragment>
+    <fragment
+        android:id="@+id/webViewPdfFragment"
+        android:name="com.finalproject.presentations.employee.claim.detaildocument.WebViewPdfFragment"
+        android:label="fragment_web_view_pdf"
+        tools:layout="@layout/fragment_web_view_pdf" >
+        <argument
+            android:name="StringURLPDF"
+            app:argType="string" />
     </fragment>
 </navigation>

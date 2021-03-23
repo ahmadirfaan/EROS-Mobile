@@ -33,30 +33,42 @@ class AccountFragmentViewModel @Inject constructor(
 
     fun fillProfileAccount(idLogin : String) {
         CoroutineScope(Dispatchers.Main).launch {
-            _setProfile.postValue(ResourceState.loading())
-            val response = registerLoginAccountRepo.findEmployeeByIdLogin(idLogin)
-            if(response.isSuccessful) {
-                val responseBody = response.body()
-                _setProfile.postValue(ResourceState.success(responseBody?.data))
-            } else {
-                _setProfile.postValue(ResourceState.failured(response.message()))
+            try {
+                _setProfile.postValue(ResourceState.loading())
+                val response = registerLoginAccountRepo.findEmployeeByIdLogin(idLogin)
+                if(response.isSuccessful) {
+                    val responseBody = response.body()
+                    _setProfile.postValue(ResourceState.success(responseBody?.data))
+                } else {
+                    _setProfile.postValue(ResourceState.failured(response.message()))
+                }
+            } catch (e : Exception) {
+                e.printStackTrace()
+                _setProfile.postValue(ResourceState.failured("Mohon Maaf Aplikasi Sedang Bermasalah :D"))
+
             }
         }
     }
 
     fun sendBundleDataForEditAccount(idLogin : String) {
         CoroutineScope(Dispatchers.Default).launch {
-            val response = registerLoginAccountRepo.findEmployeeByIdLogin(idLogin)
-            val responseBody = response.body()
-            _sendBundleData.postValue(ResourceState.loading())
-            if(response.isSuccessful) {
-                val employeeResponse = responseBody?.data
-                employeeResponse?.let {
-                    _sendBundleData.postValue(ResourceState.success(it))
+            try {
+                val response = registerLoginAccountRepo.findEmployeeByIdLogin(idLogin)
+                val responseBody = response.body()
+                _sendBundleData.postValue(ResourceState.loading())
+                if(response.isSuccessful) {
+                    val employeeResponse = responseBody?.data
+                    employeeResponse?.let {
+                        _sendBundleData.postValue(ResourceState.success(it))
+                    }
+                } else {
+                    _sendBundleData.postValue(ResourceState.failured(responseBody?.message as String?))
                 }
-            } else {
-                _sendBundleData.postValue(ResourceState.failured(responseBody?.message as String?))
+            } catch (e : Exception) {
+                e.printStackTrace()
+                _sendBundleData.postValue(ResourceState.failured("Mohon Maaf Aplikasi Sedang Bermasalah :D"))
             }
+
         }
     }
 

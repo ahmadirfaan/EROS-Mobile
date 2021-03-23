@@ -318,6 +318,7 @@
                 android:id="@+id/linear_layout_data_choose_filter"
                 android:layout_width="match_parent"
                 android:layout_height="500dp"
+                android:layout_marginTop="20dp"
                 android:background="@color/white"
                 android:visibility="gone"
                 android:orientation="vertical">
@@ -347,6 +348,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="500dp"
                 android:background="@color/white"
+                android:layout_marginTop="20dp"
                 android:visibility="gone"
                 android:orientation="vertical">
 
@@ -369,16 +371,36 @@
 
             </LinearLayout>
 
+        <LinearLayout
+            android:id="@+id/linear_layout_rv_success"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="List Data Reimbursement"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/lato_black"
+                android:textColor="@color/black"
+                android:layout_gravity="center"
+                />
+
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_success_history"
                 android:layout_width="match_parent"
                 android:layout_marginTop="20dp"
                 android:background="@color/white"
-                android:layout_height="500dp"
-                app:layout_constraintBottom_toTopOf="@id/btn_prev_page"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btn_filter_date" />
+                android:layout_height="500dp" />
+
+
+        </LinearLayout>
+
+
 
 
             <LinearLayout

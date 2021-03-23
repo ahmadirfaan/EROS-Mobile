@@ -66,6 +66,7 @@ class LoginViewModel @Inject constructor(
                 }
             } catch (e: Exception) {
                 e.printStackTrace()
+                _inputValidation.postValue(ResourceState.failured("Mohon Maaf Aplikasi Sedang Bermasalah :D"))
             }
 
         }
@@ -92,6 +93,7 @@ class LoginViewModel @Inject constructor(
                 }
             } catch (e: Exception) {
                 e.printStackTrace()
+                _loginAccount.postValue(ResourceState.failured("Mohon Maaf Aplikasi Sedang Bermasalah :D"))
             }
         }
     }
@@ -135,6 +137,7 @@ class LoginViewModel @Inject constructor(
                 }
             } catch (e : Exception) {
                 e.printStackTrace()
+                _checkFormLiveData.postValue(ResourceState.failured("Mohon Maaf Aplikasi Sedang Bermasalah :D"))
             }
         }
     }

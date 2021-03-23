@@ -121,13 +121,14 @@ class MainActivity : AppCompatActivity() {
         fun innerCheck(name: String) {
             if (grantResults.isEmpty() || grantResults[0] != PackageManager.PERMISSION_GRANTED) {
                 Toast.makeText(applicationContext, "$name Tidak Diberikan, maka aplikasi berhenti", Toast.LENGTH_SHORT).show()
-                finish()
+//                finish()
             } else {
                 Toast.makeText(applicationContext, "$name Diberikan", Toast.LENGTH_SHORT).show()
             }
         }
         when (requestCode) {
-            AppConstant.STORAGE_READ_PERMISSION_CODE -> innerCheck("Akses izin ke Penyimpanan")
+            AppConstant.STORAGE_READ_PERMISSION_CODE -> innerCheck("Akses izin membaca ke Penyimpanan")
+            AppConstant.STORAGE_WRITE_PERMISSION_CODE -> innerCheck("Akses izin menulis ke penyimpanan")
 //            AppConstant.STORAGE_WRITE_PERMISSION_CODE -> innerCheck("Write Storage")
 //            REQ_CAMERA -> innerCheck("CAMERA")
         }

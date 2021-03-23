@@ -47,6 +47,7 @@ class ForgotPasswordViewModel @Inject constructor(
                 }
             } catch (e : Exception) {
                 e.printStackTrace()
+                _resetPassword.postValue(ResourceState.failured("Mohon Maaf Aplikasi Sedang Bermasalah :D"))
             }
         }
     }
