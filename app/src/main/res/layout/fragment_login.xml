@@ -43,6 +43,7 @@
         android:layout_marginEnd="15dp"
         app:boxCornerRadiusBottomEnd="15dp"
         app:boxCornerRadiusTopStart="15dp"
+        app:startIconDrawable="@drawable/account_circle_24"
         android:hint="Email"
         android:textColorHint="@android:color/darker_gray"
         android:textSize="20sp"
@@ -53,11 +54,9 @@
         app:layout_constraintTop_toBottomOf="@id/title_login"
         app:layout_constraintVertical_bias="0.128">
 
-        <EditText
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etUsername"
-            android:drawableStart="@drawable/account_circle_24"
             android:backgroundTint="@color/white"
-            android:drawableTint="@color/black"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textEmailAddress"
@@ -72,6 +71,7 @@
         app:boxCornerRadiusBottomStart="15dp"
         app:boxCornerRadiusTopEnd="15dp"
         android:hint="Password"
+        app:startIconDrawable="@drawable/ic_baseline_lock_24"
         android:textColorHint="@android:color/darker_gray"
         android:textSize="20sp"
         android:layout_marginStart="15dp"
@@ -84,9 +84,8 @@
         app:layout_constraintVertical_bias="0.128"
         app:passwordToggleEnabled="true">
 
-        <EditText
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etPassword"
-            android:drawableStart="@drawable/ic_baseline_lock_24"
             android:drawableTint="@color/black"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -117,7 +116,7 @@
         android:id="@+id/btn_sign_up"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/teal_700"
+        android:backgroundTint="@color/purple_500"
         android:text="Create Account"
         app:cornerRadius="15dp"
         app:layout_constraintBottom_toBottomOf="parent"

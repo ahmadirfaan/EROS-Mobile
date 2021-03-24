@@ -22,4 +22,6 @@ interface ReimbursementRepository {
 
     suspend fun updateFileIdReimburse(idReimburse : String, filePdf : File) : Response<UploadResponse>
 
+    suspend fun getAllReimburseByIdEmployee(request: ReimburseListByEmployeeId) : Response<ReimbursementList>
+
 }

@@ -45,4 +45,8 @@ class ReimbursementRepositoryImpl @Inject constructor(
         val fileToUpload = MultipartBody.Part.createFormData("file", filePdf.getName(), requestFile);
         return reimburseApi.updateFileIdReimburse(idReimburse, fileToUpload)
     }
+
+    override suspend fun getAllReimburseByIdEmployee(request: ReimburseListByEmployeeId): Response<ReimbursementList> {
+        return reimburseApi.getAllReimburseByIdEmployee(request)
+    }
 }

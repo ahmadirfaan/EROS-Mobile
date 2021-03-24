@@ -16,10 +16,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.finalproject.R
-import com.finalproject.data.models.reimburse.ReimburseListByDateCategory
-import com.finalproject.data.models.reimburse.ReimburseListByDateRequest
-import com.finalproject.data.models.reimburse.ReimbursementListRequest
-import com.finalproject.data.models.reimburse.ReimbursementResponse
+import com.finalproject.data.models.reimburse.*
 import com.finalproject.databinding.FragmentHistoryOnprogressBinding
 import com.finalproject.presentations.employee.history.HistoryViewAdapter
 import com.finalproject.presentations.employee.history.HistoryViewModel
@@ -179,10 +176,21 @@ class HistoryOnProgressFragment : Fragment() {
             spinnerFilter.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
                 override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
 //                    tvTitleFilterBy.text = HistoryConstant.arrayFilter[position]
-                    linearLayoutDataChooseFilter.visibility = View.VISIBLE
-                    linearLayoutRvProgress.visibility = View.GONE
                     when (position) {
                         0 -> {
+                            linearLayoutVerticalFilterCategory.visibility = View.GONE
+                            linearLayoutVerticalFilterDate.visibility = View.GONE
+                            tvTitleFilterCategory.visibility = View.GONE
+                            tvTitleFilterDate.visibility = View.GONE
+                            btnFilterCategory.visibility = View.GONE
+                            btnFilterDate.visibility = View.GONE
+                            btnFilterCategoryDate.visibility = View.GONE
+                            linearLayoutDataChooseFilter.visibility = View.GONE
+                            val request = ReimburseListByEmployeeId(employeeId = getEmployeeId())
+                            viewModel.getAllReimburseByIdEmployeeOnProgress(request)
+
+                        }
+                        1 -> {
                             linearLayoutVerticalFilterCategory.visibility = View.VISIBLE
                             linearLayoutVerticalFilterDate.visibility = View.VISIBLE
                             tvTitleFilterCategory.visibility = View.VISIBLE
@@ -190,8 +198,10 @@ class HistoryOnProgressFragment : Fragment() {
                             btnFilterCategory.visibility = View.GONE
                             btnFilterDate.visibility = View.GONE
                             btnFilterCategoryDate.visibility = View.VISIBLE
+                            linearLayoutDataChooseFilter.visibility = View.VISIBLE
+                            linearLayoutRvProgress.visibility = View.GONE
                         }
-                        1 -> {
+                        2 -> {
                             linearLayoutVerticalFilterDate.visibility = View.VISIBLE
                             linearLayoutVerticalFilterCategory.visibility = View.GONE
                             tvTitleFilterCategory.visibility = View.GONE
@@ -199,8 +209,10 @@ class HistoryOnProgressFragment : Fragment() {
                             btnFilterCategory.visibility = View.GONE
                             btnFilterCategoryDate.visibility = View.GONE
                             btnFilterDate.visibility = View.VISIBLE
+                            linearLayoutDataChooseFilter.visibility = View.VISIBLE
+                            linearLayoutRvProgress.visibility = View.GONE
                         }
-                        2 -> {
+                        3 -> {
                             linearLayoutVerticalFilterCategory.visibility = View.VISIBLE
                             linearLayoutVerticalFilterDate.visibility = View.GONE
                             tvTitleFilterCategory.visibility = View.VISIBLE
@@ -208,6 +220,9 @@ class HistoryOnProgressFragment : Fragment() {
                             btnFilterCategory.visibility = View.VISIBLE
                             btnFilterDate.visibility = View.GONE
                             btnFilterCategoryDate.visibility = View.GONE
+                            linearLayoutDataChooseFilter.visibility = View.VISIBLE
+                            linearLayoutRvProgress.visibility = View.GONE
+
                         }
                     }
                 }

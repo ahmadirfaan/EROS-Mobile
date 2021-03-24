@@ -1,12 +1,10 @@
 package com.finalproject.presentations.employee.history
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.finalproject.data.models.reimburse.ReimburseListByDateCategory
-import com.finalproject.data.models.reimburse.ReimburseListByDateRequest
-import com.finalproject.data.models.reimburse.ReimbursementListRequest
-import com.finalproject.data.models.reimburse.ReimbursementResponse
+import com.finalproject.data.models.reimburse.*
 import com.finalproject.data.repositories.reimbursement.ReimbursementRepository
 import com.finalproject.di.qualifier.ReimburseRepoQualifier
 import com.finalproject.utils.ResourceState
@@ -14,6 +12,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import retrofit2.http.Body
 import javax.inject.Inject
 
 @HiltViewModel
@@ -220,6 +219,67 @@ constructor(
                 _reimburseListLiveData.postValue(ResourceState.failured("Mohon Maaf Aplikasi Sedang Bermasalah :D"))
             }
 
+        }
+    }
+
+    fun getAllReimburseByIdEmployeeOnProgress(request: ReimburseListByEmployeeId) {
+        CoroutineScope(Dispatchers.Main).launch {
+            try {
+                _reimburseListLiveData.postValue(ResourceState.loading())
+                val response = reimbursementRepository.getAllReimburseByIdEmployee(request = request)
+                val responseBody = response.body()!!
+                if (response.isSuccessful) {
+                    Log.d("Response", responseBody.toString())
+                    if (responseBody?.code != 200) {
+                        _reimburseListLiveData.postValue(ResourceState.failured(responseBody.message))
+                    } else {
+                        val listHistory = responseBody?.data
+                        val onSuccesHistory = listHistory?.filter {
+                            it?.statusSuccess != true
+                        }
+                        if (onSuccesHistory.isNullOrEmpty()) {
+                            _reimburseListLiveData.postValue(ResourceState.failured("Data Tidak ada"))
+                        } else {
+                            _reimburseListLiveData.postValue(ResourceState.success(onSuccesHistory))
+                        }
+                    }
+                } else {
+                    _reimburseListLiveData.postValue(ResourceState.failured(response.message()))
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+                _reimburseListLiveData.postValue(ResourceState.failured("Mohon Maaf Aplikasi Sedang Bermasalah :D"))
+            }
+        }
+    }
+
+    fun getAllReimburseByIdEmployeeOnSuccess(request: ReimburseListByEmployeeId) {
+        CoroutineScope(Dispatchers.Main).launch {
+            try {
+                _reimburseListLiveData.postValue(ResourceState.loading())
+                val response = reimbursementRepository.getAllReimburseByIdEmployee(request = request)
+                val responseBody = response.body()!!
+                if (response.isSuccessful) {
+                    if (responseBody?.code != 200) {
+                        _reimburseListLiveData.postValue(ResourceState.failured(responseBody.message))
+                    } else {
+                        val listHistory = responseBody?.data
+                        val onSuccesHistory = listHistory?.filter {
+                            it?.statusSuccess == true
+                        }
+                        if (onSuccesHistory.isNullOrEmpty()) {
+                            _reimburseListLiveData.postValue(ResourceState.failured("Data Tidak ada"))
+                        } else {
+                            _reimburseListLiveData.postValue(ResourceState.success(onSuccesHistory))
+                        }
+                    }
+                } else {
+                    _reimburseListLiveData.postValue(ResourceState.failured(response.message()))
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+                _reimburseListLiveData.postValue(ResourceState.failured("Mohon Maaf Aplikasi Sedang Bermasalah :D"))
+            }
         }
     }
 

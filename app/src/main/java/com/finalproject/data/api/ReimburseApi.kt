@@ -1,6 +1,7 @@
 package com.finalproject.data.api
 
 import com.finalproject.data.models.reimburse.*
+import com.google.gson.annotations.SerializedName
 import okhttp3.MultipartBody
 import retrofit2.Response
 import retrofit2.http.*
@@ -17,6 +18,9 @@ interface ReimburseApi {
 
     @POST("/reimburse")
     suspend fun addReimbursement(@Body request : AddReimbursementRequest) : Response<AddReimbursementResponse>
+
+    @POST("/reimburse/filter-employee-admin")
+    suspend fun getAllReimburseByIdEmployee(@Body request: ReimburseListByEmployeeId) : Response<ReimbursementList>
 
     @Multipart
     @POST("/bill/{idReimburse}/upload/file")

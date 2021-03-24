@@ -25,6 +25,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="20dp"
+        android:scrollbars="none"
         android:background="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -43,6 +44,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="start"
+                android:layout_marginStart="15dp"
                 android:layout_marginTop="15dp"
                 android:text="Full Name"
                 android:textColor="@color/black"
@@ -50,9 +52,13 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_input_full_name"
-                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:background="@color/white"
                 app:hintEnabled="false"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -62,7 +68,6 @@
                     android:id="@+id/et_full_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@android:color/transparent"
                     android:hint="Insert Full Name"
                     android:inputType="textPersonName"
                     android:singleLine="true"
@@ -75,16 +80,20 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="start"
                 android:layout_marginTop="15dp"
+                android:layout_marginStart="15dp"
                 android:text="Mothers Name"
                 android:textColor="@color/black"
                 android:textSize="15sp" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_mothers_name"
-                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:hintEnabled="false"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:background="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_full_name">
@@ -93,7 +102,6 @@
                     android:id="@+id/et_mothers_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@android:color/transparent"
                     android:hint="Insert Mothers Name"
                     android:inputType="textPersonName"
                     android:singleLine="true"
@@ -107,6 +115,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="start"
+                android:layout_marginStart="15dp"
                 android:layout_marginTop="15dp"
                 android:text="Place Birth"
                 android:textColor="@color/black"
@@ -114,10 +123,13 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_input_place_birth"
-                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:hintEnabled="false"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:background="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_full_name">
@@ -126,7 +138,6 @@
                     android:id="@+id/et_place_birth_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@android:color/transparent"
                     android:hint="Insert Place Birth"
                     android:inputType="textPersonName"
                     android:singleLine="true"
@@ -139,6 +150,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="start"
                 android:layout_marginTop="15dp"
+                android:layout_marginStart="15dp"
                 android:text="Date Birth"
                 android:textColor="@color/black"
                 android:textSize="15sp" />
@@ -152,7 +164,8 @@
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/til_input_date_birth"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_marginStart="10dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
@@ -162,7 +175,6 @@
                         android:id="@+id/et_date_birth_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@android:color/transparent"
                         android:hint="Insert Date Birth"
                         android:inputType="text"
                         android:singleLine="true"
@@ -172,8 +184,8 @@
                 <ImageView
                     android:id="@+id/date_icon"
                     android:layout_width="wrap_content"
-                    android:layout_gravity="center_vertical"
                     android:layout_height="30dp"
+                    android:layout_gravity="center_vertical"
                     android:layout_weight="1"
                     android:src="@drawable/ic_baseline_calendar_today_24" />
 
@@ -186,6 +198,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="start"
                 android:layout_marginTop="15dp"
+                android:layout_marginStart="15dp"
                 android:text="Gender"
                 android:textColor="@color/black"
                 android:textSize="15sp" />
@@ -197,14 +210,33 @@
                 android:layout_marginTop="10dp"
                 android:orientation="horizontal">
 
-                <EditText
-                    android:id="@+id/et_input_gender"
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_input_gender"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_marginStart="10dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="3"
-                    android:hint="GENDER"
-                    android:textAlignment="textStart"
-                    android:textSize="15sp" />
+                    app:hintEnabled="false">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_input_gender"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="GENDER"
+                        android:inputType="text"
+                        android:singleLine="true"
+                        android:textSize="15sp" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+<!--                <EditText-->
+<!--                    android:id="@+id/et_input_gender"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_weight="3"-->
+<!--                    android:hint="GENDER"-->
+<!--                    android:textAlignment="textStart"-->
+<!--                    android:textSize="15sp" />-->
 
                 <Spinner
                     android:id="@+id/spinner_gender"
@@ -219,6 +251,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="start"
+                android:layout_marginStart="15dp"
                 android:layout_marginTop="15dp"
                 android:text="Marital Status"
                 android:textColor="@color/black"
@@ -231,14 +264,33 @@
                 android:layout_marginTop="10dp"
                 android:orientation="horizontal">
 
-                <EditText
-                    android:id="@+id/et_input_marital_status"
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_input_marital_status"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_marginStart="10dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="3"
-                    android:hint="MARITAL STATUS"
-                    android:textAlignment="textStart"
-                    android:textSize="15sp" />
+                    app:hintEnabled="false">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_input_marital_status"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="MARITAL STATUS"
+                        android:inputType="text"
+                        android:singleLine="true"
+                        android:textSize="15sp" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+<!--                <EditText-->
+<!--                    android:id="@+id/et_input_marital_status"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_weight="3"-->
+<!--                    android:hint="MARITAL STATUS"-->
+<!--                    android:textAlignment="textStart"-->
+<!--                    android:textSize="15sp" />-->
 
                 <Spinner
                     android:id="@+id/spinner_marital_status"
@@ -253,17 +305,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="start"
+                android:layout_marginStart="15dp"
                 android:layout_marginTop="15dp"
-                android:text="Name Couple"
+                android:text="Name Pasangan"
                 android:textColor="@color/black"
                 android:textSize="15sp" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_input_name_couple"
-                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:hintEnabled="false"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:background="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_full_name">
@@ -272,7 +328,6 @@
                     android:id="@+id/et_name_couple"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@android:color/transparent"
                     android:hint="Insert Name Couple"
                     android:inputType="textPersonName"
                     android:singleLine="true"
@@ -284,6 +339,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="start"
+                android:layout_marginStart="15dp"
                 android:layout_marginTop="15dp"
                 android:text="Number Children"
                 android:textColor="@color/black"
@@ -291,10 +347,13 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_input_number_children"
-                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:hintEnabled="false"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:background="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_full_name">
@@ -303,7 +362,6 @@
                     android:id="@+id/et_number_children"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@android:color/transparent"
                     android:hint="Insert Number Children"
                     android:inputType="number"
                     android:singleLine="true"
@@ -315,6 +373,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="start"
+                android:layout_marginStart="15dp"
                 android:layout_marginTop="15dp"
                 android:text="Religion"
                 android:textColor="@color/black"
@@ -327,14 +386,33 @@
                 android:layout_marginTop="10dp"
                 android:orientation="horizontal">
 
-                <EditText
-                    android:id="@+id/et_input_religion"
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_input_religion"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_marginStart="10dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="3"
-                    android:hint="RELIGION"
-                    android:textAlignment="textStart"
-                    android:textSize="15sp" />
+                    app:hintEnabled="false">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_input_religion"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="RELIGION"
+                        android:inputType="text"
+                        android:singleLine="true"
+                        android:textSize="15sp" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+<!--                <EditText-->
+<!--                    android:id="@+id/et_input_religion"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_weight="3"-->
+<!--                    android:hint="RELIGION"-->
+<!--                    android:textAlignment="textStart"-->
+<!--                    android:textSize="15sp" />-->
 
                 <Spinner
                     android:id="@+id/spinner_religion"
@@ -349,6 +427,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="start"
+                android:layout_marginStart="15dp"
                 android:layout_marginTop="15dp"
                 android:text="Nomer KTP"
                 android:textColor="@color/black"
@@ -356,10 +435,13 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_input_nomer_ktp"
-                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:hintEnabled="false"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:background="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_full_name">
@@ -368,7 +450,6 @@
                     android:id="@+id/et_nomer_ktp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@android:color/transparent"
                     android:hint="Nomer KTP"
                     android:inputType="number"
                     android:maxLength="16"
@@ -381,6 +462,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="start"
+                android:layout_marginStart="15dp"
                 android:layout_marginTop="15dp"
                 android:text="Alamat Lengkap KTP"
                 android:textColor="@color/black"
@@ -414,6 +496,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="start"
+                android:layout_marginStart="15dp"
                 android:layout_marginTop="15dp"
                 android:text="Postal Code"
                 android:textColor="@color/black"
@@ -421,10 +504,13 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_input_postal_code"
-                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:hintEnabled="false"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:background="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_full_name">
@@ -433,7 +519,6 @@
                     android:id="@+id/et_postal_code"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@android:color/transparent"
                     android:hint="Kode Pos"
                     android:inputType="number"
                     android:maxLength="5"
@@ -446,6 +531,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="start"
+                android:layout_marginStart="15dp"
                 android:layout_marginTop="15dp"
                 android:text="Nomer NPWP"
                 android:textColor="@color/black"
@@ -453,10 +539,13 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_input_nomer_npwp"
-                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:hintEnabled="false"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:background="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_full_name">
@@ -465,7 +554,6 @@
                     android:id="@+id/et_nomer_npwp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@android:color/transparent"
                     android:hint="Nomer NPWP"
                     android:inputType="number"
                     android:singleLine="true"
@@ -477,6 +565,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="start"
+                android:layout_marginStart="15dp"
                 android:layout_marginTop="15dp"
                 android:text="Alamat Lengkap NPWP"
                 android:textColor="@color/black"
@@ -509,6 +598,7 @@
                 android:id="@+id/tv_input_domicile"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
                 android:layout_gravity="start"
                 android:layout_marginTop="15dp"
                 android:text="Alamat Domisili"
@@ -543,6 +633,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="start"
+                android:layout_marginStart="15dp"
                 android:layout_marginTop="15dp"
                 android:text="Blood Type"
                 android:textColor="@color/black"
@@ -555,14 +646,33 @@
                 android:layout_marginTop="10dp"
                 android:orientation="horizontal">
 
-                <EditText
-                    android:id="@+id/et_input_blood_type"
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_input_blood_type"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_marginStart="10dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="3"
-                    android:hint="Blood Type"
-                    android:textAlignment="textStart"
-                    android:textSize="15sp" />
+                    app:hintEnabled="false">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_input_blood_type"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Blood Type"
+                        android:inputType="text"
+                        android:singleLine="true"
+                        android:textSize="15sp" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+<!--                <EditText-->
+<!--                    android:id="@+id/et_input_blood_type"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_weight="3"-->
+<!--                    android:hint="Blood Type"-->
+<!--                    android:textAlignment="textStart"-->
+<!--                    android:textSize="15sp" />-->
 
                 <Spinner
                     android:id="@+id/spinner_blood_type"
@@ -578,16 +688,20 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="start"
                 android:layout_marginTop="15dp"
+                android:layout_marginStart="15dp"
                 android:text="Nama Rekening"
                 android:textColor="@color/black"
                 android:textSize="15sp" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_input_nama_rekening"
-                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:hintEnabled="false"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:background="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_full_name">
@@ -596,7 +710,6 @@
                     android:id="@+id/et_nama_rekening"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@android:color/transparent"
                     android:hint="Nama Rekening Bank"
                     android:inputType="text"
                     android:singleLine="true"
@@ -608,6 +721,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="start"
+                android:layout_marginStart="15dp"
                 android:layout_marginTop="15dp"
                 android:text="Nomer Rekening"
                 android:textColor="@color/black"
@@ -615,10 +729,13 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_input_nomer_rekening"
-                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:hintEnabled="false"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:background="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_full_name">
@@ -627,7 +744,6 @@
                     android:id="@+id/et_nomer_rekening"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@android:color/transparent"
                     android:hint="Nomer Rekening Bank"
                     android:inputType="number"
                     android:singleLine="true"
@@ -639,6 +755,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="start"
+                android:layout_marginStart="15dp"
                 android:layout_marginTop="15dp"
                 android:text="Nomer HP"
                 android:textColor="@color/black"
@@ -646,10 +763,13 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_input_nomer_hp"
-                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:hintEnabled="false"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:background="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_full_name">
@@ -658,7 +778,6 @@
                     android:id="@+id/et_nomer_hp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@android:color/transparent"
                     android:hint="Nomer Hp"
                     android:inputType="number"
                     android:singleLine="true"
@@ -670,6 +789,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="start"
+                android:layout_marginStart="15dp"
                 android:layout_marginTop="15dp"
                 android:text="Nomer Emergency"
                 android:textColor="@color/black"
@@ -677,10 +797,13 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_input_nomer_emergency"
-                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:hintEnabled="false"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:background="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_full_name">
@@ -689,7 +812,6 @@
                     android:id="@+id/et_nomer_emergency"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@android:color/transparent"
                     android:hint="Nomer Emergency"
                     android:inputType="number"
                     android:singleLine="true"
