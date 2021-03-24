@@ -35,6 +35,7 @@ class HistorySuccessFragment : Fragment() {
     private lateinit var historyViewAdapter: HistoryViewAdapter
     private lateinit var loadingDialog: AlertDialog
     private var categoryId = ""
+    private val arrays = IntArray(5)
 
 
     @Inject

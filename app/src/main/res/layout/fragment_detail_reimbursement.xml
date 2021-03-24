@@ -313,6 +313,14 @@
                 android:text="" />
 
             <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_see_file"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:visibility="gone"
+                android:text="Lihat File"/>
+
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/edit_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

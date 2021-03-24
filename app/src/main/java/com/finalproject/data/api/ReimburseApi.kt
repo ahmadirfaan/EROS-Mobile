@@ -21,4 +21,8 @@ interface ReimburseApi {
     @Multipart
     @POST("/bill/{idReimburse}/upload/file")
     suspend fun uploadFileIdReimburse(@Path("idReimburse") idReimburse : String, @Part filePdf : MultipartBody.Part) : Response<UploadResponse>
+
+    @Multipart
+    @PUT("/bill/{idReimburse}/upload/file")
+    suspend fun updateFileIdReimburse(@Path("idReimburse") idReimburse : String, @Part filePdf : MultipartBody.Part) : Response<UploadResponse>
 }

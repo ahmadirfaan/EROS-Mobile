@@ -61,6 +61,7 @@ data class ReimbursementResponse(
 	val claimFee: Int? = null
 ) : Parcelable
 
+@Parcelize
 data class CategoryId(
 
 	@field:SerializedName("id")
@@ -68,4 +69,4 @@ data class CategoryId(
 
 	@field:SerializedName("categoryName")
 	val categoryName: String? = null
-)
+) : Parcelable
