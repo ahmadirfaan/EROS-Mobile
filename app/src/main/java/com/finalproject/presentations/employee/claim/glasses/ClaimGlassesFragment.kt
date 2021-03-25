@@ -5,13 +5,13 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
-import androidx.core.net.toFile
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -33,13 +33,19 @@ class ClaimGlassesFragment : Fragment() {
     private lateinit var binding: FragmentClaimGlassesBinding
     private lateinit var loadingDialog: AlertDialog
     private var dataUri: Uri? = null
-    private var file : File? = null
+    private var file: File? = null
     private var uriString: String? = null
     private lateinit var viewModel: ClaimViewModel
     val resultContract = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
         if (it?.resultCode == Activity.RESULT_OK) {
             dataUri = it.data?.data
+            Log.d("DATA URI", dataUri.toString())
+            Log.d("DATA PATH URI", dataUri?.path.toString())
+//            file = File(dataUri?.path)
             file = File(dataUri?.path?.let { it1 -> uriPath(it1) })
+            Log.d("FILE OBJECT", file.toString())
+            Log.d("FILE PATH", file!!.path)
+            Log.d("FILE EXTENSION", file!!.extension)
             binding.apply {
                 tvNameFile.text = "File : ${file?.name}"
                 uriString = it.data?.data.toString()
@@ -50,6 +56,7 @@ class ClaimGlassesFragment : Fragment() {
             binding.tvNameFile.text = "Tidak Diketahui Filenya"
         }
     }
+
 
     @Inject
     lateinit var sharedPreferences: SharedPreferences
@@ -76,21 +83,36 @@ class ClaimGlassesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+//        validationInputRunTime()
         binding.apply {
             btnUploadFiles.setOnClickListener {
                 callChooseFileFromDevice()
             }
             btnSeeFile.setOnClickListener {
-                val bundle = bundleOf("Document" to uriString)
-                findNavController().navigate(R.id.action_claimGlassesFragment_to_openPdfFragment, bundle)
+                if (file?.extension == "pdf") {
+                    val bundle = bundleOf("Document" to uriString)
+                    findNavController().navigate(R.id.action_claimGlassesFragment_to_openPdfFragment, bundle)
+                } else if (file?.extension == "jpg" || file?.extension == "png") {
+                    val bundle = bundleOf("Image" to uriString)
+                    findNavController().navigate(R.id.action_claimGlassesFragment_to_openPdfFragment, bundle)
+                } else {
+                    Toast.makeText(requireContext(), "Pilih File Yang Benar", Toast.LENGTH_SHORT).show()
+                }
+
             }
             btnSubmitFormGlasses.setOnClickListener {
+                val fileSizeInMegaByte = file?.length()?.div(1024)?.div(1024)
+                Log.d("FiLE SIZE IN MEGABYte", fileSizeInMegaByte!!.toString())
                 val tvNameFile = tvNameFile.text.toString()
                 val inputClaimString = inputClaim.text.toString()
                 if (tvNameFile.isBlank() || tvNameFile.equals("Tidak Diketahui Filenya")) {
                     Toast.makeText(requireContext(), "File Tidak Benar", Toast.LENGTH_SHORT).show()
                 } else if (inputClaimString.isBlank()) {
                     Toast.makeText(requireContext(), "Input Jumlah Claim Tidak Benar", Toast.LENGTH_SHORT).show()
+                } else if (fileSizeInMegaByte > 5) {
+                    Toast.makeText(requireContext(), "Ukuran Maksimal 5MB", Toast.LENGTH_SHORT).show()
+                } else if (file?.extension !== "pdf" || file?.extension !== "jpg" || file?.extension !== "png") {
+                    Toast.makeText(requireContext(), "File Yang Anda Masukkan tidak didukung", Toast.LENGTH_SHORT).show()
                 } else {
                     val requestReimburse = AddReimbursementRequest(
                         endDate = null,
@@ -108,7 +130,7 @@ class ClaimGlassesFragment : Fragment() {
     private fun callChooseFileFromDevice() {
         var intent = Intent(Intent.ACTION_GET_CONTENT)
         intent.addCategory(Intent.CATEGORY_OPENABLE)
-        intent.setType("application/pdf")
+        intent.setType("*/*")
         intent = Intent.createChooser(intent, "Choose from A File")
         resultContract.launch(intent)
     }
@@ -152,14 +174,46 @@ class ClaimGlassesFragment : Fragment() {
         })
     }
 
+//    private fun validationInputRunTime() {
+//        inputTextWatcher = object : TextWatcher {
+//            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+//            }
+//
+//            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+//                var setEditText = binding.inputClaim.text.toString().trim()
+//                if (s.toString() != setEditText) {
+//                    binding.inputClaim.removeTextChangedListener(this)
+//                    val replace = s?.toString()?.replace("[Rp. ]".toRegex(), "")
+//                    if (replace != null) {
+//                        if (replace.isNotEmpty()) {
+//                            setEditText = RupiahUtils.formatRupiah(replace.toDouble())
+//                        } else {
+//                            setEditText = ""
+//                        }
+//                    }
+//                    binding.inputClaim.setText(setEditText)
+//                    binding.inputClaim.setSelection(setEditText.length)
+//                    binding.inputClaim.addTextChangedListener(this)
+//                }
+//            }
+//
+//            override fun afterTextChanged(s: Editable?) {
+//            }
+//
+//        }
+//        binding.inputClaim.addTextChangedListener(inputTextWatcher)
+//    }
+
     private fun getEmployeeId(): String? {
         return sharedPreferences.getString(AppConstant.APP_ID_EMPLOYEE, "ID Employee")
     }
 
-    private fun uriPath(mypath : String) : String {
+    private fun uriPath(mypath: String): String {
         var path = ""
-        if(mypath.contains("document/raw:")){
-            path = mypath.replace("/document/raw:","");
+        if (mypath.contains("document/raw:")) {
+            path = mypath.replace("/document/raw:", "");
+        } else {
+            path = mypath
         }
         return path
     }

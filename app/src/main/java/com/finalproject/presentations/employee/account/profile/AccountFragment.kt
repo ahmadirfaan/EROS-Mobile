@@ -163,7 +163,7 @@ class AccountFragment : Fragment() {
                         tvNumberChildrenAccount.text = employee.spouseName
                     }
                     if(employee.numberOfChildren != null) {
-                        tvNumberChildrenAccount.text = employee.numberOfChildren as String
+                        tvNumberChildrenAccount.text = employee.numberOfChildren.toString()
                     } else {
                         tvNumberChildrenAccount.text = employee.numberOfChildren
                     }

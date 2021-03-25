@@ -54,15 +54,26 @@
                 android:textColor="@color/black"
                 android:textSize="15sp" />
 
-            <EditText
-                android:id="@+id/input_claim"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_input_claim"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:layout_marginTop="15dp"
                 android:layout_marginStart="15dp"
-                android:layout_marginTop="10dp"
                 android:layout_marginEnd="15dp"
-                android:hint="Input Klaim"
-                android:inputType="number" />
+                app:hintEnabled="false">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/input_claim"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Masukkan jumlah yang ingin diklaim"
+                    android:inputType="number"
+                    android:singleLine="true"
+                    android:textSize="15sp" />
+            </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -81,13 +92,33 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="15dp">
 
-                <EditText
-                    android:id="@+id/et_start_date"
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_input_date_start"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:background="@color/white"
                     android:layout_width="wrap_content"
-                    android:layout_weight="2"
-                    android:enabled="false"
                     android:layout_height="wrap_content"
-                    android:hint="Input Tanggal Awal Perjalanan" />
+                    android:layout_weight="2"
+                    app:hintEnabled="false">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_start_date"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="none"
+                        android:clickable="true"
+                        android:focusable="false"
+                        android:hint="Masukkan Tanggal Awal"
+                        android:singleLine="true"
+                        android:textSize="15sp" />
+                </com.google.android.material.textfield.TextInputLayout>
+<!--                <EditText-->
+<!--                    android:id="@+id/et_start_date"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_weight="2"-->
+<!--                    android:enabled="false"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:hint="Input Tanggal Awal Perjalanan" />-->
 
                 <ImageView
                     android:id="@+id/date_icon_start"
@@ -115,13 +146,34 @@
             android:layout_marginTop="10dp"
             android:layout_marginEnd="15dp">
 
-            <EditText
-                android:id="@+id/et_end_date"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_input_date_end"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:background="@color/white"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:enabled="false"
                 android:layout_weight="2"
-                android:hint="Input Tanggal Akhir Perjalanan"/>
+                app:hintEnabled="false">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_end_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Masukkan Tanggal Akhir"
+                    android:inputType="none"
+                    android:clickable="true"
+                    android:focusable="false"
+                    android:singleLine="true"
+                    android:textSize="15sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+<!--            <EditText-->
+<!--                android:id="@+id/et_end_date"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:enabled="false"-->
+<!--                android:layout_weight="2"-->
+<!--                android:hint="Input Tanggal Akhir Perjalanan"/>-->
 
             <ImageView
                 android:id="@+id/date_icon_end"

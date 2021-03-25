@@ -6,6 +6,7 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
+import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
@@ -24,12 +25,11 @@ import androidx.navigation.fragment.findNavController
 import com.finalproject.R
 import com.finalproject.data.models.reimburse.ReimbursementResponse
 import com.finalproject.databinding.FragmentDetailReimbursementBinding
-import com.finalproject.utils.AppConstant
-import com.finalproject.utils.HistoryConstant
-import com.finalproject.utils.LoadingDialog
-import com.finalproject.utils.ResourceStatus
+import com.finalproject.utils.*
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.File
+import java.text.NumberFormat
+import java.util.*
 
 @AndroidEntryPoint
 class DetailReimbursementFragment : Fragment() {
@@ -38,6 +38,7 @@ class DetailReimbursementFragment : Fragment() {
     private var dataUri: Uri? = null
     private var file : File? = null
     private var uriString: String? = null
+
 
     private lateinit var binding: FragmentDetailReimbursementBinding
     private var reimburseDetail: ReimbursementResponse? = null
@@ -154,9 +155,9 @@ class DetailReimbursementFragment : Fragment() {
         val dateDisbursement = reimburseDetail?.disbursementDate?.substring(0, 10)
         val startDate = reimburseDetail?.startDate?.substring(0, 10)
         val endDate = reimburseDetail?.endDate?.substring(0, 10)
-        val inputClaim = reimburseDetail?.claimFee
+        val claimFee = reimburseDetail?.claimFee?.toDouble()?.let { RupiahUtils.formatRupiah(it) }
         binding.apply {
-            tvResultInputClaim.text = "Rp $inputClaim"
+            tvResultInputClaim.text = "${claimFee}"
             tvResultClaimDate.text = dateClaim
             tvResultDisbursementDate.text = dateDisbursement
             tvResultStartDate.text = startDate
@@ -165,7 +166,7 @@ class DetailReimbursementFragment : Fragment() {
     }
 
     private fun setStatus() {
-        if (reimburseDetail?.statusSuccess != true) {
+        if (reimburseDetail?.statusSuccess != true && reimburseDetail?.statusReject != true) {
             binding.apply {
                 linearLayoutDisbursementDate.visibility = View.GONE
                 tvResultClaimFee.visibility = View.GONE
@@ -174,9 +175,10 @@ class DetailReimbursementFragment : Fragment() {
             }
         } else if (reimburseDetail?.statusSuccess == true) {
             binding.apply {
+                val borneCost = reimburseDetail?.borneCost?.toDouble()?.let { RupiahUtils.formatRupiah(it) }
                 tvTitleDetailReimbursement.text = "Detail Reimbursement Diterima"
                 tvResultStatusOnReimbursement.text = "Selesai"
-                tvResultClaimFee.text = "Uang Cair : Rp ${reimburseDetail?.borneCost}"
+                tvResultClaimFee.text = "Uang Cair : ${borneCost}"
                 btnDownloadFile.text = "Download Bukti Transfer"
                 editDataGone()
 
@@ -184,7 +186,12 @@ class DetailReimbursementFragment : Fragment() {
         } else if (reimburseDetail?.statusReject == true) {
             binding.apply {
                 tvTitleDetailReimbursement.text = "Detail Reimbursement Ditolak"
+                tvTitleDetailReimbursement.setTextColor(Color.RED)
                 tvResultStatusOnReimbursement.text = "Rejected"
+                linearLayoutStatusOnFinance.visibility = View.GONE
+                linearLayoutStatusOnHc.visibility = View.GONE
+                linearLayoutDisbursementDate.visibility = View.GONE
+                btnDownloadFile.visibility = View.GONE
                 tvResultClaimFee.visibility = View.GONE
                 editDataGone()
             }
@@ -253,14 +260,15 @@ class DetailReimbursementFragment : Fragment() {
     private fun downloadFilePdfDataEmployee() {
         val urlDownloadPdf = "${AppConstant.BASE_URL}/bill/files/employee-${reimburseDetail?.id}.pdf"
         Log.d("URL DOWNLOAD", urlDownloadPdf)
+        val fileName = "Reimbursement Tanggal $dateClaim.pdf"
         var request = DownloadManager.Request(Uri.parse(urlDownloadPdf))
             .setAllowedNetworkTypes(DownloadManager.Request.NETWORK_MOBILE or DownloadManager.Request.NETWORK_WIFI)
-            .setTitle("Reimbursement Tanggal $dateClaim.pdf")
+            .setTitle(fileName)
             .setDescription("File Reimbursement Sedang Diunduh")
             .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
             .setAllowedOverMetered(true)
         request.allowScanningByMediaScanner()
-        request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, "${System.currentTimeMillis()}")
+        request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, fileName)
         request.setMimeType("application/pdf")
         var dm = requireActivity().getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
         myDownloadId = dm.enqueue(request)
@@ -269,14 +277,15 @@ class DetailReimbursementFragment : Fragment() {
 
     private fun downloadFilePdfBuktiTransfer() {
         val urlDownloadPdf = "${AppConstant.BASE_URL}/bill/files/admin-${reimburseDetail?.id}.pdf"
+        val fileName = "Bukti Transfer Tanggal $dateClaim.pdf"
         var request = DownloadManager.Request(Uri.parse(urlDownloadPdf))
             .setAllowedNetworkTypes(DownloadManager.Request.NETWORK_MOBILE or DownloadManager.Request.NETWORK_WIFI)
-            .setTitle("Bukti Transfer Tanggal $dateClaim.pdf")
+            .setTitle(fileName)
             .setDescription("File Reimbursement Sedang Diunduh")
             .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
             .setAllowedOverMetered(true)
         request.allowScanningByMediaScanner()
-        request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, "${System.currentTimeMillis()}")
+        request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, fileName)
         request.setMimeType("application/pdf")
         var dm = requireActivity().getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
         myDownloadId = dm.enqueue(request)
@@ -295,6 +304,8 @@ class DetailReimbursementFragment : Fragment() {
         var path = ""
         if(mypath.contains("document/raw:")){
             path = mypath.replace("/document/raw:","");
+        } else {
+            path = mypath
         }
         return path
     }

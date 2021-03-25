@@ -54,15 +54,36 @@
                 android:textColor="@color/black"
                 android:textSize="15sp" />
 
-            <EditText
-                android:id="@+id/input_claim"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_input_claim"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_weight="2"
+                android:layout_marginTop="15dp"
                 android:layout_marginStart="15dp"
                 android:layout_marginEnd="15dp"
-                android:inputType="number"
-                android:hint="Input Klaim"/>
+                app:hintEnabled="false">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/input_claim"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Masukkan jumlah yang ingin diklaim"
+                    android:inputType="number"
+                    android:singleLine="true"
+                    android:textSize="15sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+<!--            <EditText-->
+<!--                android:id="@+id/input_claim"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="10dp"-->
+<!--                android:layout_marginStart="15dp"-->
+<!--                android:layout_marginEnd="15dp"-->
+<!--                android:inputType="number"-->
+<!--                android:hint="Input Klaim"/>-->
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_upload_files"

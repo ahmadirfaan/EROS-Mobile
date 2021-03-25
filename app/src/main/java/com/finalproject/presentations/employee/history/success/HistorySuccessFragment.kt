@@ -194,7 +194,7 @@ class HistorySuccessFragment : Fragment() {
                             btnFilterCategoryDate.visibility = View.GONE
                             linearLayoutDataChooseFilter.visibility = View.GONE
                             val request = ReimburseListByEmployeeId(employeeId = getEmployeeId())
-                            viewModel.getAllReimburseByIdEmployeeOnProgress(request)
+                            viewModel.getAllReimburseByIdEmployeeOnSuccess(request)
                         }
                         1 -> {
                             linearLayoutVerticalFilterCategory.visibility = View.VISIBLE

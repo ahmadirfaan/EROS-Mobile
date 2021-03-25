@@ -126,7 +126,7 @@
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/til_input_date_birth"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="2"
@@ -136,7 +136,6 @@
                             android:id="@+id/et_date_start"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:background="@android:color/transparent"
                             android:hint="Insert Date Start"
                             android:inputType="text"
                             android:singleLine="true"
@@ -162,7 +161,7 @@
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/til_input_date_end"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="2"
@@ -172,7 +171,6 @@
                             android:id="@+id/et_date_end_date"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:background="@android:color/transparent"
                             android:hint="Insert Date End"
                             android:inputType="text"
                             android:singleLine="true"

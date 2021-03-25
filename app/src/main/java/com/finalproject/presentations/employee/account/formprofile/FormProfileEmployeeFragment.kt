@@ -97,7 +97,11 @@ class FormProfileEmployeeFragment : Fragment() {
             setTextIfDataNotNull()
         }
         binding.apply {
-            etDateBirthName.isEnabled = false
+            etDateBirthName.setOnClickListener {
+                DateUtils.show(requireContext()) {
+                    etDateBirthName.setText(it)
+                }
+            }
             dateIcon.setOnClickListener {
                 DateUtils.show(requireContext()) {
                     etDateBirthName.setText(it)
@@ -191,6 +195,8 @@ class FormProfileEmployeeFragment : Fragment() {
     }
 
     private fun setTextIfDataNotNull() {
+        val lengthNomerHp = dataUpdate?.phoneNumber?.length
+        val lengthNomerEmergency = dataUpdate?.emergencyNumber?.length
         binding.apply {
             etFullName.setText(dataUpdate?.fullname)
             etMothersName.setText(dataUpdate?.biologicalMothersName)
@@ -206,8 +212,8 @@ class FormProfileEmployeeFragment : Fragment() {
             etDomicile.setText(dataUpdate?.residenceAddress)
             etNamaRekening.setText(dataUpdate?.accountName)
             etNomerRekening.setText(dataUpdate?.accountNumber)
-            etNomerHp.setText(dataUpdate?.phoneNumber)
-            etNomerEmergency.setText(dataUpdate?.emergencyNumber)
+            etNomerHp.setText(lengthNomerHp?.let { dataUpdate?.phoneNumber?.substring(3, it) })
+            etNomerEmergency.setText(lengthNomerEmergency?.let { dataUpdate?.emergencyNumber?.substring(3, it) })
             tvTitleForm.setText("Change Data Employee")
             btnSubmitForm.text = "Edit Data"
             //Logic For Enum
@@ -258,8 +264,8 @@ class FormProfileEmployeeFragment : Fragment() {
             bloodType = etInputBloodType.editableText.toString()
             accountName = etNamaRekening.editableText.toString()
             accountNumber = etNomerRekening.editableText.toString()
-            numberPhone = etNomerHp.editableText.toString()
-            numberEmergency = etNomerEmergency.editableText.toString()
+            numberPhone = "+62"+etNomerHp.editableText.toString()
+            numberEmergency = "+62"+etNomerEmergency.editableText.toString()
         }
     }
 

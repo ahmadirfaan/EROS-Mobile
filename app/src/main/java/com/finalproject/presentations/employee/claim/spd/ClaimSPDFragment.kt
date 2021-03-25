@@ -67,9 +67,19 @@ class ClaimSPDFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding.apply {
+            etStartDate.setOnClickListener{
+                DateUtils.show(requireContext()) {
+                    etStartDate.setText(it)
+                }
+            }
             dateIconStart.setOnClickListener {
                 DateUtils.show(requireContext()) {
                     etStartDate.setText(it)
+                }
+            }
+            etEndDate.setOnClickListener{
+                DateUtils.show(requireContext()) {
+                    etEndDate.setText(it)
                 }
             }
             dateIconEnd.setOnClickListener {

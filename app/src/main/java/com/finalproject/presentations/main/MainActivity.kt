@@ -36,8 +36,7 @@ class MainActivity : AppCompatActivity() {
         navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment_container) as NavHostFragment
         navController = navHostFragment.findNavController()
         setupNav()
-        checkForPermission(Manifest.permission.READ_EXTERNAL_STORAGE, "Membaca Penyimpanan", AppConstant.STORAGE_READ_PERMISSION_CODE)
-        checkForPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE, "Menulis Penyimpanan", AppConstant.STORAGE_WRITE_PERMISSION_CODE)
+        checkPermissionFunction()
     }
 
     private fun setupNav() {
@@ -107,9 +106,9 @@ class MainActivity : AppCompatActivity() {
     private fun checkForPermission(permission: String, name: String, requestCode: Int) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             when {
-//                ContextCompat.checkSelfPermission(applicationContext, permission) == PackageManager.PERMISSION_GRANTED -> {
-//                    Toast.makeText(applicationContext, "$name permission granted", Toast.LENGTH_SHORT).show()
-//                }
+                ContextCompat.checkSelfPermission(applicationContext, permission) == PackageManager.PERMISSION_GRANTED -> {
+                    Toast.makeText(applicationContext, "$name permission granted", Toast.LENGTH_SHORT).show()
+                }
                 shouldShowRequestPermissionRationale(permission) -> showDialog(permission, name, requestCode)
                 else -> ActivityCompat.requestPermissions(this, arrayOf(permission), requestCode)
             }
@@ -129,9 +128,16 @@ class MainActivity : AppCompatActivity() {
         when (requestCode) {
             AppConstant.STORAGE_READ_PERMISSION_CODE -> innerCheck("Akses izin membaca ke Penyimpanan")
             AppConstant.STORAGE_WRITE_PERMISSION_CODE -> innerCheck("Akses izin menulis ke penyimpanan")
+            AppConstant.MANAGE_STORAGE_PERMISSION_CODE -> innerCheck("Akses izin untuk mengolah ke penyimpanan")
 //            AppConstant.STORAGE_WRITE_PERMISSION_CODE -> innerCheck("Write Storage")
 //            REQ_CAMERA -> innerCheck("CAMERA")
         }
+    }
+
+    private fun checkPermissionFunction() {
+//        checkForPermission(Manifest.permission.READ_EXTERNAL_STORAGE, "Membaca Penyimpanan", AppConstant.STORAGE_READ_PERMISSION_CODE)
+//        checkForPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE, "Menulis Penyimpanan", AppConstant.STORAGE_WRITE_PERMISSION_CODE)
+        checkForPermission(Manifest.permission.MANAGE_EXTERNAL_STORAGE, "Mengolah Penyimpanan", AppConstant.MANAGE_STORAGE_PERMISSION_CODE)
     }
 
     private fun showDialog(permission: String, name: String, requestCode: Int) {
@@ -140,7 +146,7 @@ class MainActivity : AppCompatActivity() {
         builder.apply {
             setMessage("Untuk Menggunakan Aplikasi dibutuhkan ijin ke $name")
             setTitle("Membutuhkan Ijin")
-            setPositiveButton("Ok") { dialog, which ->
+            setPositiveButton("Ok") { _, _ ->
                 ActivityCompat.requestPermissions(this@MainActivity, arrayOf(permission), requestCode)
             }
         }

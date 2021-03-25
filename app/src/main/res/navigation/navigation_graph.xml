@@ -263,5 +263,10 @@
         android:name="com.finalproject.presentations.employee.claim.detaildocument.OpenPdfFragment"
         android:label="fragment_open_pdf"
         tools:layout="@layout/fragment_open_pdf" >
+        <argument
+            android:name="Image"
+            app:argType="string" />
+        <argument android:name="Document"
+            app:argType="string" />
     </fragment>
 </navigation>

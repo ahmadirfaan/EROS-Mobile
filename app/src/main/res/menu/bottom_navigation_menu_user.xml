@@ -7,19 +7,16 @@
         android:id="@+id/homeEmployeeFragment"
         android:icon="@drawable/home_24"
         android:checked="true"
-        android:iconTint="@color/blue_enigma"
         android:title="Home" />
     <item
         android:id="@+id/historyOnProgressFragment"
         android:icon="@drawable/history_24"
         android:checked="true"
-        android:iconTint="@color/blue_enigma"
         android:title="History" />
     <item
         android:id="@+id/accountFragment"
         android:icon="@drawable/account_circle_24"
         android:checked="true"
-        android:iconTint="@color/blue_enigma"
         android:title="Account" />
 
 </menu>

@@ -48,7 +48,7 @@ constructor(
                     } else {
                         val listHistory = responseBody?.data
                         val onProgressHistory = listHistory?.filter {
-                            it?.statusSuccess != true
+                            it?.statusSuccess != true && it?.statusReject != true
                         }
                         if (onProgressHistory.isNullOrEmpty()) {
                             _reimburseListLiveData.postValue(ResourceState.failured("Data Tidak ada"))
@@ -79,7 +79,7 @@ constructor(
                     } else {
                         val listHistory = responseBody?.data
                         val onProgressHistory = listHistory?.filter {
-                            it?.statusSuccess != true
+                            it?.statusSuccess != true && it?.statusReject != true
                         }
                         if (onProgressHistory.isNullOrEmpty()) {
                             _reimburseListLiveData.postValue(ResourceState.failured("Data Tidak ada"))
@@ -110,7 +110,8 @@ constructor(
                     } else {
                         val listHistory = responseBody?.data
                         val onProgressHistory = listHistory?.filter {
-                            it?.statusSuccess != true
+                            it?.statusSuccess != true && it?.statusReject != true
+
                         }
                         if (onProgressHistory.isNullOrEmpty()) {
                             _reimburseListLiveData.postValue(ResourceState.failured("Data Tidak ada"))
@@ -141,7 +142,7 @@ constructor(
                     } else {
                         val listHistory = responseBody?.data
                         val onSuccesHistory = listHistory?.filter {
-                            it?.statusSuccess == true
+                            it?.statusSuccess == true || it?.statusReject == true
                         }
                         if (onSuccesHistory.isNullOrEmpty()) {
                             _reimburseListLiveData.postValue(ResourceState.failured("Data Tidak ada"))
@@ -172,7 +173,7 @@ constructor(
                     } else {
                         val listHistory = responseBody?.data
                         val onSuccesHistory = listHistory?.filter {
-                            it?.statusSuccess == true
+                            it?.statusSuccess == true || it?.statusReject == true
                         }
                         if (onSuccesHistory.isNullOrEmpty()) {
                             _reimburseListLiveData.postValue(ResourceState.failured("Data Tidak ada"))
@@ -203,7 +204,7 @@ constructor(
                     } else {
                         val listHistory = responseBody?.data
                         val onSuccesHistory = listHistory?.filter {
-                            it?.statusSuccess == true
+                            it?.statusSuccess == true || it?.statusReject == true
                         }
                         if (onSuccesHistory.isNullOrEmpty()) {
                             _reimburseListLiveData.postValue(ResourceState.failured("Data Tidak ada"))
@@ -235,7 +236,7 @@ constructor(
                     } else {
                         val listHistory = responseBody?.data
                         val onSuccesHistory = listHistory?.filter {
-                            it?.statusSuccess != true
+                            it?.statusSuccess != true && it?.statusReject != true
                         }
                         if (onSuccesHistory.isNullOrEmpty()) {
                             _reimburseListLiveData.postValue(ResourceState.failured("Data Tidak ada"))
@@ -265,7 +266,7 @@ constructor(
                     } else {
                         val listHistory = responseBody?.data
                         val onSuccesHistory = listHistory?.filter {
-                            it?.statusSuccess == true
+                            it?.statusSuccess == true || it?.statusReject == true
                         }
                         if (onSuccesHistory.isNullOrEmpty()) {
                             _reimburseListLiveData.postValue(ResourceState.failured("Data Tidak ada"))

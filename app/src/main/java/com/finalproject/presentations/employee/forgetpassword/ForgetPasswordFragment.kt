@@ -51,8 +51,6 @@ class ForgetPasswordFragment : Fragment() {
                 if(emailString.matches(emailPattern.toRegex())) {
                     val request = ForgotPasswordRequest(email = emailString, status = "Reset Password")
                     viewModel.resetPassword(request)
-                } else {
-
                 }
             }
         }
