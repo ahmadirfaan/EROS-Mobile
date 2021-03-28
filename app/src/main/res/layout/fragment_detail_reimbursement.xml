@@ -280,7 +280,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="Download Lampiran"/>
+                android:text="Unduh Dokumen"/>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_upload_files"
@@ -288,7 +288,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="15dp"
-                android:text="Select Files"
+                android:text="Pilih Dokumen"
                 android:textColor="@color/white"
                 android:textSize="15sp" />
 
@@ -296,8 +296,8 @@
                 android:id="@+id/tv_warning_file"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="File yang diupload harus berformat .pdf dan Maksimal 5MB"
-                android:layout_gravity="center"
+                android:textAlignment="center"
+                android:text="Dokumen yang dapat diunggah hanya dengan format pdf, jpg, png, dan jpeg serta Maksimal ukuran 5MB"                android:layout_gravity="center"
                 android:textColor="@color/red_danger"/>
 
             <TextView
@@ -325,7 +325,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="Upload Ulang Lampiran"/>
+                android:text="Unggah Ulang Dokumen"/>
 
         </LinearLayout>
 

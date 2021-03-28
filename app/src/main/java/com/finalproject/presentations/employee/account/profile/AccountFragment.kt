@@ -124,15 +124,16 @@ class AccountFragment : Fragment() {
             employee?.apply {
                 if(employee.gender.equals("MALE")) {
                     accountPhoto.setImageResource(R.drawable.male)
+                    tvGenderAccount.text = "Pria"
                 } else {
                     accountPhoto.setImageResource(R.drawable.female)
+                    tvGenderAccount.text = "Wanita"
                 }
                 tvFullnameAccount.text = employee.fullname
                 tvAddressKtpAccount.text = employee.ktpAddress
                 tvBiologicalMothersAccount.text = employee.biologicalMothersName
                 tvPlaceBirthAccount.text = employee.placeOfBirth
                 tvDateBirthAccount.text = employee.dateOfBirth
-                tvGenderAccount.text = employee.gender
                 tvReligionAccount.text = employee.religion
                 tvAddressKtpAccount.text = employee.ktpAddress?.let { subStringAddress(it) }
                 tvPostalCodeAccount.text = employee.postalCodeOfIdCard
@@ -145,18 +146,20 @@ class AccountFragment : Fragment() {
                 tvNpwpAccount.text = employee.npwp
                 tvNumberPhoneAccount.text = employee.phoneNumber
                 tvEmergencyContactAccount.text = employee.emergencyNumber
-                tvMaritalStatusAccount.text = employee.maritalStatus
                 if (employee.maritalStatus.equals("SINGLE") || employee.maritalStatus == null) {
                     linearLayoutSpouseNameAccount.visibility = View.GONE
                     linearLayoutNumberChildrenAccount.visibility = View.GONE
+                    tvMaritalStatusAccount.text = "Lajang"
                 } else if (employee.maritalStatus.equals("DIVORCED")) {
                     linearLayoutSpouseNameAccount.visibility = View.GONE
+                    tvMaritalStatusAccount.text = "Cerai"
                     if(employee.numberOfChildren != null) {
                         tvNumberChildrenAccount.text = employee.numberOfChildren as String
                     } else {
                         tvNumberChildrenAccount.text = employee.numberOfChildren
                     }
                 } else {
+                    tvMaritalStatusAccount.text = "Menikah"
                     if(employee.spouseName != null) {
                         tvSpouseNameAccount.text =  employee.spouseName as String
                     } else {

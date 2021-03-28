@@ -101,7 +101,7 @@ class ClaimSPDFragment : Fragment() {
                 if (file?.extension == "pdf") {
                     val bundle = bundleOf("Document" to uriString)
                     findNavController().navigate(R.id.action_claimSPDFragment_to_openPdfFragment, bundle)
-                } else if (file?.extension == "jpg" || file?.extension == "png") {
+                } else if (file?.extension == "jpg" || file?.extension == "png" || file?.extension == "jpeg") {
                     val bundle = bundleOf("Image" to uriString)
                     findNavController().navigate(R.id.action_claimSPDFragment_to_openPdfFragment, bundle)
                 } else {
@@ -109,7 +109,7 @@ class ClaimSPDFragment : Fragment() {
                 }
             }
             btnClaimSpd.setOnClickListener {
-                val formatFile = arrayListOf<String>("jpg", "pdf", "png")
+                val formatFile = arrayListOf<String>("jpg", "pdf", "png", "jpeg")
                 val fileSizeInMegaByte = file?.length()?.div(1024)?.div(1024)
                 val tvNameFile = tvNameFile.text.toString()
                 val inputClaimString = inputClaim.text.toString()

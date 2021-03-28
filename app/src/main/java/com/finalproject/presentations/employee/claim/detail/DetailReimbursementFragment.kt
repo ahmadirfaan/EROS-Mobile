@@ -23,6 +23,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.finalproject.R
+import com.finalproject.data.models.reimburse.AddReimbursementRequest
 import com.finalproject.data.models.reimburse.BillResponse
 import com.finalproject.data.models.reimburse.ReimbursementResponse
 import com.finalproject.databinding.FragmentDetailReimbursementBinding
@@ -120,14 +121,33 @@ class DetailReimbursementFragment : Fragment() {
 //                    findNavController().navigate(R.id.action_detailReimbursementFragment_to_webViewPdfFragment, bundle)
                 }
                 editButton.setOnClickListener {
-                    reimburseDetail?.id?.let { it1 -> file?.let { it2 -> viewModel.uploadFile(it1, it2) } }
+                    val formatFile = arrayListOf<String>("jpg","pdf","png","jpeg")
+                    val fileSizeInMegaByte = file?.length()?.div(1024)?.div(1024)
+                    Log.d("FiLE SIZE IN MEGABYte", fileSizeInMegaByte!!.toString())
+                    val tvNameFile = tvNameFile.text.toString()
+                    if (tvNameFile.isBlank() || tvNameFile.equals("Tidak Diketahui Filenya")) {
+                        Toast.makeText(requireContext(), "File Tidak Benar", Toast.LENGTH_SHORT).show()
+                    } else if (fileSizeInMegaByte > 5) {
+                        Toast.makeText(requireContext(), "Ukuran Maksimal 5MB", Toast.LENGTH_SHORT).show()
+                    } else if (!formatFile.contains(file?.extension)) {
+                        Toast.makeText(requireContext(), "File Yang Anda Masukkan tidak didukung", Toast.LENGTH_SHORT).show()
+                    } else {
+                        reimburseDetail?.id?.let { it1 -> file?.let { it2 -> viewModel.uploadFile(it1, it2) } }
+                    }
                 }
                 btnUploadFiles.setOnClickListener {
                     callChooseFileFromDevice()
                 }
                 btnSeeFile.setOnClickListener {
-                    val bundle = bundleOf("Document" to uriString)
-                    findNavController().navigate(R.id.action_detailReimbursementFragment_to_openPdfFragment, bundle)
+                    if (file?.extension == "pdf") {
+                        val bundle = bundleOf("Document" to uriString)
+                        findNavController().navigate(R.id.action_detailReimbursementFragment_to_openPdfFragment, bundle)
+                    } else if (file?.extension == "jpg" || file?.extension == "png" || file?.extension == "jpeg") {
+                        val bundle = bundleOf("Image" to uriString)
+                        findNavController().navigate(R.id.action_detailReimbursementFragment_to_openPdfFragment, bundle)
+                    } else {
+                        Toast.makeText(requireContext(), "Pilih File Yang Benar", Toast.LENGTH_SHORT).show()
+                    }
                 }
             }
         }
@@ -137,17 +157,17 @@ class DetailReimbursementFragment : Fragment() {
         binding.apply {
             when (reimburseDetail?.categoryId?.id) {
                 "1" -> {
-                    tvTitleCategoryReimbursement.text = "Category : Kacamata"
+                    tvTitleCategoryReimbursement.text = "Kategori : Kacamata"
                     hidingStartAndEndDate()
                 }
-                "2" -> tvTitleCategoryReimbursement.text = "Category : Pelatihan"
+                "2" -> tvTitleCategoryReimbursement.text = "Kategori : Pelatihan"
                 "3" -> {
-                    tvTitleCategoryReimbursement.text = "Category : Melahirkan"
+                    tvTitleCategoryReimbursement.text = "Kategori : Melahirkan"
                     hidingStartAndEndDate()
                 }
-                "4" -> tvTitleCategoryReimbursement.text = "Category : Perjalanan Dinas"
+                "4" -> tvTitleCategoryReimbursement.text = "Kategori : Perjalanan Dinas"
                 "5" -> {
-                    tvTitleCategoryReimbursement.text = "Category : Asuransi"
+                    tvTitleCategoryReimbursement.text = "Kategori : Asuransi"
                     hidingStartAndEndDate()
                 }
             }
@@ -180,7 +200,7 @@ class DetailReimbursementFragment : Fragment() {
             binding.apply {
                 linearLayoutDisbursementDate.visibility = View.GONE
                 tvResultClaimFee.visibility = View.GONE
-                tvResultStatusOnReimbursement.text = "On Progress"
+                tvResultStatusOnReimbursement.text = "Masih Diproses"
                 editDateVisibile()
             }
         } else if (reimburseDetail?.statusSuccess == true) {
@@ -189,7 +209,7 @@ class DetailReimbursementFragment : Fragment() {
                 tvTitleDetailReimbursement.text = "Detail Reimbursement Diterima"
                 tvResultStatusOnReimbursement.text = "Selesai"
                 tvResultClaimFee.text = "Uang Cair : ${borneCost}"
-                btnDownloadFile.text = "Download Bukti Transfer"
+                btnDownloadFile.text = "Unduh Bukti Transfer"
                 editDataGone()
 
             }
@@ -197,7 +217,7 @@ class DetailReimbursementFragment : Fragment() {
             binding.apply {
                 tvTitleDetailReimbursement.text = "Detail Reimbursement Ditolak"
                 tvTitleDetailReimbursement.setTextColor(Color.RED)
-                tvResultStatusOnReimbursement.text = "Rejected"
+                tvResultStatusOnReimbursement.text = "Ditolak"
                 linearLayoutStatusOnFinance.visibility = View.GONE
                 linearLayoutStatusOnHc.visibility = View.GONE
                 linearLayoutDisbursementDate.visibility = View.GONE
@@ -287,7 +307,7 @@ class DetailReimbursementFragment : Fragment() {
         if (reimburseDetail?.statusOnFinance == true) {
             binding.tvResultStatusOnFinance.text = "Selesai"
         } else {
-            binding.tvResultStatusOnFinance.text = "On Progress"
+            binding.tvResultStatusOnFinance.text = "Masih Diproses"
         }
     }
 
@@ -295,7 +315,7 @@ class DetailReimbursementFragment : Fragment() {
         if (reimburseDetail?.statusOnHc == true) {
             binding.tvResultStatusOnHc.text = "Selesai"
         } else {
-            binding.tvResultStatusOnHc.text = "On Progress"
+            binding.tvResultStatusOnHc.text = "Masih Diproses"
         }
     }
 

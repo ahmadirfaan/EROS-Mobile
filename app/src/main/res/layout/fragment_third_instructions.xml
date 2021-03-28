@@ -21,7 +21,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Step 3"
+        android:text="Langkah 3"
         android:textColor="@color/black"
         android:textSize="35sp"
         android:textStyle="bold"
@@ -36,22 +36,23 @@
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Review &amp; Reimbursement"
+        android:text="Lihat Klaim Anda Pada Menu Riwayat"
+        android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.647" />
+        app:layout_constraintVertical_bias="0.675" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
-        android:text="When you have all of your documents completed and HR will review the claim reimbursement"
+        android:text="Ketika Klaim Anda Sudah Masuk Pada Data Kami Silahkan Menunggu Karena Klaim Anda akan diulas oleh Tim HR dan Finance"
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="20sp"

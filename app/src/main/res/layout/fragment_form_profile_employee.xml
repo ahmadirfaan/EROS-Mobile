@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:fontFamily="@font/lato_black"
-        android:text="Form \n Profile Employee"
+        android:text="Formulir \n Data Karyawan"
         android:textColor="@color/black"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -46,7 +46,7 @@
                 android:layout_gravity="start"
                 android:layout_marginStart="15dp"
                 android:layout_marginTop="15dp"
-                android:text="Full Name"
+                android:text="Nama Lengkap"
                 android:textColor="@color/black"
                 android:textSize="15sp" />
 
@@ -68,7 +68,7 @@
                     android:id="@+id/et_full_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Insert Full Name"
+                    android:hint="Isi Nama Lengkap"
                     android:inputType="textPersonName"
                     android:singleLine="true"
                     android:textSize="15sp" />
@@ -81,7 +81,7 @@
                 android:layout_gravity="start"
                 android:layout_marginTop="15dp"
                 android:layout_marginStart="15dp"
-                android:text="Mothers Name"
+                android:text="Nama Ibu"
                 android:textColor="@color/black"
                 android:textSize="15sp" />
 
@@ -102,7 +102,7 @@
                     android:id="@+id/et_mothers_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Insert Mothers Name"
+                    android:hint="Isi Nama Ibu Kandung"
                     android:inputType="textPersonName"
                     android:singleLine="true"
                     android:textSize="15sp" />
@@ -117,7 +117,7 @@
                 android:layout_gravity="start"
                 android:layout_marginStart="15dp"
                 android:layout_marginTop="15dp"
-                android:text="Place Birth"
+                android:text="Tempat Lahir"
                 android:textColor="@color/black"
                 android:textSize="15sp" />
 
@@ -138,7 +138,7 @@
                     android:id="@+id/et_place_birth_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Insert Place Birth"
+                    android:hint="Isi Tempat Lahir"
                     android:inputType="textPersonName"
                     android:singleLine="true"
                     android:textSize="15sp" />
@@ -151,7 +151,7 @@
                 android:layout_gravity="start"
                 android:layout_marginTop="15dp"
                 android:layout_marginStart="15dp"
-                android:text="Date Birth"
+                android:text="Tanggal Lahir"
                 android:textColor="@color/black"
                 android:textSize="15sp" />
 
@@ -178,7 +178,7 @@
                         android:inputType="none"
                         android:clickable="true"
                         android:focusable="false"
-                        android:hint="Insert Date Birth"
+                        android:hint="Isi Tanggal Lahir"
                         android:singleLine="true"
                         android:textSize="15sp" />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -201,7 +201,7 @@
                 android:layout_gravity="start"
                 android:layout_marginTop="15dp"
                 android:layout_marginStart="15dp"
-                android:text="Gender"
+                android:text="Jenis Kelamin"
                 android:textColor="@color/black"
                 android:textSize="15sp" />
 
@@ -225,7 +225,7 @@
                         android:id="@+id/et_input_gender"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="GENDER"
+                        android:hint="Jenis Kelamin"
                         android:inputType="text"
                         android:singleLine="true"
                         android:textSize="15sp" />
@@ -255,7 +255,7 @@
                 android:layout_gravity="start"
                 android:layout_marginStart="15dp"
                 android:layout_marginTop="15dp"
-                android:text="Marital Status"
+                android:text="Status Pernikahan"
                 android:textColor="@color/black"
                 android:textSize="15sp" />
 
@@ -279,7 +279,7 @@
                         android:id="@+id/et_input_marital_status"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="MARITAL STATUS"
+                        android:hint="Status Pernikahan"
                         android:inputType="text"
                         android:singleLine="true"
                         android:textSize="15sp" />
@@ -330,7 +330,7 @@
                     android:id="@+id/et_name_couple"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Insert Name Couple"
+                    android:hint="Isikan Nama Pasangan"
                     android:inputType="textPersonName"
                     android:singleLine="true"
                     android:textSize="15sp" />
@@ -343,7 +343,7 @@
                 android:layout_gravity="start"
                 android:layout_marginStart="15dp"
                 android:layout_marginTop="15dp"
-                android:text="Number Children"
+                android:text="Jumlah Anak"
                 android:textColor="@color/black"
                 android:textSize="15sp" />
 
@@ -364,7 +364,7 @@
                     android:id="@+id/et_number_children"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Insert Number Children"
+                    android:hint="Isi Jumlah Anak"
                     android:inputType="number"
                     android:singleLine="true"
                     android:textSize="15sp" />
@@ -377,7 +377,7 @@
                 android:layout_gravity="start"
                 android:layout_marginStart="15dp"
                 android:layout_marginTop="15dp"
-                android:text="Religion"
+                android:text="Agama"
                 android:textColor="@color/black"
                 android:textSize="15sp" />
 
@@ -401,7 +401,7 @@
                         android:id="@+id/et_input_religion"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="RELIGION"
+                        android:hint="AGAMA"
                         android:inputType="text"
                         android:singleLine="true"
                         android:textSize="15sp" />
@@ -431,7 +431,7 @@
                 android:layout_gravity="start"
                 android:layout_marginStart="15dp"
                 android:layout_marginTop="15dp"
-                android:text="Nomer KTP"
+                android:text="Nomor KTP"
                 android:textColor="@color/black"
                 android:textSize="15sp" />
 
@@ -454,7 +454,7 @@
                     android:id="@+id/et_nomer_ktp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Nomer KTP"
+                    android:hint="Isi Nomor KTP"
                     android:inputType="number"
                     android:maxLength="16"
                     android:singleLine="true"
@@ -488,7 +488,7 @@
                     android:layout_height="wrap_content"
                     android:background="@color/gray"
                     android:gravity="top|left"
-                    android:hint="Address KTP"
+                    android:hint="Isi Alamat Lengkap Berdasarkan KTP"
                     android:inputType="textMultiLine"
                     android:maxLines="3"
                     android:minLines="2"
@@ -502,7 +502,7 @@
                 android:layout_gravity="start"
                 android:layout_marginStart="15dp"
                 android:layout_marginTop="15dp"
-                android:text="Postal Code"
+                android:text="Kode Pos"
                 android:textColor="@color/black"
                 android:textSize="15sp" />
 
@@ -539,7 +539,7 @@
                 android:layout_gravity="start"
                 android:layout_marginStart="15dp"
                 android:layout_marginTop="15dp"
-                android:text="Nomer NPWP"
+                android:text="Nomor NPWP"
                 android:textColor="@color/black"
                 android:textSize="15sp" />
 
@@ -560,7 +560,7 @@
                     android:id="@+id/et_nomer_npwp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Nomer NPWP"
+                    android:hint="Isi Nomor NPWP"
                     android:inputType="number"
                     android:singleLine="true"
                     android:textSize="15sp" />
@@ -593,7 +593,7 @@
                     android:layout_height="wrap_content"
                     android:background="@color/gray"
                     android:gravity="top|left"
-                    android:hint="Address NPWP"
+                    android:hint="Isi Alamat Lengkap NPWP"
                     android:inputType="textMultiLine"
                     android:maxLines="3"
                     android:minLines="2"
@@ -627,7 +627,7 @@
                     android:layout_height="wrap_content"
                     android:background="@color/gray"
                     android:gravity="top|left"
-                    android:hint="Address Domicile"
+                    android:hint="Isi Alamat Domisili"
                     android:inputType="textMultiLine"
                     android:maxLines="3"
                     android:minLines="2"
@@ -641,7 +641,7 @@
                 android:layout_gravity="start"
                 android:layout_marginStart="15dp"
                 android:layout_marginTop="15dp"
-                android:text="Blood Type"
+                android:text="Golongan Darah"
                 android:textColor="@color/black"
                 android:textSize="15sp" />
 
@@ -665,7 +665,7 @@
                         android:id="@+id/et_input_blood_type"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Blood Type"
+                        android:hint="Gol. Darah"
                         android:inputType="text"
                         android:singleLine="true"
                         android:textSize="15sp" />
@@ -729,7 +729,7 @@
                 android:layout_gravity="start"
                 android:layout_marginStart="15dp"
                 android:layout_marginTop="15dp"
-                android:text="Nomer Rekening"
+                android:text="Nomor Rekening"
                 android:textColor="@color/black"
                 android:textSize="15sp" />
 
@@ -750,7 +750,7 @@
                     android:id="@+id/et_nomer_rekening"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Nomer Rekening Bank"
+                    android:hint="Isi Nomor Rekening Bank"
                     android:inputType="number"
                     android:singleLine="true"
                     android:textSize="15sp" />
@@ -763,7 +763,7 @@
                 android:layout_gravity="start"
                 android:layout_marginStart="15dp"
                 android:layout_marginTop="15dp"
-                android:text="Nomer HP"
+                android:text="Nomor HP"
                 android:textColor="@color/black"
                 android:textSize="15sp" />
 
@@ -786,7 +786,7 @@
                     android:id="@+id/et_nomer_hp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Nomer Hp"
+                    android:hint="Isi Nomor Hp"
                     android:inputType="phone"
                     android:singleLine="true"
                     android:textSize="15sp" />
@@ -799,7 +799,7 @@
                 android:layout_gravity="start"
                 android:layout_marginStart="15dp"
                 android:layout_marginTop="15dp"
-                android:text="Nomer Emergency"
+                android:text="Nomor Darurat"
                 android:textColor="@color/black"
                 android:textSize="15sp" />
 
@@ -822,7 +822,7 @@
                     android:id="@+id/et_nomer_emergency"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Nomer Emergency"
+                    android:hint="Isi Nomor Darurat"
                     android:inputType="phone"
                     android:singleLine="true"
                     android:textSize="15sp" />
@@ -835,7 +835,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="30dp"
-                android:text="Submit Form" />
+                android:text="Kirim Formulir" />
 
 
         </LinearLayout>

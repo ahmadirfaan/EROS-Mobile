@@ -37,7 +37,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/lato_regular"
-                    android:text="DATA PROFILE"
+                    android:text="Data Enigmanians"
                     android:textColor="@color/black"
                     android:textSize="25sp"
                     android:textStyle="bold" />
@@ -49,7 +49,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:text="Edit Account"
+                android:text="Edit Akun"
                 app:cornerRadius="40dp"/>
         </LinearLayout>
 
@@ -79,7 +79,7 @@
                     android:layout_marginStart="10dp"
                     android:fontFamily="@font/lato_regular"
                     android:gravity="center_vertical"
-                    android:text="Full Name"
+                    android:text="Nama Lengkap"
                     android:textColor="@color/black"
                     android:textSize="20sp" />
 
@@ -109,7 +109,7 @@
                     android:layout_marginStart="10dp"
                     android:fontFamily="@font/lato_regular"
                     android:gravity="center_vertical"
-                    android:text="Mothers Name"
+                    android:text="Nama Ibu Kandung"
                     android:textColor="@color/black"
                     android:textSize="20sp" />
 
@@ -140,7 +140,7 @@
                     android:layout_weight="1"
                     android:fontFamily="@font/lato_regular"
                     android:gravity="center_vertical"
-                    android:text="Place Birth"
+                    android:text="Tempat Lahir"
                     android:textColor="@color/black"
                     android:textSize="20sp" />
 
@@ -171,7 +171,7 @@
                     android:layout_weight="1"
                     android:fontFamily="@font/lato_regular"
                     android:gravity="center_vertical"
-                    android:text="Date Birth"
+                    android:text="Tanggal Lahir"
                     android:textColor="@color/black"
                     android:textSize="20sp" />
 
@@ -202,7 +202,7 @@
                     android:layout_weight="1"
                     android:fontFamily="@font/lato_regular"
                     android:gravity="center_vertical"
-                    android:text="Gender"
+                    android:text="Jenis Kelamin"
                     android:textColor="@color/black"
                     android:textSize="20sp" />
 
@@ -232,7 +232,7 @@
                     android:layout_marginStart="10dp"
                     android:fontFamily="@font/lato_regular"
                     android:gravity="start"
-                    android:text="Marital Status"
+                    android:text="Status Pernikahan"
                     android:textColor="@color/black"
                     android:textSize="20sp" />
 
@@ -262,7 +262,7 @@
                     android:layout_marginStart="10dp"
                     android:fontFamily="@font/lato_regular"
                     android:gravity="start"
-                    android:text="Spouse Name"
+                    android:text="Nama Pasangan"
                     android:textColor="@color/black"
                     android:textSize="20sp" />
 
@@ -293,7 +293,7 @@
                     android:layout_weight="1"
                     android:fontFamily="@font/lato_regular"
                     android:gravity="start"
-                    android:text="Number\nChildren"
+                    android:text="Jumlah\nAnak"
                     android:textColor="@color/black"
                     android:textSize="20sp" />
 
@@ -324,7 +324,7 @@
                     android:layout_weight="1"
                     android:fontFamily="@font/lato_regular"
                     android:gravity="start"
-                    android:text="Religion"
+                    android:text="Agama"
                     android:textColor="@color/black"
                     android:textSize="20sp" />
 
@@ -357,7 +357,7 @@
                     android:layout_weight="3"
                     android:fontFamily="@font/lato_regular"
                     android:gravity="start"
-                    android:text="Address"
+                    android:text="Alamat Lengkap"
                     android:textColor="@color/black"
                     android:textSize="20sp" />
 
@@ -387,7 +387,7 @@
                     android:layout_marginStart="10dp"
                     android:fontFamily="@font/lato_regular"
                     android:gravity="start"
-                    android:text="Postal Code"
+                    android:text="Kode Pos"
                     android:textColor="@color/black"
                     android:textSize="20sp" />
 
@@ -420,7 +420,7 @@
                     android:layout_weight="5"
                     android:fontFamily="@font/lato_regular"
                     android:gravity="start"
-                    android:text="NPWP Address"
+                    android:text="Alamat NPWP"
                     android:textColor="@color/black"
                     android:textSize="20sp" />
 
@@ -453,7 +453,7 @@
                     android:layout_weight="1"
                     android:fontFamily="@font/lato_regular"
                     android:gravity="start"
-                    android:text="Domicile"
+                    android:text="Alamat Domisili"
                     android:textColor="@color/black"
                     android:textSize="20sp" />
 
@@ -483,7 +483,7 @@
                     android:layout_marginStart="10dp"
                     android:fontFamily="@font/lato_regular"
                     android:gravity="center_vertical"
-                    android:text="Blood Type"
+                    android:text="Golongan Darah"
                     android:textColor="@color/black"
                     android:textSize="20sp" />
 
@@ -543,7 +543,7 @@
                     android:layout_marginStart="10dp"
                     android:fontFamily="@font/lato_regular"
                     android:gravity="center_vertical"
-                    android:text="No Rek"
+                    android:text="Nomor Rek"
                     android:textColor="@color/black"
                     android:textSize="20sp" />
 
@@ -574,7 +574,7 @@
                     android:layout_weight="1"
                     android:fontFamily="@font/lato_regular"
                     android:gravity="center_vertical"
-                    android:text="No KTP"
+                    android:text="Nomor KTP"
                     android:textColor="@color/black"
                     android:textSize="20sp" />
 
@@ -636,7 +636,7 @@
                     android:layout_weight="3"
                     android:fontFamily="@font/lato_regular"
                     android:gravity="center_vertical"
-                    android:text="Phone"
+                    android:text="Nomor Ponsel"
                     android:textColor="@color/black"
                     android:textSize="20sp" />
 
@@ -668,7 +668,7 @@
                     android:layout_weight="1"
                     android:fontFamily="@font/lato_regular"
                     android:gravity="center_vertical"
-                    android:text="No Emergency"
+                    android:text="Nomor Darurat"
                     android:textColor="@color/black"
                     android:textSize="20sp" />
 
@@ -691,7 +691,7 @@
             android:layout_width="wrap_content"
             android:backgroundTint="@android:color/holo_orange_dark"
             android:layout_height="wrap_content"
-            android:text="Change Password"
+            android:text="Ganti Kata Sandi"
             app:cornerRadius="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -702,7 +702,7 @@
             android:layout_marginTop="20dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Log Out"
+            android:text="Keluar"
             android:backgroundTint="@android:color/holo_red_dark"
             app:cornerRadius="10dp"
             app:layout_constraintEnd_toEndOf="parent"

@@ -12,10 +12,10 @@ class AppConstant {
         const val APP_ID_LOGIN = "ApplicationIdLogin"
         const val APP_ID_EMPLOYEE = "ApplicationIdEmployee"
         const val SEND_BUNDLE_DATA_EMPLOYEE = "BundleDataEmployee"
-        val GENDER_ARRAYS = arrayListOf<String>("MALE", "FEMALE")
+        val GENDER_ARRAYS = arrayListOf<String>("Pria", "Wanita")
         val RELIGION_ARRAYS = arrayListOf<String>("ISLAM", "KRISTEN PROTESTAN", "KRISTEN KATOLIK", "BUDDHA", "HINDU", "KONG HU CU")
         //val GRADE_ARRAYS = arrayListOf<Int>(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13)
-        val MARITAL_STATUS_ARRAYS = arrayListOf<String>("MARRIED", "SINGLE", "DIVORCE")
+        val MARITAL_STATUS_ARRAYS = arrayListOf<String>("Menikah", "Lajang", "Cerai")
         val BLOOD_TYPE_ARRAY = arrayListOf<String>("A", "B", "O", "AB")
     }
 }

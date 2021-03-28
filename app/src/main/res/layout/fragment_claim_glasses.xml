@@ -91,15 +91,15 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="15dp"
-                android:text="Upload Files"
+                android:text="Unggah Dokumen"
                 android:textColor="@color/white"
                 android:textSize="15sp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="File yang diupload harus berformat .pdf dan Maksimal 5MB"
-                android:layout_gravity="center"
+                android:textAlignment="center"
+                android:text="Dokumen yang dapat diunggah hanya dengan format pdf, jpg, png, dan jpeg serta Maksimal ukuran 5MB"                android:layout_gravity="center"
                 android:layout_marginBottom="30dp"
                 android:textColor="@color/red_danger"/>
 
@@ -132,7 +132,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="50dp"
-                android:text="Submit Claim Glasses"
+                android:text="Kirim Klaim Kacamata"
                 android:textColor="@color/white"
                 android:textSize="15sp" />
 
