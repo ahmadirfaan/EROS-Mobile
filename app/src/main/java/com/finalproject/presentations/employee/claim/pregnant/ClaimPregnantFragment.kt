@@ -17,7 +17,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.finalproject.R
 import com.finalproject.data.models.reimburse.AddReimbursementRequest
-import com.finalproject.databinding.FragmentClaimInsuranceBinding
 import com.finalproject.databinding.FragmentClaimPregnantBinding
 import com.finalproject.presentations.employee.claim.ClaimViewModel
 import com.finalproject.utils.AppConstant
@@ -30,12 +29,12 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class ClaimPregnantFragment : Fragment() {
 
-    private lateinit var binding : FragmentClaimPregnantBinding
+    private lateinit var binding: FragmentClaimPregnantBinding
 
     private lateinit var viewModel: ClaimViewModel
     private lateinit var loadingDialog: AlertDialog
     private var dataUri: Uri? = null
-    private var file : File? = null
+    private var file: File? = null
     private var uriString: String? = null
     val resultContract = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
         if (it?.resultCode == Activity.RESULT_OK) {
@@ -83,16 +82,29 @@ class ClaimPregnantFragment : Fragment() {
                 callChooseFileFromDevice()
             }
             btnSeeFile.setOnClickListener {
-                val bundle = bundleOf("Document" to uriString)
-                findNavController().navigate(R.id.action_claimPregnantFragment_to_openPdfFragment, bundle)
+                if (file?.extension == "pdf") {
+                    val bundle = bundleOf("Document" to uriString)
+                    findNavController().navigate(R.id.action_claimPregnantFragment_to_openPdfFragment, bundle)
+                } else if (file?.extension == "jpg" || file?.extension == "png") {
+                    val bundle = bundleOf("Image" to uriString)
+                    findNavController().navigate(R.id.action_claimPregnantFragment_to_openPdfFragment, bundle)
+                } else {
+                    Toast.makeText(requireContext(), "Pilih File Yang Benar", Toast.LENGTH_SHORT).show()
+                }
             }
             btnSubmitFormPregnant.setOnClickListener {
+                val formatFile = arrayListOf<String>("jpg", "pdf", "png")
+                val fileSizeInMegaByte = file?.length()?.div(1024)?.div(1024)
                 val tvNameFile = tvNameFile.text.toString()
                 val inputClaimString = inputClaim.text.toString()
                 if (tvNameFile.isBlank() || tvNameFile.equals("Tidak Diketahui Filenya")) {
                     Toast.makeText(requireContext(), "File Tidak Benar", Toast.LENGTH_SHORT).show()
                 } else if (inputClaimString.isBlank()) {
                     Toast.makeText(requireContext(), "Input Jumlah Claim Tidak Benar", Toast.LENGTH_SHORT).show()
+                } else if (fileSizeInMegaByte!! > 5) {
+                    Toast.makeText(requireContext(), "Ukuran Maksimal 5MB", Toast.LENGTH_SHORT).show()
+                } else if (!formatFile.contains(file?.extension)) {
+                    Toast.makeText(requireContext(), "File Yang Anda Masukkan tidak didukung", Toast.LENGTH_SHORT).show()
                 } else {
                     val requestReimburse = AddReimbursementRequest(
                         endDate = null,
@@ -149,7 +161,7 @@ class ClaimPregnantFragment : Fragment() {
     private fun callChooseFileFromDevice() {
         var intent = Intent(Intent.ACTION_GET_CONTENT)
         intent.addCategory(Intent.CATEGORY_OPENABLE)
-        intent.setType("application/pdf")
+        intent.setType("*/*")
         intent = Intent.createChooser(intent, "Choose from A File")
         resultContract.launch(intent)
     }
@@ -158,10 +170,12 @@ class ClaimPregnantFragment : Fragment() {
         return sharedPreferences.getString(AppConstant.APP_ID_EMPLOYEE, "ID Employee")
     }
 
-    private fun uriPath(mypath : String) : String {
+    private fun uriPath(mypath: String): String {
         var path = ""
-        if(mypath.contains("document/raw:")){
-            path = mypath.replace("/document/raw:","");
+        if (mypath.contains("document/raw:")) {
+            path = mypath.replace("/document/raw:", "");
+        } else {
+            path = mypath
         }
         return path
     }

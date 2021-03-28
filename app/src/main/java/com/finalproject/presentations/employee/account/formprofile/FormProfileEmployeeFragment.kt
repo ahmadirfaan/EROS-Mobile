@@ -92,7 +92,7 @@ class FormProfileEmployeeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        validateNomerKTPOnRuntime()
+        validateInputOnRunTime()
         if (dataUpdate != null) {
             setTextIfDataNotNull()
         }
@@ -288,20 +288,22 @@ class FormProfileEmployeeFragment : Fragment() {
         }
     }
 
-    private fun validateNomerKTPOnRuntime() {
-        binding.tilInputNomerKtp.editText?.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-            }
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-            }
-
-            override fun afterTextChanged(s: Editable?) {
-                if (s.toString().length < 16) {
-                    binding.tilInputNomerKtp.editText?.error = "Harap Masukkan Format KTP dengan Benar"
+    private fun validateInputOnRunTime() {
+        binding.apply {
+            tilInputNomerKtp.editText?.addTextChangedListener(object : TextWatcher {
+                override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
                 }
-            }
-        })
+
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                }
+
+                override fun afterTextChanged(s: Editable?) {
+                    if (s.toString().length < 16) {
+                        binding.tilInputNomerKtp.editText?.error = "Harap Masukkan Format KTP dengan Benar"
+                    }
+                }
+            })
+        }
     }
 
     private fun onSpinnerItemMaritalStatus() {

@@ -135,8 +135,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun checkPermissionFunction() {
-//        checkForPermission(Manifest.permission.READ_EXTERNAL_STORAGE, "Membaca Penyimpanan", AppConstant.STORAGE_READ_PERMISSION_CODE)
-//        checkForPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE, "Menulis Penyimpanan", AppConstant.STORAGE_WRITE_PERMISSION_CODE)
+        checkForPermission(Manifest.permission.READ_EXTERNAL_STORAGE, "Membaca Penyimpanan", AppConstant.STORAGE_READ_PERMISSION_CODE)
+        checkForPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE, "Menulis Penyimpanan", AppConstant.STORAGE_WRITE_PERMISSION_CODE)
         checkForPermission(Manifest.permission.MANAGE_EXTERNAL_STORAGE, "Mengolah Penyimpanan", AppConstant.MANAGE_STORAGE_PERMISSION_CODE)
     }
 

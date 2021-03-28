@@ -49,4 +49,12 @@ class ReimbursementRepositoryImpl @Inject constructor(
     override suspend fun getAllReimburseByIdEmployee(request: ReimburseListByEmployeeId): Response<ReimbursementList> {
         return reimburseApi.getAllReimburseByIdEmployee(request)
     }
+
+    override suspend fun getURLFileAdmin(idReimburse: String): Response<BillResponse> {
+        return reimburseApi.getURLdFileAdmin(idReimburse)
+    }
+
+    override suspend fun getURLFileEmployee(idReimburse: String): Response<BillResponse> {
+        return reimburseApi.getURLFileEmployee(idReimburse)
+    }
 }

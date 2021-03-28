@@ -2,10 +2,11 @@ package com.finalproject.presentations.employee.history.onprogress
 
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.activity.addCallback
@@ -45,6 +46,11 @@ class HistoryOnProgressFragment : Fragment() {
         historyViewAdapter = HistoryViewAdapter(viewModel)
     }
 
+    override fun onResume() {
+        super.onResume()
+        onSpinnerFilterBy()
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -57,7 +63,6 @@ class HistoryOnProgressFragment : Fragment() {
         requireActivity().onBackPressedDispatcher.addCallback(this) {
             findNavController().navigate(R.id.action_historyOnProgressFragment_to_homeEmployeeFragment2)
         }
-        onSpinnerFilterBy()
         onRadioButtonFilterCategory()
         binding.apply {
             etDateStart.isEnabled = false
@@ -76,7 +81,7 @@ class HistoryOnProgressFragment : Fragment() {
                 findNavController().navigate(R.id.action_historyOnProgressFragment_to_historySuccessFragment2)
             }
             btnFilterCategory.setOnClickListener {
-                if(categoryId.isBlank()) {
+                if (categoryId.isBlank()) {
                     Toast.makeText(requireContext(), "Anda belum memilih kategori", Toast.LENGTH_SHORT).show()
                 } else {
                     val request = ReimbursementListRequest(employeeId = getEmployeeId(), categoryId = categoryId)
@@ -106,9 +111,9 @@ class HistoryOnProgressFragment : Fragment() {
                     Toast.makeText(requireContext(), "Anda Belum memasukkan data untuk tanggal akhir", Toast.LENGTH_SHORT).show()
                 } else if (startDate.isBlank()) {
                     Toast.makeText(requireContext(), "Anda belum memasukkan data untuk tanggal awal", Toast.LENGTH_SHORT).show()
-                } else if(categoryId.isBlank()) {
+                } else if (categoryId.isBlank()) {
                     Toast.makeText(requireContext(), "Anda belum memilih kategori", Toast.LENGTH_SHORT).show()
-                }else {
+                } else {
                     val request =
                         ReimburseListByDateCategory(startDate = startDate, endDate = endDate, employeeId = getEmployeeId(), categoryId = categoryId)
                     viewModel.getAllHistoryProgressByDateCategory(request)
@@ -171,26 +176,22 @@ class HistoryOnProgressFragment : Fragment() {
 
     private fun onSpinnerFilterBy() {
         binding.apply {
-            val adapterFilter = ArrayAdapter<String>(requireContext(), android.R.layout.simple_spinner_dropdown_item, HistoryConstant.arrayFilter)
-            spinnerFilter.adapter = adapterFilter
-            spinnerFilter.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-                override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-//                    tvTitleFilterBy.text = HistoryConstant.arrayFilter[position]
-                    when (position) {
-                        0 -> {
-                            linearLayoutVerticalFilterCategory.visibility = View.GONE
-                            linearLayoutVerticalFilterDate.visibility = View.GONE
-                            tvTitleFilterCategory.visibility = View.GONE
-                            tvTitleFilterDate.visibility = View.GONE
-                            btnFilterCategory.visibility = View.GONE
-                            btnFilterDate.visibility = View.GONE
-                            btnFilterCategoryDate.visibility = View.GONE
-                            linearLayoutDataChooseFilter.visibility = View.GONE
-                            val request = ReimburseListByEmployeeId(employeeId = getEmployeeId())
-                            viewModel.getAllReimburseByIdEmployeeOnProgress(request)
+            val adapterFilter = ArrayAdapter<String>(requireContext(), R.layout.dropdown_item, HistoryConstant.arrayFilter)
+            actSpinner.setAdapter(adapterFilter)
+            actSpinner.addTextChangedListener(object : TextWatcher {
+                override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                }
 
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                }
+
+                override fun afterTextChanged(s: Editable?) {
+                    linearLayoutDataNotFound.visibility = View.GONE
+                    when (s?.toString()) {
+                        "Lihat Semua Data" -> {
+                            defaultFilter()
                         }
-                        1 -> {
+                        "Saring Data Berdasarkan Tanggal dan Kategori" -> {
                             linearLayoutVerticalFilterCategory.visibility = View.VISIBLE
                             linearLayoutVerticalFilterDate.visibility = View.VISIBLE
                             tvTitleFilterCategory.visibility = View.VISIBLE
@@ -201,7 +202,7 @@ class HistoryOnProgressFragment : Fragment() {
                             linearLayoutDataChooseFilter.visibility = View.VISIBLE
                             linearLayoutRvProgress.visibility = View.GONE
                         }
-                        2 -> {
+                        "Saring Data Berdasarkan Tanggal" -> {
                             linearLayoutVerticalFilterDate.visibility = View.VISIBLE
                             linearLayoutVerticalFilterCategory.visibility = View.GONE
                             tvTitleFilterCategory.visibility = View.GONE
@@ -211,8 +212,9 @@ class HistoryOnProgressFragment : Fragment() {
                             btnFilterDate.visibility = View.VISIBLE
                             linearLayoutDataChooseFilter.visibility = View.VISIBLE
                             linearLayoutRvProgress.visibility = View.GONE
+
                         }
-                        3 -> {
+                        "Saring Data Berdasarkan Kategori" -> {
                             linearLayoutVerticalFilterCategory.visibility = View.VISIBLE
                             linearLayoutVerticalFilterDate.visibility = View.GONE
                             tvTitleFilterCategory.visibility = View.VISIBLE
@@ -222,15 +224,70 @@ class HistoryOnProgressFragment : Fragment() {
                             btnFilterCategoryDate.visibility = View.GONE
                             linearLayoutDataChooseFilter.visibility = View.VISIBLE
                             linearLayoutRvProgress.visibility = View.GONE
-
                         }
+
                     }
                 }
 
-                override fun onNothingSelected(parent: AdapterView<*>?) {
-                }
+            })
+//            spinnerFilter.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+//                override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+//                    tvTitleFilterBy.text = HistoryConstant.arrayFilter[position]
+//                    when (position) {
+//                        0 -> {
+//                            linearLayoutVerticalFilterCategory.visibility = View.GONE
+//                            linearLayoutVerticalFilterDate.visibility = View.GONE
+//                            tvTitleFilterCategory.visibility = View.GONE
+//                            tvTitleFilterDate.visibility = View.GONE
+//                            btnFilterCategory.visibility = View.GONE
+//                            btnFilterDate.visibility = View.GONE
+//                            btnFilterCategoryDate.visibility = View.GONE
+//                            linearLayoutDataChooseFilter.visibility = View.GONE
+//                            val request = ReimburseListByEmployeeId(employeeId = getEmployeeId())
+//                            viewModel.getAllReimburseByIdEmployeeOnProgress(request)
+//
+//                        }
+//                        1 -> {
+//                            linearLayoutVerticalFilterCategory.visibility = View.VISIBLE
+//                            linearLayoutVerticalFilterDate.visibility = View.VISIBLE
+//                            tvTitleFilterCategory.visibility = View.VISIBLE
+//                            tvTitleFilterDate.visibility = View.VISIBLE
+//                            btnFilterCategory.visibility = View.GONE
+//                            btnFilterDate.visibility = View.GONE
+//                            btnFilterCategoryDate.visibility = View.VISIBLE
+//                            linearLayoutDataChooseFilter.visibility = View.VISIBLE
+//                            linearLayoutRvProgress.visibility = View.GONE
+//                        }
+//                        2 -> {
+//                            linearLayoutVerticalFilterDate.visibility = View.VISIBLE
+//                            linearLayoutVerticalFilterCategory.visibility = View.GONE
+//                            tvTitleFilterCategory.visibility = View.GONE
+//                            tvTitleFilterDate.visibility = View.VISIBLE
+//                            btnFilterCategory.visibility = View.GONE
+//                            btnFilterCategoryDate.visibility = View.GONE
+//                            btnFilterDate.visibility = View.VISIBLE
+//                            linearLayoutDataChooseFilter.visibility = View.VISIBLE
+//                            linearLayoutRvProgress.visibility = View.GONE
+//                        }
+//                        3 -> {
+//                            linearLayoutVerticalFilterCategory.visibility = View.VISIBLE
+//                            linearLayoutVerticalFilterDate.visibility = View.GONE
+//                            tvTitleFilterCategory.visibility = View.VISIBLE
+//                            tvTitleFilterDate.visibility = View.GONE
+//                            btnFilterCategory.visibility = View.VISIBLE
+//                            btnFilterDate.visibility = View.GONE
+//                            btnFilterCategoryDate.visibility = View.GONE
+//                            linearLayoutDataChooseFilter.visibility = View.VISIBLE
+//                            linearLayoutRvProgress.visibility = View.GONE
+//
+//                        }
+//                    }
+//                }
+//
+//                override fun onNothingSelected(parent: AdapterView<*>?) {
+//                }
 
-            }
+//            }
         }
     }
 
@@ -245,6 +302,21 @@ class HistoryOnProgressFragment : Fragment() {
                     radioButtonAsuransi.id -> categoryId = "5"
                 }
             }
+        }
+    }
+
+    private fun defaultFilter() {
+        binding.apply {
+            linearLayoutVerticalFilterCategory.visibility = View.GONE
+            linearLayoutVerticalFilterDate.visibility = View.GONE
+            tvTitleFilterCategory.visibility = View.GONE
+            tvTitleFilterDate.visibility = View.GONE
+            btnFilterCategory.visibility = View.GONE
+            btnFilterDate.visibility = View.GONE
+            btnFilterCategoryDate.visibility = View.GONE
+            linearLayoutDataChooseFilter.visibility = View.GONE
+            val request = ReimburseListByEmployeeId(employeeId = getEmployeeId())
+            viewModel.getAllReimburseByIdEmployeeOnProgress(request)
         }
     }
 

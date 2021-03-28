@@ -79,38 +79,62 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:orientation="vertical"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
             <LinearLayout
                 android:id="@+id/layout_filter"
-                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-
-                <Spinner
-                    android:id="@+id/spinner_filter"
-                    android:layout_weight="3"
-                    android:layout_gravity="center"
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_spinner_filter"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"/>
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:hint="Penyaring"
+                    app:startIconDrawable="@drawable/ic_baseline_menu_24">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/act_spinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:inputType="none"
+                        android:paddingStart="16dp"
+                        android:paddingBottom="16dp"
+                        android:text="Pilih Penyaring" />
+
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <!--                <Spinner-->
+                <!--                    android:id="@+id/spinner_filter"-->
+                <!--                    android:layout_weight="3"-->
+                <!--                    android:layout_gravity="center"-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="50dp"/>-->
 
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/linear_layout_vertical_filter_date"
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:layout_height="wrap_content">
+                android:visibility="gone">
 
                 <TextView
                     android:id="@+id/tv_title_filter_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:text="Pilih Tanggal"
                     android:textColor="@color/black"
-                    android:layout_gravity="center"
                     android:textSize="25sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -120,8 +144,8 @@
                     android:id="@+id/linear_layout_date_start"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
                     android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
                     android:orientation="horizontal">
 
                     <com.google.android.material.textfield.TextInputLayout
@@ -145,8 +169,8 @@
                     <ImageView
                         android:id="@+id/date_icon_start"
                         android:layout_width="wrap_content"
-                        android:layout_gravity="center_vertical"
                         android:layout_height="30dp"
+                        android:layout_gravity="center_vertical"
                         android:layout_weight="1"
                         android:src="@drawable/ic_baseline_calendar_today_24" />
                 </LinearLayout>
@@ -180,8 +204,8 @@
                     <ImageView
                         android:id="@+id/date_icon_end"
                         android:layout_width="wrap_content"
-                        android:layout_gravity="center_vertical"
                         android:layout_height="30dp"
+                        android:layout_gravity="center_vertical"
                         android:layout_weight="1"
                         android:src="@drawable/ic_baseline_calendar_today_24" />
                 </LinearLayout>
@@ -190,8 +214,8 @@
                     android:id="@+id/btn_filter_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
                     android:layout_gravity="end"
+                    android:layout_marginTop="24dp"
                     android:text="Filter Date" />
 
             </LinearLayout>
@@ -200,15 +224,16 @@
             <LinearLayout
                 android:id="@+id/linear_layout_vertical_filter_category"
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:layout_height="wrap_content">
+                android:visibility="gone">
 
                 <TextView
                     android:id="@+id/tv_title_filter_category"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Pilih Kategori"
                     android:layout_gravity="center"
+                    android:text="Pilih Kategori"
                     android:textColor="@color/black"
                     android:textSize="25sp"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -244,11 +269,11 @@
                             android:id="@+id/radio_button_pelatihan"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginRight="5dp"
                             android:background="@drawable/radio_selector"
                             android:button="@android:color/transparent"
                             android:elevation="4dp"
                             android:padding="10dp"
-                            android:layout_marginRight="5dp"
                             android:text="Pelatihan"
                             android:textColor="@drawable/text_color" />
 
@@ -256,9 +281,9 @@
                             android:id="@+id/radio_button_melahirkan"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginRight="5dp"
                             android:background="@drawable/radio_selector"
                             android:button="@android:color/transparent"
-                            android:layout_marginRight="5dp"
                             android:elevation="4dp"
                             android:padding="10dp"
                             android:text="Melahirkan"
@@ -268,13 +293,13 @@
                             android:id="@+id/radio_button_dinas"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginRight="5dp"
                             android:background="@drawable/radio_selector"
                             android:button="@android:color/transparent"
                             android:elevation="4dp"
-                            android:layout_marginRight="5dp"
                             android:padding="10dp"
-                            android:textColor="@drawable/text_color"
-                            android:text="Dinas" />
+                            android:text="Dinas"
+                            android:textColor="@drawable/text_color" />
 
                         <RadioButton
                             android:id="@+id/radio_button_asuransi"
@@ -283,23 +308,21 @@
                             android:layout_marginRight="5dp"
                             android:background="@drawable/radio_selector"
                             android:button="@android:color/transparent"
-                            android:textColor="@drawable/text_color"
                             android:elevation="4dp"
                             android:padding="10dp"
-                            android:text="Asuransi" />
+                            android:text="Asuransi"
+                            android:textColor="@drawable/text_color" />
                     </RadioGroup>
                 </LinearLayout>
-
-
 
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btn_filter_category"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="end"
                     android:layout_marginTop="24dp"
-                    android:text="Filter Category"
-                    android:layout_gravity="end" />
+                    android:text="Filter Category" />
 
             </LinearLayout>
 
@@ -307,9 +330,10 @@
                 android:id="@+id/btn_filter_category_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="end"
                 android:layout_marginTop="24dp"
                 android:text="Filter Category And Date"
-                android:layout_gravity="end"/>
+                android:visibility="gone" />
 
 
             <LinearLayout
@@ -318,25 +342,24 @@
                 android:layout_height="500dp"
                 android:layout_marginTop="20dp"
                 android:background="@color/white"
-                android:visibility="gone"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:visibility="visible">
 
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="400dp"
-                    android:src="@drawable/icon_choose_filter"
-                    />
+                    android:src="@drawable/icon_choose_filter" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textAlignment="center"
-                    android:textSize="25sp"
                     android:layout_gravity="center"
-                    android:textColor="@color/black"
-                    android:textStyle="bold"
                     android:fontFamily="@font/lato_black"
-                    android:text="Silahkan Lakukan Filter"/>
+                    android:text="Silahkan Lakukan Penyaringan"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="25sp"
+                    android:textStyle="bold" />
 
             </LinearLayout>
 
@@ -345,85 +368,79 @@
                 android:id="@+id/linear_layout_data_not_found"
                 android:layout_width="match_parent"
                 android:layout_height="500dp"
-                android:background="@color/white"
                 android:layout_marginTop="20dp"
-                android:visibility="gone"
-                android:orientation="vertical">
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:visibility="gone">
 
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="400dp"
-                    android:src="@drawable/empty_data_icon"
-                    />
+                    android:src="@drawable/empty_data_icon" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textAlignment="center"
-                    android:textSize="25sp"
                     android:layout_gravity="center"
-                    android:textColor="@color/black"
-                    android:textStyle="bold"
                     android:fontFamily="@font/lato_black"
-                    android:text="Maaf, Data Tidak Ditemukan"/>
+                    android:text="Maaf, Data Tidak Ditemukan"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="25sp"
+                    android:textStyle="bold" />
 
             </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/linear_layout_rv_success"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="List Data Reimbursement"
-                android:textSize="25sp"
-                android:textStyle="bold"
-                android:fontFamily="@font/lato_black"
-                android:textColor="@color/black"
-                android:layout_gravity="center"
-                />
-
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_success_history"
-                android:layout_width="match_parent"
-                android:layout_marginTop="20dp"
-                android:background="@color/white"
-                android:layout_height="500dp" />
-
-
-        </LinearLayout>
-
-
-
 
             <LinearLayout
+                android:id="@+id/linear_layout_rv_success"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:orientation="horizontal">
+                android:orientation="vertical"
+                android:visibility="gone">
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btn_prev_page"
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="end"
-                    android:text="Prev"
-                    app:cornerRadius="50dp" />
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/lato_black"
+                    android:text="List Data Reimbursement"
+                    android:textColor="@color/black"
+                    android:textSize="25sp"
+                    android:textStyle="bold" />
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btn_next_page"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Next"
-                    android:layout_gravity="end"
-                    app:cornerRadius="50dp" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_success_history"
+                    android:layout_width="match_parent"
+                    android:layout_height="500dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@color/white" />
+
 
             </LinearLayout>
+
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="20dp"-->
+<!--                android:orientation="horizontal">-->
+
+<!--                <com.google.android.material.button.MaterialButton-->
+<!--                    android:id="@+id/btn_prev_page"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="Prev"-->
+<!--                    app:cornerRadius="50dp" />-->
+
+<!--                <com.google.android.material.button.MaterialButton-->
+<!--                    android:id="@+id/btn_next_page"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="Next"-->
+<!--                    app:cornerRadius="50dp" />-->
+
+<!--            </LinearLayout>-->
 
 
         </LinearLayout>

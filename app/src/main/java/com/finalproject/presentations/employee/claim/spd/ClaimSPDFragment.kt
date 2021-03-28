@@ -98,10 +98,19 @@ class ClaimSPDFragment : Fragment() {
                 callChooseFileFromDevice()
             }
             btnSeeFile.setOnClickListener {
-                val bundle = bundleOf("Document" to uriString)
-                findNavController().navigate(R.id.action_claimSPDFragment_to_openPdfFragment, bundle)
+                if (file?.extension == "pdf") {
+                    val bundle = bundleOf("Document" to uriString)
+                    findNavController().navigate(R.id.action_claimSPDFragment_to_openPdfFragment, bundle)
+                } else if (file?.extension == "jpg" || file?.extension == "png") {
+                    val bundle = bundleOf("Image" to uriString)
+                    findNavController().navigate(R.id.action_claimSPDFragment_to_openPdfFragment, bundle)
+                } else {
+                    Toast.makeText(requireContext(), "Pilih File Yang Benar", Toast.LENGTH_SHORT).show()
+                }
             }
             btnClaimSpd.setOnClickListener {
+                val formatFile = arrayListOf<String>("jpg", "pdf", "png")
+                val fileSizeInMegaByte = file?.length()?.div(1024)?.div(1024)
                 val tvNameFile = tvNameFile.text.toString()
                 val inputClaimString = inputClaim.text.toString()
                 val startDateString = etStartDate.text.toString()
@@ -110,10 +119,10 @@ class ClaimSPDFragment : Fragment() {
                     Toast.makeText(requireContext(), "File Tidak Benar", Toast.LENGTH_SHORT).show()
                 } else if (inputClaimString.isBlank()) {
                     Toast.makeText(requireContext(), "Input Jumlah Claim Tidak Benar", Toast.LENGTH_SHORT).show()
-                } else if (startDateString.isBlank()) {
-                    Toast.makeText(requireContext(), "Anda Belum Memasukkan Tanggal Awal", Toast.LENGTH_SHORT).show()
-                } else if (endDateString.isBlank()) {
-                    Toast.makeText(requireContext(), "Anda Belum Memasukkan Tanggal Akhir", Toast.LENGTH_SHORT).show()
+                } else if (fileSizeInMegaByte!! > 5) {
+                    Toast.makeText(requireContext(), "Ukuran Maksimal 5MB", Toast.LENGTH_SHORT).show()
+                } else if (!formatFile.contains(file?.extension)) {
+                    Toast.makeText(requireContext(), "File Yang Anda Masukkan tidak didukung", Toast.LENGTH_SHORT).show()
                 } else {
                     val requestReimburse = AddReimbursementRequest(
                         endDate = endDateString,
@@ -171,7 +180,7 @@ class ClaimSPDFragment : Fragment() {
     private fun callChooseFileFromDevice() {
         var intent = Intent(Intent.ACTION_GET_CONTENT)
         intent.addCategory(Intent.CATEGORY_OPENABLE)
-        intent.setType("application/pdf")
+        intent.setType("*/*")
         intent = Intent.createChooser(intent, "Choose from A File")
         resultContract.launch(intent)
     }
@@ -184,6 +193,8 @@ class ClaimSPDFragment : Fragment() {
         var path = ""
         if (mypath.contains("document/raw:")) {
             path = mypath.replace("/document/raw:", "");
+        } else {
+            path = mypath
         }
         return path
     }

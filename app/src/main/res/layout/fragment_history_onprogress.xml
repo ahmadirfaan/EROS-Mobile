@@ -87,19 +87,44 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-
-                <Spinner
-                    android:id="@+id/spinner_filter"
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_spinner_filter"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_gravity="center"
-                    android:layout_weight="3" />
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    app:startIconDrawable="@drawable/ic_baseline_menu_24"
+                    android:layout_marginEnd="16dp"
+                    android:hint="Penyaring">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/act_spinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Pilih Penyaring"
+                        android:inputType="none"
+                        android:paddingStart="16dp"
+                        android:paddingBottom="16dp" />
+
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+<!--                <Spinner-->
+<!--                    android:id="@+id/spinner_filter"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="50dp"-->
+<!--                    android:layout_gravity="center"-->
+<!--                    android:layout_weight="3"-->
+<!--                    android:visibility="gone" />-->
 
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/linear_layout_vertical_filter_date"
                 android:layout_width="match_parent"
+                android:visibility="gone"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
@@ -126,10 +151,10 @@
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/til_input_date_start"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                        android:background="@color/gray"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="2"
+                        android:background="@color/gray"
                         app:hintEnabled="false">
 
                         <com.google.android.material.textfield.TextInputEditText
@@ -199,9 +224,10 @@
 
             <LinearLayout
                 android:id="@+id/linear_layout_vertical_filter_category"
+                android:visibility="gone"
                 android:layout_width="match_parent"
-                android:layout_marginTop="15dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
                 android:orientation="vertical">
 
                 <TextView
@@ -245,11 +271,11 @@
                             android:id="@+id/radio_button_pelatihan"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginRight="5dp"
                             android:background="@drawable/radio_selector"
                             android:button="@android:color/transparent"
                             android:elevation="4dp"
                             android:padding="10dp"
-                            android:layout_marginRight="5dp"
                             android:text="Pelatihan"
                             android:textColor="@drawable/text_color" />
 
@@ -257,9 +283,9 @@
                             android:id="@+id/radio_button_melahirkan"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginRight="5dp"
                             android:background="@drawable/radio_selector"
                             android:button="@android:color/transparent"
-                            android:layout_marginRight="5dp"
                             android:elevation="4dp"
                             android:padding="10dp"
                             android:text="Melahirkan"
@@ -269,13 +295,13 @@
                             android:id="@+id/radio_button_dinas"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginRight="5dp"
                             android:background="@drawable/radio_selector"
                             android:button="@android:color/transparent"
                             android:elevation="4dp"
-                            android:layout_marginRight="5dp"
                             android:padding="10dp"
-                            android:textColor="@drawable/text_color"
-                            android:text="Dinas" />
+                            android:text="Dinas"
+                            android:textColor="@drawable/text_color" />
 
                         <RadioButton
                             android:id="@+id/radio_button_asuransi"
@@ -284,10 +310,10 @@
                             android:layout_marginRight="5dp"
                             android:background="@drawable/radio_selector"
                             android:button="@android:color/transparent"
-                            android:textColor="@drawable/text_color"
                             android:elevation="4dp"
                             android:padding="10dp"
-                            android:text="Asuransi" />
+                            android:text="Asuransi"
+                            android:textColor="@drawable/text_color" />
                     </RadioGroup>
 
                     <!--                    <Spinner-->
@@ -313,6 +339,7 @@
                 android:id="@+id/btn_filter_category_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:visibility="gone"
                 android:layout_gravity="end"
                 android:layout_marginTop="24dp"
                 android:text="Filter Category And Date" />
@@ -324,25 +351,24 @@
                 android:layout_height="500dp"
                 android:layout_marginTop="20dp"
                 android:background="@color/white"
-                android:visibility="gone"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:visibility="visible">
 
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="400dp"
-                    android:src="@drawable/icon_choose_filter"
-                    />
+                    android:src="@drawable/icon_choose_filter" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textAlignment="center"
-                    android:textSize="25sp"
                     android:layout_gravity="center"
-                    android:textColor="@color/black"
-                    android:textStyle="bold"
                     android:fontFamily="@font/lato_black"
-                    android:text="Silahkan Lakukan Filter"/>
+                    android:text="Silahkan Lakukan Penyaringan"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="25sp"
+                    android:textStyle="bold" />
 
             </LinearLayout>
 
@@ -353,31 +379,31 @@
                 android:layout_height="500dp"
                 android:layout_marginTop="20dp"
                 android:background="@color/white"
-                android:visibility="gone"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:visibility="gone">
 
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="400dp"
-                    android:src="@drawable/empty_data_icon"
-                    />
+                    android:src="@drawable/empty_data_icon" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textAlignment="center"
-                    android:textSize="25sp"
                     android:layout_gravity="center"
-                    android:textColor="@color/black"
-                    android:textStyle="bold"
                     android:fontFamily="@font/lato_black"
-                    android:text="Maaf, Data Tidak Ditemukan"/>
+                    android:text="Maaf, Data Tidak Ditemukan"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="25sp"
+                    android:textStyle="bold" />
 
             </LinearLayout>
 
 
             <LinearLayout
                 android:id="@+id/linear_layout_rv_progress"
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
@@ -386,13 +412,12 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="List Data Reimbursement"
-                    android:textSize="25sp"
-                    android:textStyle="bold"
-                    android:fontFamily="@font/lato_black"
-                    android:textColor="@color/black"
                     android:layout_gravity="center"
-                    />
+                    android:fontFamily="@font/lato_black"
+                    android:text="List Data Reimbursement"
+                    android:textColor="@color/black"
+                    android:textSize="25sp"
+                    android:textStyle="bold" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_on_progress_history"
@@ -400,7 +425,6 @@
                     android:layout_height="500dp"
                     android:layout_marginTop="20dp"
                     android:background="@color/white"
-                    app:layout_constraintBottom_toTopOf="@id/btn_prev_page"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/btn_filter_date" />
@@ -408,31 +432,29 @@
             </LinearLayout>
 
 
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="20dp"-->
+<!--                android:orientation="horizontal">-->
 
+<!--                <com.google.android.material.button.MaterialButton-->
+<!--                    android:id="@+id/btn_prev_page"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_gravity="end"-->
+<!--                    android:text="Prev"-->
+<!--                    app:cornerRadius="50dp" />-->
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:orientation="horizontal">
+<!--                <com.google.android.material.button.MaterialButton-->
+<!--                    android:id="@+id/btn_next_page"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_gravity="end"-->
+<!--                    android:text="Next"-->
+<!--                    app:cornerRadius="50dp" />-->
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btn_prev_page"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end"
-                    android:text="Prev"
-                    app:cornerRadius="50dp" />
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btn_next_page"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end"
-                    android:text="Next"
-                    app:cornerRadius="50dp" />
-
-            </LinearLayout>
+<!--            </LinearLayout>-->
 
 
         </LinearLayout>

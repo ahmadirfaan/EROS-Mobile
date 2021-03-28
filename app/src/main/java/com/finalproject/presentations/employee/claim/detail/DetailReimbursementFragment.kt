@@ -23,32 +23,32 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.finalproject.R
+import com.finalproject.data.models.reimburse.BillResponse
 import com.finalproject.data.models.reimburse.ReimbursementResponse
 import com.finalproject.databinding.FragmentDetailReimbursementBinding
 import com.finalproject.utils.*
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.File
-import java.text.NumberFormat
-import java.util.*
 
 @AndroidEntryPoint
 class DetailReimbursementFragment : Fragment() {
 
 
     private var dataUri: Uri? = null
-    private var file : File? = null
+    private var file: File? = null
     private var uriString: String? = null
+    private var urlDownloadFile: String? = null
 
 
     private lateinit var binding: FragmentDetailReimbursementBinding
     private var reimburseDetail: ReimbursementResponse? = null
     private var dateClaim: String? = null
     private var myDownloadId: Long = 0 //Untuk verifikasi jika download complete
-    private lateinit var viewModel : DetailReimbursementViewModel
+    private lateinit var viewModel: DetailReimbursementViewModel
     private var br = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
             var id = intent?.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1)
-            if(id == myDownloadId) {
+            if (id == myDownloadId) {
                 Toast.makeText(requireContext(), "File Download Completed", Toast.LENGTH_SHORT).show()
             }
         }
@@ -56,7 +56,12 @@ class DetailReimbursementFragment : Fragment() {
     val resultContract = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
         if (it?.resultCode == Activity.RESULT_OK) {
             dataUri = it.data?.data
+            Log.d("DATA URI", dataUri.toString())
+            Log.d("DATA PATH URI", dataUri?.path.toString())
             file = File(dataUri?.path?.let { it1 -> uriPath(it1) })
+            Log.d("FILE OBJECT", file.toString())
+            Log.d("FILE PATH", file!!.path)
+            Log.d("FILE EXTENSION", file!!.extension)
             uriString = it.data?.data.toString()
             binding.apply {
                 tvNameFile.text = "File : ${file?.name}"
@@ -67,7 +72,7 @@ class DetailReimbursementFragment : Fragment() {
             binding.tvNameFile.text = "Tidak Diketahui Filenya"
         }
     }
-    private lateinit var loadingDialog : AlertDialog
+    private lateinit var loadingDialog: AlertDialog
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -75,11 +80,16 @@ class DetailReimbursementFragment : Fragment() {
         arguments?.apply {
             reimburseDetail = this.getParcelable(HistoryConstant.SEND_BUNDLE_DATA_REIMBURSEMENT)
             dateClaim = reimburseDetail?.dateOfClaimSubmission?.substring(0, 10)
-
         }
         binding = FragmentDetailReimbursementBinding.inflate(layoutInflater)
         initViewModel()
         subscribe()
+        if(reimburseDetail?.statusSuccess == true) {
+            reimburseDetail?.id?.let { it1 -> viewModel.getURLDownloadFileAdmin(it1) }
+        } else {
+            reimburseDetail?.id?.let { it1 -> viewModel.getURLDownloadFileEmployee(it1) }
+
+        }
         loadingDialog = LoadingDialog.build(requireContext())
     }
 
@@ -101,7 +111,7 @@ class DetailReimbursementFragment : Fragment() {
                 setDate()
                 setStatus()
                 btnDownloadFile.setOnClickListener {
-                    if(reimburseDetail?.statusSuccess == true) {
+                    if (reimburseDetail?.statusSuccess == true) {
                         downloadFilePdfBuktiTransfer()
                     } else {
                         downloadFilePdfDataEmployee()
@@ -221,6 +231,38 @@ class DetailReimbursementFragment : Fragment() {
                 }
             }
         })
+        viewModel.getURLFileLiveDataEmployee.observe(this, {
+            when (it.status) {
+                ResourceStatus.LOADING -> {
+                    loadingDialog.show()
+                }
+                ResourceStatus.SUCCESS -> {
+                    loadingDialog.hide()
+                    val data = it?.data as BillResponse
+                    urlDownloadFile = data?.data?.url
+                }
+                ResourceStatus.FAILURE -> {
+                    loadingDialog.hide()
+                    Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
+                }
+            }
+        })
+        viewModel.getURLFileLiveDataAdmin.observe(this, {
+            when (it.status) {
+                ResourceStatus.LOADING -> {
+                    loadingDialog.show()
+                }
+                ResourceStatus.SUCCESS -> {
+                    loadingDialog.hide()
+                    val data = it?.data as BillResponse
+                    urlDownloadFile = data?.data?.url
+                }
+                ResourceStatus.FAILURE -> {
+                    loadingDialog.hide()
+                    Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
+                }
+            }
+        })
     }
 
     private fun editDataGone() {
@@ -258,52 +300,105 @@ class DetailReimbursementFragment : Fragment() {
     }
 
     private fun downloadFilePdfDataEmployee() {
-        val urlDownloadPdf = "${AppConstant.BASE_URL}/bill/files/employee-${reimburseDetail?.id}.pdf"
-        Log.d("URL DOWNLOAD", urlDownloadPdf)
-        val fileName = "Reimbursement Tanggal $dateClaim.pdf"
-        var request = DownloadManager.Request(Uri.parse(urlDownloadPdf))
+        var fileName = "Reimbursement Tanggal $dateClaim"
+        urlDownloadFile = urlDownloadFile?.replace("http://localhost:8081", AppConstant.BASE_URL)
+        Log.d("URL DOWNLOAD", urlDownloadFile.toString())
+        var request = DownloadManager.Request(Uri.parse(urlDownloadFile))
             .setAllowedNetworkTypes(DownloadManager.Request.NETWORK_MOBILE or DownloadManager.Request.NETWORK_WIFI)
             .setTitle(fileName)
             .setDescription("File Reimbursement Sedang Diunduh")
             .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
             .setAllowedOverMetered(true)
         request.allowScanningByMediaScanner()
+        val lengthUrl = urlDownloadFile?.length
+        val type = lengthUrl?.minus(4)
+        val jenisFile = type?.let { urlDownloadFile?.substring(it, lengthUrl) }
+        if (jenisFile?.equals(".pdf", true) == true) {
+            Log.d("MASUK LOG SET MIME TYPE", "MASUK DISINI PDF")
+            request.setMimeType("application/pdf")
+            fileName += ".pdf"
+        } else if (jenisFile?.equals(".jpg", true) == true) {
+            request.setMimeType("image/jpg")
+            fileName += ".jpg"
+        } else if (jenisFile?.equals("jpeg", true) == true) {
+            request.setMimeType("image/jpeg")
+            fileName += ".jpeg"
+        } else if (jenisFile?.equals(".png", true) == true) {
+            request.setMimeType("image/png")
+            fileName += ".jpng"
+        }
         request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, fileName)
-        request.setMimeType("application/pdf")
         var dm = requireActivity().getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
         myDownloadId = dm.enqueue(request)
         requireActivity().registerReceiver(br, IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE))
     }
 
     private fun downloadFilePdfBuktiTransfer() {
-        val urlDownloadPdf = "${AppConstant.BASE_URL}/bill/files/admin-${reimburseDetail?.id}.pdf"
-        val fileName = "Bukti Transfer Tanggal $dateClaim.pdf"
-        var request = DownloadManager.Request(Uri.parse(urlDownloadPdf))
+        var fileName = "Bukti Transfer Tanggal $dateClaim"
+        urlDownloadFile = urlDownloadFile?.replace("http://localhost:8081", AppConstant.BASE_URL)
+        var request = DownloadManager.Request(Uri.parse(urlDownloadFile))
             .setAllowedNetworkTypes(DownloadManager.Request.NETWORK_MOBILE or DownloadManager.Request.NETWORK_WIFI)
             .setTitle(fileName)
             .setDescription("File Reimbursement Sedang Diunduh")
             .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
             .setAllowedOverMetered(true)
         request.allowScanningByMediaScanner()
+        val lengthUrl = urlDownloadFile?.length
+        val type = lengthUrl?.minus(4)
+        val jenisFile = type?.let { urlDownloadFile?.substring(it, lengthUrl) }
+        Log.d("JENIS FILE", jenisFile!!)
+        if (jenisFile?.equals(".pdf", true) == true) {
+            Log.d("MASUK LOG SET MIME TYPE", "MASUK DISINI PDF")
+            request.setMimeType("application/pdf")
+            fileName += ".pdf"
+        } else if (jenisFile?.equals(".jpg", true) == true) {
+            request.setMimeType("image/jpg")
+            fileName += ".jpg"
+        } else if (jenisFile?.equals("jpeg", true) == true) {
+            request.setMimeType("image/jpeg")
+            fileName += ".jpeg"
+        } else if (jenisFile?.equals(".png", true) == true) {
+            request.setMimeType("image/png")
+            fileName += ".png"
+        }
         request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, fileName)
-        request.setMimeType("application/pdf")
+
         var dm = requireActivity().getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
         myDownloadId = dm.enqueue(request)
         requireActivity().registerReceiver(br, IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE))
     }
 
+//    private fun setMimeType(downloadRequest: DownloadManager.Request, filename : String) {
+//        val lengthUrl = urlDownloadFile?.length
+//        val type = lengthUrl?.minus(4)
+//        val jenisFile = type?.let { urlDownloadFile?.substring(it, lengthUrl) }
+//        Log.d("JENIS FILE", jenisFile!!)
+//        if (jenisFile?.equals(".pdf", true) == true) {
+//            Log.d("MASUK LOG SET MIME TYPE", "MASUK DISINI PDF")
+//            downloadRequest.setMimeType("application/pdf")
+//        } else if (jenisFile?.equals(".jpg", true) == true) {
+//            downloadRequest.setMimeType("image/jpg")
+//        } else if (jenisFile?.equals("jpeg", true) == true) {
+//            downloadRequest.setMimeType("image/jpeg")
+//        } else if (jenisFile?.equals(".png", true) == true) {
+//            downloadRequest.setMimeType("image/png")
+//        } else {
+//            downloadRequest.setMimeType("*/*")
+//        }
+//    }
+
     private fun callChooseFileFromDevice() {
         var intent = Intent(Intent.ACTION_GET_CONTENT)
         intent.addCategory(Intent.CATEGORY_OPENABLE)
-        intent.setType("application/pdf")
+        intent.setType("*/*")
         intent = Intent.createChooser(intent, "Choose from A File")
         resultContract.launch(intent)
     }
 
-    private fun uriPath(mypath : String) : String {
+    private fun uriPath(mypath: String): String {
         var path = ""
-        if(mypath.contains("document/raw:")){
-            path = mypath.replace("/document/raw:","");
+        if (mypath.contains("document/raw:")) {
+            path = mypath.replace("/document/raw:", "");
         } else {
             path = mypath
         }

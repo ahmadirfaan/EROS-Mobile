@@ -39,10 +39,10 @@ class ClaimGlassesFragment : Fragment() {
     val resultContract = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
         if (it?.resultCode == Activity.RESULT_OK) {
             dataUri = it.data?.data
-            Log.d("DATA URI", dataUri.toString())
-            Log.d("DATA PATH URI", dataUri?.path.toString())
 //            file = File(dataUri?.path)
             file = File(dataUri?.path?.let { it1 -> uriPath(it1) })
+            Log.d("DATA URI", dataUri.toString())
+            Log.d("DATA PATH URI", dataUri?.path.toString())
             Log.d("FILE OBJECT", file.toString())
             Log.d("FILE PATH", file!!.path)
             Log.d("FILE EXTENSION", file!!.extension)
@@ -101,6 +101,7 @@ class ClaimGlassesFragment : Fragment() {
 
             }
             btnSubmitFormGlasses.setOnClickListener {
+                val formatFile = arrayListOf<String>("jpg","pdf","png")
                 val fileSizeInMegaByte = file?.length()?.div(1024)?.div(1024)
                 Log.d("FiLE SIZE IN MEGABYte", fileSizeInMegaByte!!.toString())
                 val tvNameFile = tvNameFile.text.toString()
@@ -111,7 +112,7 @@ class ClaimGlassesFragment : Fragment() {
                     Toast.makeText(requireContext(), "Input Jumlah Claim Tidak Benar", Toast.LENGTH_SHORT).show()
                 } else if (fileSizeInMegaByte > 5) {
                     Toast.makeText(requireContext(), "Ukuran Maksimal 5MB", Toast.LENGTH_SHORT).show()
-                } else if (file?.extension !== "pdf" || file?.extension !== "jpg" || file?.extension !== "png") {
+                } else if (!formatFile.contains(file?.extension)) {
                     Toast.makeText(requireContext(), "File Yang Anda Masukkan tidak didukung", Toast.LENGTH_SHORT).show()
                 } else {
                     val requestReimburse = AddReimbursementRequest(

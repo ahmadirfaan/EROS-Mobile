@@ -29,4 +29,10 @@ interface ReimburseApi {
     @Multipart
     @PUT("/bill/{idReimburse}/upload/file")
     suspend fun updateFileIdReimburse(@Path("idReimburse") idReimburse : String, @Part filePdf : MultipartBody.Part) : Response<UploadResponse>
+
+    @GET("/bill/{idReimburse}/file")
+    suspend fun getURLdFileAdmin(@Path("idReimburse") idReimburse: String) : Response<BillResponse>
+
+    @GET("/bill/{idReimburse}/file/employee")
+    suspend fun getURLFileEmployee(@Path("idReimburse") idReimburse: String) : Response<BillResponse>
 }
