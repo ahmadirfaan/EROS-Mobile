@@ -3,7 +3,7 @@ package com.finalproject.utils
 class HistoryConstant {
 
     companion object {
-        val arrayFilter = arrayOf("Lihat Semua Data", "Saring Data Berdasarkan Tanggal dan Kategori", "Saring Data Berdasarkan Tanggal", "Saring Data Berdasarkan Kategori")
+        val arrayFilter = arrayOf("Lihat Semua Data", "Filter Berdasarkan Tanggal dan Kategori", "Filter Berdasarkan Tanggal", "Filter Berdasarkan Kategori")
         const val SEND_BUNDLE_DATA_REIMBURSEMENT = "Reimbursement"
     }
 }

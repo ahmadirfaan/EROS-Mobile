@@ -82,6 +82,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="15dp"
                 android:text="Unggah Dokumen"
+                android:textAllCaps="false"
                 android:textColor="@color/white"
                 android:textSize="15sp" />
 
@@ -89,7 +90,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAlignment="center"
-                android:text="Dokumen yang dapat diunggah hanya dengan format pdf, jpg, png, dan jpeg serta Maksimal ukuran 5MB"                android:layout_gravity="center"
+                android:text="Unggah dokumen dengan format pdf, jpg, png, dan jpeg serta maksimal ukuran 5MB"                android:layout_gravity="center"
                 android:layout_marginBottom="30dp"
                 android:textColor="@color/red_danger"/>
 
@@ -122,6 +123,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="50dp"
+                android:textAllCaps="false"
                 android:text="Kirim Klaim Kehamilan"
                 android:textColor="@color/white"
                 android:textSize="15sp" />

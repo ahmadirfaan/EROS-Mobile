@@ -12,7 +12,7 @@ class HistoryViewHolder(private val view: View, private val historyClickListener
 
     fun bind(reimbursement: ReimbursementResponse) {
         binding.apply {
-            tvNameEmployee.text = "Name : ${reimbursement?.employeeId?.fullname}"
+            tvNameEmployee.text = "Nama : ${reimbursement?.employeeId?.fullname}"
             tvDateClaim.text = "Tanggal Klaim : ${reimbursement?.dateOfClaimSubmission?.substring(0,10)}"
             when (reimbursement?.categoryId?.id) {
                 "1" -> tvCategoryReimbursement.text = "Kategori : Kacamata"

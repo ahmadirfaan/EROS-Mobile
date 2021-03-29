@@ -13,6 +13,7 @@
         android:layout_height="wrap_content"
         android:background="@color/white"
         android:orientation="horizontal"
+        android:paddingTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -20,11 +21,11 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Data Reimbursement"
+            android:text="Riwayat Reimbursement"
             android:textAlignment="center"
             android:textColor="@color/black"
-            android:textSize="25sp"
-            android:textStyle="bold|italic" />
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
     </LinearLayout>
 
@@ -41,16 +42,17 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             android:orientation="horizontal">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Dalam Progres"
+                android:text="Dalam Proses"
                 android:textAlignment="center"
                 android:textColor="@color/black"
-                android:textSize="20sp"
+                android:textSize="15sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -61,7 +63,7 @@
                 android:text="Selesai"
                 android:textAlignment="center"
                 android:textColor="@color/gray"
-                android:textSize="20sp"
+                android:textSize="15sp"
                 android:textStyle="bold" />
         </LinearLayout>
 
@@ -95,14 +97,14 @@
                     android:layout_marginStart="16dp"
                     app:startIconDrawable="@drawable/ic_baseline_menu_24"
                     android:layout_marginEnd="16dp"
-                    android:hint="Penyaring">
+                    android:hint="Filter">
 
                     <AutoCompleteTextView
                         android:id="@+id/act_spinner"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Pilih Penyaring"
+                        android:text="Pilih Filter"
                         android:inputType="none"
                         android:paddingStart="16dp"
                         android:paddingBottom="16dp" />
@@ -364,7 +366,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:fontFamily="@font/lato_black"
-                    android:text="Silahkan Lakukan Penyaringan"
+                    android:text="Silahkan Lakukan Filter"
                     android:textAlignment="center"
                     android:textColor="@color/black"
                     android:textSize="25sp"
@@ -414,7 +416,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:fontFamily="@font/lato_black"
-                    android:text="List Data Reimbursement"
+                    android:text="Daftar Reimbursement"
                     android:textColor="@color/black"
                     android:textSize="25sp"
                     android:textStyle="bold" />

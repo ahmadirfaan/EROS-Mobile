@@ -198,7 +198,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAlignment="center"
-                android:text="Dokumen yang dapat diunggah hanya dengan format pdf, jpg, png, dan jpeg serta Maksimal ukuran 5MB"                android:layout_gravity="center"
+                android:text="Unggah dokumen dengan format pdf, jpg, png, dan jpeg serta maksimal ukuran 5MB"                android:layout_gravity="center"
                 android:layout_marginBottom="30dp"
                 android:textColor="@color/red_danger"/>
 

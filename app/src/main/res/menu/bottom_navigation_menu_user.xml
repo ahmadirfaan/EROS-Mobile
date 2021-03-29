@@ -7,7 +7,7 @@
         android:id="@+id/homeEmployeeFragment"
         android:icon="@drawable/home_24"
         android:checked="true"
-        android:title="Home" />
+        android:title="Beranda" />
     <item
         android:id="@+id/historyOnProgressFragment"
         android:icon="@drawable/history_24"

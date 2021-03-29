@@ -214,7 +214,7 @@ class FormProfileEmployeeFragment : Fragment() {
             etNomerRekening.setText(dataUpdate?.accountNumber)
             etNomerHp.setText(lengthNomerHp?.let { dataUpdate?.phoneNumber?.substring(3, it) })
             etNomerEmergency.setText(lengthNomerEmergency?.let { dataUpdate?.emergencyNumber?.substring(3, it) })
-            tvTitleForm.setText("Change Data Employee")
+            tvTitleForm.setText("Edit Data Karyawan")
             btnSubmitForm.text = "Edit Data"
             //Logic For Enum
             when(dataUpdate?.gender) {

@@ -37,7 +37,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/lato_regular"
-                    android:text="Data Enigmanians"
+                    android:text="Biodata Enigmanians"
                     android:textColor="@color/black"
                     android:textSize="25sp"
                     android:textStyle="bold" />
@@ -46,11 +46,12 @@
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_edit_account"
                 android:layout_marginTop="20dp"
+                android:backgroundTint="@color/blue_enigma"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:text="Edit Akun"
-                app:cornerRadius="40dp"/>
+                android:textAllCaps="false"
+                android:text="Edit Akun"/>
         </LinearLayout>
 
 
@@ -689,7 +690,7 @@
             android:id="@+id/btn_change_password"
             android:layout_marginTop="20dp"
             android:layout_width="wrap_content"
-            android:backgroundTint="@android:color/holo_orange_dark"
+            android:backgroundTint="@color/blue_enigma"
             android:layout_height="wrap_content"
             android:text="Ganti Kata Sandi"
             app:cornerRadius="20dp"
@@ -703,7 +704,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Keluar"
-            android:backgroundTint="@android:color/holo_red_dark"
+            android:backgroundTint="@color/next_button_instruction"
             app:cornerRadius="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

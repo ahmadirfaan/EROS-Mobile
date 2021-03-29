@@ -73,7 +73,7 @@ class SignUpFragment : Fragment() {
 
             override fun afterTextChanged(s: Editable?) {
                 if(!s.toString().matches(emailPattern.toRegex())) {
-                    binding.signUpInputEmail.editText?.error="Please enter a valid email address"
+                    binding.signUpInputEmail.editText?.error="Mohon isi format email dengan benar"
                 }
             }
         }
@@ -136,7 +136,7 @@ class SignUpFragment : Fragment() {
                 }
                 ResourceStatus.SUCCESS -> {
                     loadingDialog.hide()
-                    Toast.makeText(requireContext(), "Success Create Account", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "Sukses Membuat Akun, Silahkan Konfirmasi Email Anda", Toast.LENGTH_SHORT).show()
                     clearText()
                 }
             }

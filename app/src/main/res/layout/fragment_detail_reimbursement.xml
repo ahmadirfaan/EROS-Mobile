@@ -50,6 +50,7 @@
                 android:id="@+id/linear_layout_input_claim"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
                 android:orientation="horizontal">
 
                 <TextView
@@ -78,6 +79,7 @@
                 android:id="@+id/linear_layout_date_claim"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
                 android:orientation="horizontal">
 
                 <TextView
@@ -105,6 +107,7 @@
                 android:id="@+id/linear_layout_start_date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
                 android:orientation="horizontal">
 
                 <TextView
@@ -132,6 +135,7 @@
                 android:id="@+id/linear_layout_end_date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
                 android:orientation="horizontal">
 
                 <TextView
@@ -160,6 +164,7 @@
                 android:id="@+id/linear_layout_status_on_hc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
                 android:orientation="horizontal">
 
                 <TextView
@@ -187,6 +192,7 @@
                 android:id="@+id/linear_layout_status_on_finance"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
                 android:orientation="horizontal">
 
                 <TextView
@@ -214,6 +220,7 @@
                 android:id="@+id/linear_layout_status_reimbursement"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
                 android:orientation="horizontal">
 
                 <TextView
@@ -240,6 +247,7 @@
                 android:id="@+id/linear_layout_disbursement_date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
                 android:orientation="horizontal">
 
                 <TextView
@@ -270,6 +278,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Claim Fee : Rp 500.000"
+
                 android:textSize="25sp"
                 android:textStyle="bold"
                 android:textColor="@color/black"
@@ -280,6 +289,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:textAllCaps="false"
                 android:text="Unduh Dokumen"/>
 
             <com.google.android.material.button.MaterialButton
@@ -289,6 +299,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="15dp"
                 android:text="Pilih Dokumen"
+                android:textAllCaps="false"
                 android:textColor="@color/white"
                 android:textSize="15sp" />
 
@@ -297,7 +308,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAlignment="center"
-                android:text="Dokumen yang dapat diunggah hanya dengan format pdf, jpg, png, dan jpeg serta Maksimal ukuran 5MB"                android:layout_gravity="center"
+                android:text="Unggah dokumen dengan format pdf, jpg, png, dan jpeg serta maksimal ukuran 5MB"                android:layout_gravity="center"
                 android:textColor="@color/red_danger"/>
 
             <TextView
@@ -325,6 +336,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:textAllCaps="false"
                 android:text="Unggah Ulang Dokumen"/>
 
         </LinearLayout>

@@ -105,7 +105,7 @@ class LoginFragment : Fragment() {
 
             override fun afterTextChanged(s: Editable?) {
                 if (!s.toString().matches(emailPattern.toRegex())) {
-                    binding.inputEmailLogin.editText?.error = "Please enter a valid email address"
+                    binding.inputEmailLogin.editText?.error = "Mohon isi format email dengan benar"
                 }
             }
         }

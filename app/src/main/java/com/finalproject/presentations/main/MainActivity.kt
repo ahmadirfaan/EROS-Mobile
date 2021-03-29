@@ -72,6 +72,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.claimTrainingFragment -> hideBottomNav()
                 R.id.changePasswordFragment -> hideBottomNav()
                 R.id.detailReimbursementFragment -> hideBottomNav()
+                R.id.instructionsPagerFragment -> hideBottomNav()
             }
         }
 

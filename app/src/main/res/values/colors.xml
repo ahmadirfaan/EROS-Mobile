@@ -10,4 +10,6 @@
     <color name="blue_enigma">#292961</color>
     <color name="red_danger">#FF0000</color>
     <color name="gray">#EBEBEB</color>
+    <color name="primary_bootstrap">#0275D8</color>
+    <color name="next_button_instruction">#910107</color>
 </resources>
