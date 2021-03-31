@@ -345,7 +345,7 @@ class DetailReimbursementFragment : Fragment() {
             fileName += ".jpeg"
         } else if (jenisFile?.equals(".png", true) == true) {
             request.setMimeType("image/png")
-            fileName += ".jpng"
+            fileName += ".png"
         }
         request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, fileName)
         var dm = requireActivity().getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager

@@ -63,7 +63,7 @@ constructor(
         CoroutineScope(Dispatchers.Main).launch {
             try {
                 _uploadFileLiveData.postValue(ResourceState.loading())
-                val response = idReimburseData?.let { reimbursementRepository.uploadFileIdReimburse(it, pdfFile) }
+                val response = idReimburseData?.let { reimbursementRepository.updateFileIdReimburse(it, pdfFile) }
                 val responseBody = response?.body()
                 if (response?.isSuccessful == true) {
                     if (responseBody?.code != 200) {

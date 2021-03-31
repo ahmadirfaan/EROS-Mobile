@@ -32,12 +32,12 @@ class ReimbursementRepositoryImpl @Inject constructor(
         return reimburseApi.addReimbursement(request)
     }
 
-    override suspend fun uploadFileIdReimburse(idReimburse: String, pdfFile: File) : Response<UploadResponse> {
-        val mediaType = MediaType.parse("multipart/form-data")
-        val requestFile = RequestBody.create(mediaType, pdfFile);
-        val fileToUpload = MultipartBody.Part.createFormData("file", pdfFile.getName(), requestFile);
-        return reimburseApi.uploadFileIdReimburse(idReimburse, fileToUpload)
-    }
+//    override suspend fun uploadFileIdReimburse(idReimburse: String, pdfFile: File) : Response<UploadResponse> {
+//        val mediaType = MediaType.parse("multipart/form-data")
+//        val requestFile = RequestBody.create(mediaType, pdfFile);
+//        val fileToUpload = MultipartBody.Part.createFormData("file", pdfFile.getName(), requestFile);
+//        return reimburseApi.uploadFileIdReimburse(idReimburse, fileToUpload)
+//    }
 
     override suspend fun updateFileIdReimburse(idReimburse: String, filePdf: File): Response<UploadResponse> {
         val mediaType = MediaType.parse("multipart/form-data")

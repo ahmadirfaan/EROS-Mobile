@@ -15,7 +15,7 @@ interface ReimbursementRepository {
 
     suspend fun addReimbursement(request : AddReimbursementRequest) : Response<AddReimbursementResponse>
 
-    suspend fun uploadFileIdReimburse(idReimburse : String, pdfFile : File) : Response<UploadResponse>
+//    suspend fun uploadFileIdReimburse(idReimburse : String, pdfFile : File) : Response<UploadResponse>
 
     suspend fun updateFileIdReimburse(idReimburse : String, filePdf : File) : Response<UploadResponse>
 
