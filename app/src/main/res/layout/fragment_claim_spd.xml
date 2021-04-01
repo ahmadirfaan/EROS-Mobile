@@ -33,7 +33,6 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginStart="10dp"
-                android:layout_marginTop="15dp"
                 android:layout_marginBottom="10dp"
                 android:background="@color/white"
                 android:fontFamily="@font/lato_black"
@@ -68,10 +67,9 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/input_claim"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:hint="Masukkan jumlah yang ingin diklaim"
                     android:inputType="number"
-                    android:singleLine="true"
                     android:textSize="15sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -207,7 +205,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
                 android:textAlignment="center"
                 android:textColor="@color/black"
                 android:textSize="20sp"
@@ -229,8 +227,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="50dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
                 android:text="Kirim Klaim SPD"
                 android:textColor="@color/white"
                 android:textSize="15sp" />

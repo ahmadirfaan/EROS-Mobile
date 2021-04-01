@@ -22,7 +22,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="@font/lato_regular"
-        android:text="Klaim perjalanan dinas, pelatihan, dan asuransi semua ada di EROS"
+        android:text="Klaim perjalanan dinas, pelatihan, dan asuransi semua ada di E.R.O.S"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="20sp"

@@ -320,72 +320,84 @@ class DetailReimbursementFragment : Fragment() {
     }
 
     private fun downloadFilePdfDataEmployee() {
-        var fileName = "Reimbursement Tanggal $dateClaim"
-        urlDownloadFile = urlDownloadFile?.replace("http://localhost:8081", AppConstant.BASE_URL)
-        Log.d("URL DOWNLOAD", urlDownloadFile.toString())
-        var request = DownloadManager.Request(Uri.parse(urlDownloadFile))
-            .setAllowedNetworkTypes(DownloadManager.Request.NETWORK_MOBILE or DownloadManager.Request.NETWORK_WIFI)
-            .setTitle(fileName)
-            .setDescription("File Reimbursement Sedang Diunduh")
-            .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
-            .setAllowedOverMetered(true)
-        request.allowScanningByMediaScanner()
-        val lengthUrl = urlDownloadFile?.length
-        val type = lengthUrl?.minus(4)
-        val jenisFile = type?.let { urlDownloadFile?.substring(it, lengthUrl) }
-        if (jenisFile?.equals(".pdf", true) == true) {
-            Log.d("MASUK LOG SET MIME TYPE", "MASUK DISINI PDF")
-            request.setMimeType("application/pdf")
-            fileName += ".pdf"
-        } else if (jenisFile?.equals(".jpg", true) == true) {
-            request.setMimeType("image/jpg")
-            fileName += ".jpg"
-        } else if (jenisFile?.equals("jpeg", true) == true) {
-            request.setMimeType("image/jpeg")
-            fileName += ".jpeg"
-        } else if (jenisFile?.equals(".png", true) == true) {
-            request.setMimeType("image/png")
-            fileName += ".png"
+        try {
+            var fileName = "Reimbursement Tanggal $dateClaim"
+            urlDownloadFile = urlDownloadFile?.replace("http://localhost:8081", AppConstant.BASE_URL)
+            Log.d("URL DOWNLOAD", urlDownloadFile.toString())
+            var request = DownloadManager.Request(Uri.parse(urlDownloadFile))
+                .setAllowedNetworkTypes(DownloadManager.Request.NETWORK_MOBILE or DownloadManager.Request.NETWORK_WIFI)
+                .setTitle(fileName)
+                .setDescription("File Reimbursement Sedang Diunduh")
+                .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
+                .setAllowedOverMetered(true)
+            request.allowScanningByMediaScanner()
+            val lengthUrl = urlDownloadFile?.length
+            val type = lengthUrl?.minus(4)
+            val jenisFile = type?.let { urlDownloadFile?.substring(it, lengthUrl) }
+            if (jenisFile?.equals(".pdf", true) == true) {
+                Log.d("MASUK LOG SET MIME TYPE", "MASUK DISINI PDF")
+                request.setMimeType("application/pdf")
+                fileName += ".pdf"
+            } else if (jenisFile?.equals(".jpg", true) == true) {
+                request.setMimeType("image/jpg")
+                fileName += ".jpg"
+            } else if (jenisFile?.equals("jpeg", true) == true) {
+                request.setMimeType("image/jpeg")
+                fileName += ".jpeg"
+            } else if (jenisFile?.equals(".png", true) == true) {
+                request.setMimeType("image/png")
+                fileName += ".png"
+            }
+            request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, fileName)
+            var dm = requireActivity().getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
+            myDownloadId = dm.enqueue(request)
+            requireActivity().registerReceiver(br, IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE))
+        } catch (e : Exception) {
+            e.printStackTrace()
+            Toast.makeText(requireContext(), "Mohon Maaf File Tidak Ada", Toast.LENGTH_SHORT).show()
         }
-        request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, fileName)
-        var dm = requireActivity().getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
-        myDownloadId = dm.enqueue(request)
-        requireActivity().registerReceiver(br, IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE))
+
     }
 
     private fun downloadFilePdfBuktiTransfer() {
         var fileName = "Bukti Transfer Tanggal $dateClaim"
         urlDownloadFile = urlDownloadFile?.replace("http://localhost:8081", AppConstant.BASE_URL)
-        var request = DownloadManager.Request(Uri.parse(urlDownloadFile))
-            .setAllowedNetworkTypes(DownloadManager.Request.NETWORK_MOBILE or DownloadManager.Request.NETWORK_WIFI)
-            .setTitle(fileName)
-            .setDescription("File Reimbursement Sedang Diunduh")
-            .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
-            .setAllowedOverMetered(true)
-        request.allowScanningByMediaScanner()
-        val lengthUrl = urlDownloadFile?.length
-        val type = lengthUrl?.minus(4)
-        val jenisFile = type?.let { urlDownloadFile?.substring(it, lengthUrl) }
-        Log.d("JENIS FILE", jenisFile!!)
-        if (jenisFile?.equals(".pdf", true) == true) {
-            Log.d("MASUK LOG SET MIME TYPE", "MASUK DISINI PDF")
-            request.setMimeType("application/pdf")
-            fileName += ".pdf"
-        } else if (jenisFile?.equals(".jpg", true) == true) {
-            request.setMimeType("image/jpg")
-            fileName += ".jpg"
-        } else if (jenisFile?.equals("jpeg", true) == true) {
-            request.setMimeType("image/jpeg")
-            fileName += ".jpeg"
-        } else if (jenisFile?.equals(".png", true) == true) {
-            request.setMimeType("image/png")
-            fileName += ".png"
-        }
-        request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, fileName)
+        try {
+            var request = DownloadManager.Request(Uri.parse(urlDownloadFile))
+                .setAllowedNetworkTypes(DownloadManager.Request.NETWORK_MOBILE or DownloadManager.Request.NETWORK_WIFI)
+                .setTitle(fileName)
+                .setDescription("File Reimbursement Sedang Diunduh")
+                .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
+                .setAllowedOverMetered(true)
+            request.allowScanningByMediaScanner()
+            val lengthUrl = urlDownloadFile?.length
+            val type = lengthUrl?.minus(4)
+            val jenisFile = type?.let { urlDownloadFile?.substring(it, lengthUrl) }
+            Log.d("JENIS FILE", jenisFile!!)
+            if (jenisFile?.equals(".pdf", true) == true) {
+                Log.d("MASUK LOG SET MIME TYPE", "MASUK DISINI PDF")
+                request.setMimeType("application/pdf")
+                fileName += ".pdf"
+            } else if (jenisFile?.equals(".jpg", true) == true) {
+                request.setMimeType("image/jpg")
+                fileName += ".jpg"
+            } else if (jenisFile?.equals("jpeg", true) == true) {
+                request.setMimeType("image/jpeg")
+                fileName += ".jpeg"
+            } else if (jenisFile?.equals(".png", true) == true) {
+                request.setMimeType("image/png")
+                fileName += ".png"
+            }
+            request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, fileName)
 
-        var dm = requireActivity().getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
-        myDownloadId = dm.enqueue(request)
-        requireActivity().registerReceiver(br, IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE))
+            var dm = requireActivity().getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
+            myDownloadId = dm.enqueue(request)
+            requireActivity().registerReceiver(br, IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE))
+        } catch (e : Exception) {
+            e.printStackTrace()
+            Toast.makeText(requireContext(), "Mohon Maaf File Tidak Ada", Toast.LENGTH_SHORT).show()
+        }
+
     }
 
 //    private fun setMimeType(downloadRequest: DownloadManager.Request, filename : String) {
